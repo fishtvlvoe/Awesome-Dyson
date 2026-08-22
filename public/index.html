@@ -257,16 +257,41 @@
     .stat-tile {
       background: var(--paper);
       border: 1px solid var(--border);
+      border-top: 3px solid var(--stat-accent, var(--border));
       border-radius: var(--radius-lg);
-      padding: 16px 18px;
+      padding: 14px 18px 16px;
       box-shadow: var(--shadow);
     }
+
+    .stat-tile-blue { --stat-accent: var(--badge-blue-fg); }
+    .stat-tile-green { --stat-accent: var(--badge-green-fg); }
+    .stat-tile-amber { --stat-accent: var(--badge-amber-fg); }
+    .stat-tile-alert { --stat-accent: var(--status-error); }
+    .stat-tile-alert .stat-value { color: var(--status-error); }
+
+    .stat-head {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .stat-head .icon-badge {
+      width: 26px;
+      height: 26px;
+    }
+
+    .stat-head .icon-badge .icon {
+      width: 14px;
+      height: 14px;
+    }
+
+    .icon-badge-red { background: var(--status-error-bg); color: var(--status-error); }
 
     .stat-label {
       font-size: 0.78em;
       color: var(--text-faint);
       font-weight: 600;
-      margin-bottom: 6px;
     }
 
     .stat-value {
@@ -275,10 +300,6 @@
       font-weight: 800;
       font-variant-numeric: tabular-nums;
       color: var(--text);
-    }
-
-    .stat-tile-alert .stat-value {
-      color: var(--status-error);
     }
 
     .cards-grid {
@@ -986,20 +1007,32 @@
         <div class="one-liner">${escapeHtml(oneLiner)}</div>
 
         <div class="stats-row">
-          <div class="stat-tile">
-            <div class="stat-label">進行中專案</div>
+          <div class="stat-tile stat-tile-blue">
+            <div class="stat-head">
+              <span class="icon-badge icon-badge-blue">${ICONS.checklist}</span>
+              <span class="stat-label">進行中專案</span>
+            </div>
             <div class="stat-value">${inProgressCount}</div>
           </div>
-          <div class="stat-tile">
-            <div class="stat-label">平均完成度</div>
+          <div class="stat-tile stat-tile-green">
+            <div class="stat-head">
+              <span class="icon-badge icon-badge-green">${ICONS.barChart}</span>
+              <span class="stat-label">平均完成度</span>
+            </div>
             <div class="stat-value">${avgPercent}%</div>
           </div>
-          <div class="stat-tile">
-            <div class="stat-label">待確認事項</div>
+          <div class="stat-tile stat-tile-amber">
+            <div class="stat-head">
+              <span class="icon-badge icon-badge-amber">${ICONS.question}</span>
+              <span class="stat-label">待確認事項</span>
+            </div>
             <div class="stat-value">${openQuestionsCount}</div>
           </div>
-          <div class="stat-tile${stuckCount > 0 ? ' stat-tile-alert' : ''}">
-            <div class="stat-label">卡住等你決定</div>
+          <div class="stat-tile${stuckCount > 0 ? ' stat-tile-alert' : ' stat-tile-green'}">
+            <div class="stat-head">
+              <span class="icon-badge ${stuckCount > 0 ? 'icon-badge-red' : 'icon-badge-green'}">${ICONS.wrench}</span>
+              <span class="stat-label">卡住等你決定</span>
+            </div>
             <div class="stat-value">${stuckCount}</div>
           </div>
         </div>
