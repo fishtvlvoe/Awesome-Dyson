@@ -31,7 +31,19 @@
         "properties": {
           "name": {
             "type": "string",
-            "description": "Change name/title"
+            "description": "Change name/title (technical slug, e.g. Spectra change name)"
+          },
+          "icon": {
+            "type": "string",
+            "description": "Single emoji shown next to display_name for quick visual scanning"
+          },
+          "display_name": {
+            "type": "string",
+            "description": "Human-friendly title shown instead of the raw technical slug"
+          },
+          "plain_summary": {
+            "type": "string",
+            "description": "One-line plain-language explanation of what this change actually does, for non-technical readers"
           },
           "done": {
             "type": "integer",

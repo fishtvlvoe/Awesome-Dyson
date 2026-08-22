@@ -1,41 +1,53 @@
 {
   "project": "startkiter",
-  "updated_at": "2026-08-22T09:15:00+08:00",
+  "updated_at": "2026-08-22T09:20:00+08:00",
   "updated_by": "claude-code",
-  "one_liner": "課 + 終身代碼包，類似 WordPress 的可擴充平台",
+  "one_liner": "一套買了就能自己開站、還能像搭積木一樣自由加裝功能的網站工具包",
   "changes_in_progress": [
     {
       "name": "core-module-bundles-coupons",
+      "icon": "🎁",
+      "display_name": "組合包與優惠券",
+      "plain_summary": "讓學生可以把幾堂課包在一起買，或用折扣碼便宜買課",
       "done": 55,
       "total": 56,
       "status": "ok",
-      "note": "剩 1 項故意延後，等買家課程播放頁做出來才接"
+      "note": "只剩 1 項故意先不做：要等「買家版課程播放頁」蓋好才能接上"
     },
     {
       "name": "platform-shell-plugin-architecture",
+      "icon": "🧱",
+      "display_name": "網站骨架與擴充功能",
+      "plain_summary": "決定整個網站以後能不能像 WordPress 一樣自由加裝新功能，這是打地基的工程",
       "done": 90,
       "total": 129,
       "status": "warn",
-      "note": "體量最大的一張，正常施工中，沒卡關"
+      "note": "工程量最大的一塊，還在正常施工中，沒有卡住"
     },
     {
       "name": "sheets-export-engine",
+      "icon": "📊",
+      "display_name": "報表匯出功能",
+      "plain_summary": "讓後台的數據可以一鍵匯出成 Excel 表格",
       "done": 11,
       "total": 13,
       "status": "ok",
-      "note": "剩 AI agent 產表整合"
+      "note": "快做完了，剩下讓 AI 也能自動產出報表"
     },
     {
       "name": "unified-support-desk",
+      "icon": "🎧",
+      "display_name": "客服訊息整合",
+      "plain_summary": "把網站客服、LINE、Telegram 的訊息全部匯進同一個地方，不用切換好幾個 App",
       "done": 43,
       "total": 49,
-      "status": "blocked",
-      "note": "LINE Messaging Channel 跟 Telegram Bot 都建好了，剩 Chatwoot 還沒裝到 VPS 上"
+      "status": "error",
+      "note": "LINE 跟 Telegram 都接好了，卡在客服系統還沒裝進伺服器"
     }
   ],
   "open_questions": [
     {
-      "question": "主站部署完成後要不要順便升級 VPS 規格？",
+      "question": "主站部署完成後要不要順便升級 VPS（伺服器）的規格？",
       "asked_at": "2026-08-22T08:00:00+08:00"
     }
   ],
@@ -46,8 +58,8 @@
     "docs/dashboard/README.md"
   ],
   "connected_systems": [
-    "Cloudflare (DNS + Pages)",
-    "Coolify (VPS)",
+    "Cloudflare (網域 + 部署)",
+    "Coolify (伺服器管理)",
     "LINE Messaging API",
     "Telegram Bot API"
   ]

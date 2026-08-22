@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>開發儀表板</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -11,41 +14,67 @@
       box-sizing: border-box;
     }
 
+    /* 設計語言參考 vibeprompts.dev：暖白紙感底色、Archivo 特粗大標、
+       Inter 內文、白卡片配淺灰邊框與大圓角，不用漸層或裝飾性配色 */
     :root {
-      --bg: #ffffff;
-      --bg-secondary: #f5f5f5;
-      --text: #000000;
-      --text-secondary: #666666;
-      --border: #e0e0e0;
-      --accent: #0066cc;
-      --status-ok: #00aa44;
-      --status-warn: #ff8800;
-      --status-error: #dd0000;
+      --bg: #f5f4f0;
+      --paper: #ffffff;
+      --text: #14140f;
+      --text-secondary: #6b6a63;
+      --text-faint: #97948b;
+      --border: #e4e2dc;
+      --sidebar-bg: #14140f;
+      --sidebar-text: #f5f4f0;
+      --sidebar-text-dim: #9a988f;
+      --accent: #2f6fed;
+      --status-ok: #1f8a4c;
+      --status-ok-bg: #e6f4ea;
+      --status-warn: #b3711f;
+      --status-warn-bg: #fbf0dd;
+      --status-error: #b3392c;
+      --status-error-bg: #fbe9e6;
+      --shadow: 0 1px 2px rgba(20,20,15,0.04), 0 6px 20px -10px rgba(20,20,15,0.12);
     }
 
     html.dark-mode {
-      --bg: #1a1a1a;
-      --bg-secondary: #2a2a2a;
-      --text: #ffffff;
-      --text-secondary: #aaaaaa;
-      --border: #404040;
-      --accent: #66b3ff;
-      --status-ok: #44dd77;
-      --status-warn: #ffaa33;
-      --status-error: #ff5555;
+      --bg: #14161a;
+      --paper: #1c1f24;
+      --text: #f1f0ec;
+      --text-secondary: #a8a6a0;
+      --text-faint: #74726b;
+      --border: #2c2f35;
+      --sidebar-bg: #0b0c0e;
+      --sidebar-text: #f1f0ec;
+      --sidebar-text-dim: #74726b;
+      --accent: #6f9bff;
+      --status-ok: #4fbf7f;
+      --status-ok-bg: #163122;
+      --status-warn: #e0ac4c;
+      --status-warn-bg: #362a12;
+      --status-error: #e5877a;
+      --status-error-bg: #3a1e1a;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 6px 20px -10px rgba(0,0,0,0.5);
     }
 
     @media (prefers-color-scheme: dark) {
       html:not(.light-mode) {
-        --bg: #1a1a1a;
-        --bg-secondary: #2a2a2a;
-        --text: #ffffff;
-        --text-secondary: #aaaaaa;
-        --border: #404040;
-        --accent: #66b3ff;
-        --status-ok: #44dd77;
-        --status-warn: #ffaa33;
-        --status-error: #ff5555;
+        --bg: #14161a;
+        --paper: #1c1f24;
+        --text: #f1f0ec;
+        --text-secondary: #a8a6a0;
+        --text-faint: #74726b;
+        --border: #2c2f35;
+        --sidebar-bg: #0b0c0e;
+        --sidebar-text: #f1f0ec;
+        --sidebar-text-dim: #74726b;
+        --accent: #6f9bff;
+        --status-ok: #4fbf7f;
+        --status-ok-bg: #163122;
+        --status-warn: #e0ac4c;
+        --status-warn-bg: #362a12;
+        --status-error: #e5877a;
+        --status-error-bg: #3a1e1a;
+        --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 6px 20px -10px rgba(0,0,0,0.5);
       }
     }
 
@@ -54,73 +83,107 @@
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang TC', Roboto, sans-serif;
       background: var(--bg);
       color: var(--text);
       line-height: 1.6;
       display: flex;
-      flex-direction: column;
+      min-height: 100%;
     }
 
-    header {
-      border-bottom: 1px solid var(--border);
-      padding: 16px 20px;
-      background: var(--bg-secondary);
+    /* 左側深色導覽（呼應 vibeprompts.dev 的側邊欄） */
+    .sidebar {
+      width: 220px;
+      flex-shrink: 0;
+      background: var(--sidebar-bg);
+      color: var(--sidebar-text);
+      padding: 24px 20px;
     }
 
-    .header-content {
-      max-width: 1400px;
-      margin: 0 auto;
-      width: 100%;
+    .sidebar .logo {
+      font-family: 'Archivo', sans-serif;
+      font-weight: 800;
+      font-size: 1.05em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 28px;
     }
 
-    .logo {
-      font-size: 20px;
-      margin-bottom: 8px;
-      font-weight: bold;
-    }
-
-    .logo-icon {
+    .sidebar .logo-icon {
       display: inline-block;
-      margin-right: 8px;
+    }
+
+    .sidebar-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .sidebar-nav a {
+      color: var(--sidebar-text-dim);
+      text-decoration: none;
+      font-size: 0.9em;
+      padding: 8px 10px;
+      border-radius: 8px;
+    }
+
+    .sidebar-nav a:hover, .sidebar-nav a.active {
+      background: rgba(255,255,255,0.08);
+      color: var(--sidebar-text);
     }
 
     main {
       flex: 1;
       overflow-y: auto;
-      padding: 24px 20px;
+      padding: 40px 32px 80px;
+      min-width: 0;
     }
 
     .container {
-      max-width: 1400px;
+      max-width: 1200px;
       margin: 0 auto;
       width: 100%;
+    }
+
+    .eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      margin-bottom: 8px;
     }
 
     .page-title {
       display: flex;
       align-items: baseline;
+      flex-wrap: wrap;
       gap: 16px;
-      margin-bottom: 8px;
+      margin-bottom: 4px;
     }
 
     h1 {
-      font-size: 2.5em;
-      font-weight: bold;
-      line-height: 1.2;
+      font-family: 'Archivo', sans-serif;
+      font-size: 3em;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      text-wrap: balance;
     }
 
     .updated-info {
-      font-size: 0.85em;
-      color: var(--text-secondary);
+      font-size: 0.82em;
+      color: var(--text-faint);
       font-weight: normal;
     }
 
     .one-liner {
-      font-size: 1.15em;
+      font-size: 1.1em;
       color: var(--text-secondary);
-      margin-bottom: 32px;
-      font-weight: 500;
+      margin: 12px 0 36px;
+      max-width: 60ch;
     }
 
     .cards-grid {
@@ -131,16 +194,18 @@
     }
 
     .card {
-      background: var(--bg-secondary);
+      background: var(--paper);
       border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 20px;
+      border-radius: 16px;
+      padding: 22px;
+      box-shadow: var(--shadow);
     }
 
     .card h2 {
-      font-size: 1.1em;
-      font-weight: bold;
-      margin-bottom: 16px;
+      font-family: 'Archivo', sans-serif;
+      font-size: 1.05em;
+      font-weight: 800;
+      margin-bottom: 6px;
       display: flex;
       align-items: center;
       gap: 8px;
@@ -148,12 +213,20 @@
 
     .card-icon {
       display: inline-block;
-      font-size: 1.2em;
+      font-size: 1.15em;
+    }
+
+    .status-legend {
+      font-size: 0.78em;
+      color: var(--text-faint);
+      margin-bottom: 16px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
     }
 
     .change-item {
-      margin-bottom: 16px;
-      padding-bottom: 16px;
+      margin-bottom: 18px;
+      padding-bottom: 18px;
       border-bottom: 1px solid var(--border);
     }
 
@@ -163,9 +236,23 @@
       padding-bottom: 0;
     }
 
-    .change-name {
-      font-weight: bold;
+    .change-display-name {
+      font-weight: 700;
+      font-size: 1.02em;
+      margin-bottom: 2px;
+    }
+
+    .change-plain-summary {
+      font-size: 0.88em;
+      color: var(--text-secondary);
       margin-bottom: 6px;
+    }
+
+    .change-name {
+      font-family: 'Menlo', 'Monaco', monospace;
+      font-size: 0.72em;
+      color: var(--text-faint);
+      margin-bottom: 8px;
     }
 
     .change-status {
@@ -174,31 +261,25 @@
       gap: 8px;
       font-size: 0.9em;
       color: var(--text-secondary);
+      font-variant-numeric: tabular-nums;
     }
 
     .status-dot {
       display: inline-block;
-      width: 8px;
-      height: 8px;
+      width: 9px;
+      height: 9px;
       border-radius: 50%;
+      flex-shrink: 0;
     }
 
-    .status-ok {
-      background: var(--status-ok);
-    }
-
-    .status-warn {
-      background: var(--status-warn);
-    }
-
-    .status-error {
-      background: var(--status-error);
-    }
+    .status-ok { background: var(--status-ok); }
+    .status-warn { background: var(--status-warn); }
+    .status-error { background: var(--status-error); }
 
     .progress-bar {
       background: var(--border);
-      height: 6px;
-      border-radius: 3px;
+      height: 7px;
+      border-radius: 4px;
       overflow: hidden;
       margin-top: 8px;
     }
@@ -227,17 +308,18 @@
 
     .question-asked {
       font-size: 0.85em;
-      color: var(--text-secondary);
+      color: var(--text-faint);
     }
 
     .timeline {
-      margin-top: 32px;
+      margin-top: 40px;
       padding-top: 32px;
-      border-top: 2px solid var(--border);
+      border-top: 1px solid var(--border);
     }
 
     .timeline h2 {
-      font-weight: bold;
+      font-family: 'Archivo', sans-serif;
+      font-weight: 800;
       margin-bottom: 24px;
       display: flex;
       align-items: center;
@@ -289,12 +371,13 @@
 
     .timeline-date {
       font-size: 0.85em;
-      color: var(--text-secondary);
+      color: var(--text-faint);
       font-weight: 600;
+      font-variant-numeric: tabular-nums;
     }
 
     .timeline-topic {
-      font-weight: bold;
+      font-weight: 700;
       margin-top: 4px;
       margin-bottom: 8px;
       display: flex;
@@ -337,8 +420,8 @@
 
     .timeline-decision {
       background: var(--bg);
-      padding: 6px 8px;
-      border-radius: 3px;
+      padding: 6px 10px;
+      border-radius: 6px;
       display: inline-block;
       margin-right: 6px;
       margin-bottom: 4px;
@@ -346,24 +429,23 @@
     }
 
     .error {
-      background: var(--status-error);
-      color: white;
+      background: var(--status-error-bg);
+      color: var(--status-error);
       padding: 16px;
-      border-radius: 6px;
+      border-radius: 12px;
       margin: 20px 0;
     }
 
     .loading {
       text-align: center;
       padding: 40px;
-      font-style: italic;
-      color: var(--text-secondary);
+      color: var(--text-faint);
     }
 
     .empty-state {
-      text-align: center;
-      padding: 24px;
-      color: var(--text-secondary);
+      padding: 12px 0;
+      color: var(--text-faint);
+      font-size: 0.9em;
     }
 
     .connected-systems {
@@ -378,10 +460,11 @@
     }
 
     .system-tag {
-      background: var(--border);
+      background: var(--bg);
+      border: 1px solid var(--border);
       padding: 6px 12px;
       border-radius: 20px;
-      font-size: 0.9em;
+      font-size: 0.85em;
       color: var(--text);
     }
 
@@ -393,52 +476,50 @@
     }
 
     .file-tag {
-      background: var(--border);
+      background: var(--bg);
+      border: 1px solid var(--border);
       padding: 6px 12px;
-      border-radius: 3px;
-      font-size: 0.9em;
+      border-radius: 6px;
+      font-size: 0.82em;
       color: var(--text);
-      font-family: 'Monaco', 'Menlo', monospace;
+      font-family: 'Menlo', 'Monaco', monospace;
     }
 
     .theme-toggle {
       position: fixed;
       bottom: 20px;
       right: 20px;
-      background: var(--bg-secondary);
+      background: var(--paper);
       border: 1px solid var(--border);
       padding: 8px 12px;
-      border-radius: 6px;
+      border-radius: 10px;
       cursor: pointer;
       font-size: 1.2em;
+      box-shadow: var(--shadow);
       z-index: 1000;
     }
 
     @media (max-width: 768px) {
-      h1 {
-        font-size: 1.8em;
-      }
-
-      .cards-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .page-title {
-        flex-direction: column;
-        gap: 8px;
-      }
+      body { flex-direction: column; }
+      .sidebar { width: 100%; padding: 16px 20px; }
+      h1 { font-size: 2em; }
+      .cards-grid { grid-template-columns: 1fr; }
+      .page-title { flex-direction: column; gap: 8px; }
+      main { padding: 24px 16px 64px; }
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="header-content">
-      <div class="logo">
-        <span class="logo-icon">▶</span>
-        專案開發儀表板
-      </div>
+  <div class="sidebar">
+    <div class="logo">
+      <span class="logo-icon">▶</span>
+      待神
     </div>
-  </header>
+    <nav class="sidebar-nav">
+      <a href="#overview" class="active">現況總覽</a>
+      <a href="#history">歷史紀錄</a>
+    </nav>
+  </div>
 
   <main>
     <div class="container">
@@ -534,6 +615,7 @@
       const updatedBy = state.updated_by || 'Unknown';
 
       let html = `
+        <div class="eyebrow">專案開發儀表板</div>
         <div class="page-title">
           <h1>${escapeHtml(project)}</h1>
           <div class="updated-info">
@@ -550,14 +632,19 @@
       if (changesInProgress && changesInProgress.length > 0) {
         html += `
           <div class="card">
-            <h2><span class="card-icon">📋</span> 進行中的任務</h2>
+            <h2><span class="card-icon">📋</span> 現在在做的事</h2>
+            <div class="status-legend">🟢 快做完了，不用管　🟠 還在正常進行　🔴 卡住了，等你決定</div>
         `;
         changesInProgress.forEach(change => {
           const percent = change.total ? Math.round((change.done / change.total) * 100) : 0;
           const statusClass = change.status === 'ok' ? 'status-ok' : (change.status === 'warn' ? 'status-warn' : 'status-error');
+          const icon = change.icon || '🔧';
+          const displayName = change.display_name || change.name || '未命名';
           html += `
             <div class="change-item">
-              <div class="change-name">${escapeHtml(change.name || '未命名')}</div>
+              <div class="change-display-name">${icon} ${escapeHtml(displayName)}</div>
+              ${change.plain_summary ? `<div class="change-plain-summary">${escapeHtml(change.plain_summary)}</div>` : ''}
+              <div class="change-name">${escapeHtml(change.name || '')}</div>
               <div class="change-status">
                 <span class="status-dot ${statusClass}"></span>
                 ${change.done}/${change.total} 已完成
@@ -565,7 +652,7 @@
               <div class="progress-bar">
                 <div class="progress-fill" style="width: ${percent}%"></div>
               </div>
-              ${change.note ? `<div style="font-size: 0.85em; color: var(--text-secondary); margin-top: 6px;">Note: ${escapeHtml(change.note)}</div>` : ''}
+              ${change.note ? `<div style="font-size: 0.85em; color: var(--text-secondary); margin-top: 6px;">${escapeHtml(change.note)}</div>` : ''}
             </div>
           `;
         });
