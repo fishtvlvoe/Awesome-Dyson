@@ -2,12 +2,18 @@
 
 ### Requirement: Single fixed dashboard URL per project
 
-Each development project SHALL have exactly one persistent dashboard URL hosted on Cloudflare Pages (`<project-slug>.pages.dev`), not bound to a custom domain that may be unreachable from a different machine or network.
+Each development project SHALL have exactly one persistent dashboard URL hosted on Cloudflare Pages (`<project-slug>.pages.dev`). This URL SHALL NOT depend on a custom domain, because a custom domain's DNS configuration is not guaranteed to be reachable from every machine or network the project is worked on.
 
 #### Scenario: Opening the dashboard from a different machine
 
 - **WHEN** a person or AI agent on a machine without the project's custom domain configured opens the dashboard URL
 - **THEN** the Cloudflare Pages URL SHALL resolve and render the dashboard without requiring any custom DNS setup
+
+##### Example
+
+- **GIVEN** the StartKiter dashboard is published at `startkiter-dashboard.pages.dev`, and `app.startkiter.dev` (a custom domain) is not configured on the current machine's DNS resolver
+- **WHEN** an agent on that machine opens `https://startkiter-dashboard.pages.dev/`
+- **THEN** the page SHALL load successfully because `.pages.dev` resolution does not depend on the project's own custom domain
 
 ### Requirement: Machine-readable state alongside human-readable page
 
@@ -39,6 +45,13 @@ Before writing to any part of a project's dashboard (`state.json`, `entries/mani
 - **AND** agent B attempts to update project X's dashboard before the lock is released or expired
 - **THEN** agent B SHALL detect the existing lock and abort the write
 - **THEN** agent B SHALL report to the user that the dashboard is locked, including who holds it and since when
+
+##### Example
+
+- **GIVEN** `~/.claude/locks/dev-dashboards/startkiter.lock` contains `{"holder": "claude-code-worktree-A", "acquired_at": "2026-08-22T08:00:00+08:00"}`, and the current time is `2026-08-22T08:03:00+08:00` (3 minutes later, under the 10-minute expiry)
+- **WHEN** a second agent (e.g. a Codex sub-agent in a different worktree) runs the dashboard update script for the `startkiter` project
+- **THEN** the script SHALL exit without writing to `state.json` or `entries/`
+- **THEN** the script SHALL print "StartKiter 儀表板目前被 claude-code-worktree-A 鎖住，2026-08-22T08:00:00+08:00 開始，請稍後再試"
 
 #### Scenario: Lock expires after agent crash or interruption
 
