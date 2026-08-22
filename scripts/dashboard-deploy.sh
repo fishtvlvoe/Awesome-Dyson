@@ -63,13 +63,16 @@ function deploy_dashboard() {
 
   # Verify URL is accessible AND actually serving the dashboard (Cloudflare's
   # own soft-404 template also returns HTTP 200, so status code alone proves
-  # nothing — check for real page content instead).
+  # nothing — check for a structural marker instead). id="app" is the mount
+  # point every dashboard template has regardless of project name, language,
+  # or content, so this check stays valid even after the template's title/
+  # copy changes — unlike checking for a specific title string.
   echo "🔍 Verifying accessibility..."
   if command -v curl &> /dev/null; then
-    if curl -s "$dashboard_url" | grep -q "<title>Dev Project Dashboard</title>"; then
+    if curl -s "$dashboard_url" | grep -q 'id="app"'; then
       echo "✅ Dashboard is accessible and serving real content"
     else
-      die "Dashboard URL returned 200 but did not contain expected content — likely deployed to Preview, not Production. Check --branch=main was used."
+      die "Dashboard URL returned 200 but did not contain the dashboard's id=\"app\" mount point — likely deployed to Preview, not Production. Check --branch=main was used."
     fi
   fi
 }
