@@ -1,3 +1,9 @@
 {
-  "entries": []
+  "entries": [
+    {
+      "date": "2026-08-22",
+      "topic": "Manifest Test",
+      "file": "2026-08-22-manifest-test.json"
+    }
+  ]
 }
