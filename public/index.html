@@ -14,88 +14,94 @@
       box-sizing: border-box;
     }
 
-    /* 設計語言參考 FlowMapp（saasframe.io/saas/flowmapp 實測色值）：
-       淺灰畫布、白卡片、鮮明藍紫主色、彩色淡色徽章/圖示底，友善的 SaaS 產品感 */
+    /* 設計語言參考 Lightdash（saasframe.io/saas/lightdash 實測 CSS Variables／Design
+       Tokens 分頁，非目測猜色）：低調中性灰階、克制的語意色（dimension 藍／calculation
+       綠／metric 橘）、緊縮圓角（4/8/12px）與極淺陰影，走真正 BI／中臺軟體的質感，
+       不是行銷頁那種大量彩色圓角泡泡 */
     :root {
-      --bg: #f3f4f7;
-      --paper: #ffffff;
-      --text: #16181d;
-      --text-secondary: #5b5f6b;
-      --text-faint: #9296a1;
-      --border: #e7e9ee;
-      --sidebar-bg: #ffffff;
-      --sidebar-text: #16181d;
-      --sidebar-text-dim: #8a8d97;
-      --sidebar-active-bg: #e8edff;
-      --sidebar-border: #e7e9ee;
-      --accent: #3046ff;
-      --accent-soft-bg: #e6f0ff;
-      --status-ok: #1f9254;
-      --status-ok-bg: #e6f7ee;
-      --status-warn: #b9770e;
-      --status-warn-bg: #fef3e0;
-      --status-error: #c81e26;
-      --status-error-bg: #fde9ea;
-      --badge-blue-bg: #e6f0ff; --badge-blue-fg: #3046ff;
-      --badge-green-bg: #eaf7e4; --badge-green-fg: #2f8f3f;
-      --badge-purple-bg: #f1ecff; --badge-purple-fg: #6b46e5;
-      --badge-amber-bg: #fff3e0; --badge-amber-fg: #b9770e;
-      --shadow: 0 1px 2px rgba(20,20,30,0.04), 0 8px 24px -12px rgba(20,20,30,0.10);
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      --radius-full: 9999px;
+      --bg: #f8f9fa;
+      --paper: #fefefe;
+      --text: #1a1b1e;
+      --text-secondary: #495057;
+      --text-faint: #868e96;
+      --border: #e9ecef;
+      --sidebar-bg: #fefefe;
+      --sidebar-text: #1a1b1e;
+      --sidebar-text-dim: #495057;
+      --sidebar-active-bg: #edf0fd;
+      --sidebar-border: #e9ecef;
+      --accent: #3b5bdb;
+      --accent-soft-bg: #edf0fd;
+      --status-ok: #2b8a3e;
+      --status-ok-bg: #ebf5ed;
+      --status-warn: #de7f0b;
+      --status-warn-bg: #fbe9e0;
+      --status-error: #c92a2a;
+      --status-error-bg: #fff0f0;
+      --badge-blue-bg: #edf0fd; --badge-blue-fg: #3b5bdb;
+      --badge-green-bg: #ebf5ed; --badge-green-fg: #2b8a3e;
+      --badge-purple-bg: #f8f0fc; --badge-purple-fg: #9c36b5;
+      --badge-amber-bg: #fbe9e0; --badge-amber-fg: #de7f0b;
+      --shadow: 0px 1px 2px 0px rgba(10,13,18,0.05);
     }
 
     html.dark-mode {
-      --bg: #101216;
-      --paper: #1a1d24;
-      --text: #eef0f5;
-      --text-secondary: #a7abb6;
-      --text-faint: #6b6f79;
-      --border: #2a2e37;
-      --sidebar-bg: #15171d;
-      --sidebar-text: #eef0f5;
-      --sidebar-text-dim: #7d818c;
-      --sidebar-active-bg: #232a45;
-      --sidebar-border: #262a33;
-      --accent: #7c8bff;
-      --accent-soft-bg: #202a4a;
-      --status-ok: #4fbf7f;
-      --status-ok-bg: #16321f;
-      --status-warn: #e0ac4c;
-      --status-warn-bg: #362a12;
+      --bg: #141414;
+      --paper: #1a1a1a;
+      --text: #fefefe;
+      --text-secondary: #9e9e9e;
+      --text-faint: #7a7a7a;
+      --border: #2e2e2e;
+      --sidebar-bg: #1a1a1a;
+      --sidebar-text: #fefefe;
+      --sidebar-text-dim: #9e9e9e;
+      --sidebar-active-bg: #202539;
+      --sidebar-border: #2e2e2e;
+      --accent: #95aaf0;
+      --accent-soft-bg: #202539;
+      --status-ok: #38af4d;
+      --status-ok-bg: #1d3525;
+      --status-warn: #e08a20;
+      --status-warn-bg: #3e2f1a;
       --status-error: #e5877a;
       --status-error-bg: #3a1e1a;
-      --badge-blue-bg: #1c2440; --badge-blue-fg: #93a5ff;
-      --badge-green-bg: #17301e; --badge-green-fg: #7bd396;
-      --badge-purple-bg: #2a2149; --badge-purple-fg: #bfa8ff;
-      --badge-amber-bg: #362a12; --badge-amber-fg: #e0ac4c;
-      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
+      --badge-blue-bg: #202539; --badge-blue-fg: #95aaf0;
+      --badge-green-bg: #1d3525; --badge-green-fg: #38af4d;
+      --badge-purple-bg: #2b1a33; --badge-purple-fg: #d599e8;
+      --badge-amber-bg: #3e2f1a; --badge-amber-fg: #e08a20;
+      --shadow: 0px 1px 2px 0px rgba(0,0,0,0.4);
     }
 
     @media (prefers-color-scheme: dark) {
       html:not(.light-mode) {
-        --bg: #101216;
-        --paper: #1a1d24;
-        --text: #eef0f5;
-        --text-secondary: #a7abb6;
-        --text-faint: #6b6f79;
-        --border: #2a2e37;
-        --sidebar-bg: #15171d;
-        --sidebar-text: #eef0f5;
-        --sidebar-text-dim: #7d818c;
-        --sidebar-active-bg: #232a45;
-        --sidebar-border: #262a33;
-        --accent: #7c8bff;
-        --accent-soft-bg: #202a4a;
-        --status-ok: #4fbf7f;
-        --status-ok-bg: #16321f;
-        --status-warn: #e0ac4c;
-        --status-warn-bg: #362a12;
+        --bg: #141414;
+        --paper: #1a1a1a;
+        --text: #fefefe;
+        --text-secondary: #9e9e9e;
+        --text-faint: #7a7a7a;
+        --border: #2e2e2e;
+        --sidebar-bg: #1a1a1a;
+        --sidebar-text: #fefefe;
+        --sidebar-text-dim: #9e9e9e;
+        --sidebar-active-bg: #202539;
+        --sidebar-border: #2e2e2e;
+        --accent: #95aaf0;
+        --accent-soft-bg: #202539;
+        --status-ok: #38af4d;
+        --status-ok-bg: #1d3525;
+        --status-warn: #e08a20;
+        --status-warn-bg: #3e2f1a;
         --status-error: #e5877a;
         --status-error-bg: #3a1e1a;
-        --badge-blue-bg: #1c2440; --badge-blue-fg: #93a5ff;
-        --badge-green-bg: #17301e; --badge-green-fg: #7bd396;
-        --badge-purple-bg: #2a2149; --badge-purple-fg: #bfa8ff;
-        --badge-amber-bg: #362a12; --badge-amber-fg: #e0ac4c;
-        --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
+        --badge-blue-bg: #202539; --badge-blue-fg: #95aaf0;
+        --badge-green-bg: #1d3525; --badge-green-fg: #38af4d;
+        --badge-purple-bg: #2b1a33; --badge-purple-fg: #d599e8;
+        --badge-amber-bg: #3e2f1a; --badge-amber-fg: #e08a20;
+        --shadow: 0px 1px 2px 0px rgba(0,0,0,0.4);
       }
     }
 
@@ -140,7 +146,7 @@
       justify-content: center;
       width: 28px;
       height: 28px;
-      border-radius: 8px;
+      border-radius: var(--radius-md);
       background: var(--accent);
       color: #fff;
       flex-shrink: 0;
@@ -166,7 +172,7 @@
       font-size: 0.9em;
       font-weight: 500;
       padding: 9px 10px;
-      border-radius: 8px;
+      border-radius: var(--radius-md);
     }
 
     .sidebar-nav a .icon {
@@ -235,8 +241,44 @@
     .one-liner {
       font-size: 1.1em;
       color: var(--text-secondary);
-      margin: 12px 0 36px;
+      margin: 12px 0 28px;
       max-width: 60ch;
+    }
+
+    /* Stats at a glance — 參考 Lightdash KPI Dashboard 的統計磚：
+       白底細邊框卡片 + 大數字，不是裝飾，是真的從資料算出來的數字 */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .stat-tile {
+      background: var(--paper);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 16px 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .stat-label {
+      font-size: 0.78em;
+      color: var(--text-faint);
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .stat-value {
+      font-family: 'Archivo', sans-serif;
+      font-size: 1.9em;
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+      color: var(--text);
+    }
+
+    .stat-tile-alert .stat-value {
+      color: var(--status-error);
     }
 
     .cards-grid {
@@ -249,7 +291,7 @@
     .card {
       background: var(--paper);
       border: 1px solid var(--border);
-      border-radius: 16px;
+      border-radius: var(--radius-lg);
       padding: 22px;
       box-shadow: var(--shadow);
     }
@@ -283,7 +325,7 @@
       justify-content: center;
       width: 30px;
       height: 30px;
-      border-radius: 9px;
+      border-radius: var(--radius-md);
       flex-shrink: 0;
     }
 
@@ -303,7 +345,7 @@
       font-size: 0.82em;
       font-weight: 700;
       padding: 3px 10px;
-      border-radius: 20px;
+      border-radius: var(--radius-sm);
       font-variant-numeric: tabular-nums;
     }
 
@@ -314,7 +356,7 @@
     .card-about, .card-screenshots {
       background: var(--paper);
       border: 1px solid var(--border);
-      border-radius: 16px;
+      border-radius: var(--radius-lg);
       padding: 26px 28px;
       box-shadow: var(--shadow);
       margin-bottom: 24px;
@@ -369,7 +411,7 @@
     }
 
     .feature-list li {
-      border-radius: 20px;
+      border-radius: var(--radius-sm);
       padding: 6px 14px;
       font-size: 0.85em;
       font-weight: 500;
@@ -393,7 +435,7 @@
     .screenshot img {
       width: 100%;
       display: block;
-      border-radius: 10px;
+      border-radius: var(--radius-md);
       border: 1px solid var(--border);
     }
 
@@ -657,7 +699,7 @@
       background: var(--status-error-bg);
       color: var(--status-error);
       padding: 16px;
-      border-radius: 12px;
+      border-radius: var(--radius-lg);
       margin: 20px 0;
     }
 
@@ -688,7 +730,7 @@
       background: var(--bg);
       border: 1px solid var(--border);
       padding: 6px 12px;
-      border-radius: 20px;
+      border-radius: var(--radius-sm);
       font-size: 0.85em;
       color: var(--text);
     }
@@ -756,7 +798,7 @@
       background: var(--bg);
       border: 1px solid var(--border);
       padding: 6px 12px;
-      border-radius: 6px;
+      border-radius: var(--radius-sm);
       font-size: 0.82em;
       color: var(--text);
       font-family: 'Menlo', 'Monaco', monospace;
@@ -769,7 +811,7 @@
       background: var(--paper);
       border: 1px solid var(--border);
       padding: 8px 12px;
-      border-radius: 10px;
+      border-radius: var(--radius-md);
       cursor: pointer;
       font-size: 1.2em;
       box-shadow: var(--shadow);
@@ -924,6 +966,14 @@
       const updatedAt = state.updated_at || 'Unknown';
       const updatedBy = state.updated_by || 'Unknown';
 
+      // Stats at a glance — real numbers computed from state, not decoration
+      const inProgressCount = changesInProgress.length;
+      const avgPercent = inProgressCount
+        ? Math.round(changesInProgress.reduce((sum, c) => sum + (c.total ? (c.done / c.total) * 100 : 0), 0) / inProgressCount)
+        : 0;
+      const openQuestionsCount = openQuestions.length;
+      const stuckCount = changesInProgress.filter(c => c.status === 'error').length;
+
       let html = `
         <div class="eyebrow">專案開發儀表板</div>
         <div class="page-title">
@@ -934,6 +984,25 @@
           </div>
         </div>
         <div class="one-liner">${escapeHtml(oneLiner)}</div>
+
+        <div class="stats-row">
+          <div class="stat-tile">
+            <div class="stat-label">進行中專案</div>
+            <div class="stat-value">${inProgressCount}</div>
+          </div>
+          <div class="stat-tile">
+            <div class="stat-label">平均完成度</div>
+            <div class="stat-value">${avgPercent}%</div>
+          </div>
+          <div class="stat-tile">
+            <div class="stat-label">待確認事項</div>
+            <div class="stat-value">${openQuestionsCount}</div>
+          </div>
+          <div class="stat-tile${stuckCount > 0 ? ' stat-tile-alert' : ''}">
+            <div class="stat-label">卡住等你決定</div>
+            <div class="stat-value">${stuckCount}</div>
+          </div>
+        </div>
       `;
 
       // About card — what / how / why / feature list, for human readers
