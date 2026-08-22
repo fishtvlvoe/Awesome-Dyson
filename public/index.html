@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Dev Project Dashboard</title>
+  <title>開發儀表板</title>
   <style>
     * {
       margin: 0;
@@ -523,6 +523,9 @@
     function renderDashboard(state, manifest) {
       const project = state.project || '未命名專案';
       const oneLiner = state.one_liner || '無描述';
+
+      // Update page title dynamically
+      document.title = `${project} 開發儀表板`;
       const changesInProgress = state.changes_in_progress || [];
       const openQuestions = state.open_questions || [];
       const keyFiles = state.key_files || [];
