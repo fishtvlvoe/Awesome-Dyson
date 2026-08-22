@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Incident Board</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  html, body { height: 100%; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif; }
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(244,63,94,0.5); }
+    50% { opacity: 0.85; box-shadow: 0 0 0 4px rgba(244,63,94,0.15); }
+  }
+  .live-dot { animation: pulse-dot 1.6s ease-in-out infinite; }
+</style>
+</head>
+<body class="bg-neutral-100 text-neutral-900">
+
+  <div class="max-w-5xl mx-auto px-6 py-10">
+
+    <!-- HEADER -->
+    <div class="flex items-center justify-between mb-6">
+      <div class="flex items-center gap-3">
+        <h1 class="text-xl font-semibold text-neutral-900">Incident Board</h1>
+        <span class="inline-flex items-center gap-2 rounded-full bg-rose-50 text-rose-700 ring-1 ring-inset ring-rose-200 px-3 py-1 text-xs font-medium">
+          <span class="live-dot h-2 w-2 rounded-full bg-rose-500"></span>
+          <span id="live-count">4</span> open incidents
+        </span>
+      </div>
+      <div class="flex items-center gap-3">
+        <button class="rounded-lg border border-neutral-200 text-neutral-700 text-sm font-medium px-4 py-2 hover:bg-white transition-colors">
+          Subscribe
+        </button>
+        <button class="rounded-lg bg-neutral-900 text-white text-sm font-medium px-4 py-2 hover:bg-neutral-800 transition-colors">
+          Declare incident
+        </button>
+      </div>
+    </div>
+
+    <!-- SUMMARY TILES -->
+    <div class="grid grid-cols-3 gap-4 mb-8">
+      <div class="bg-white border border-neutral-200 rounded-xl px-5 py-4">
+        <p class="text-xs font-medium text-neutral-400 uppercase tracking-wide">Open</p>
+        <p class="text-2xl font-semibold text-neutral-900 mt-1">4</p>
+      </div>
+      <div class="bg-white border border-neutral-200 rounded-xl px-5 py-4">
+        <p class="text-xs font-medium text-neutral-400 uppercase tracking-wide">Mitigated</p>
+        <p class="text-2xl font-semibold text-neutral-900 mt-1">1</p>
+      </div>
+      <div class="bg-white border border-neutral-200 rounded-xl px-5 py-4">
+        <p class="text-xs font-medium text-neutral-400 uppercase tracking-wide">Resolved today</p>
+        <p class="text-2xl font-semibold text-neutral-900 mt-1">1</p>
+      </div>
+    </div>
+
+    <!-- INCIDENT GROUPS -->
+    <div id="incident-groups" class="space-y-8"></div>
+
+    <div class="mt-8 text-center">
+      <a href="#" class="text-sm font-medium text-neutral-500 hover:text-neutral-900 underline underline-offset-2">
+        View full timeline &rarr;
+      </a>
+    </div>
+
+  </div>
+
+<script>
+  const SEVERITY_META = {
+    'Sev-1': { color: 'bg-rose-500', chip: 'bg-rose-50 text-rose-700 ring-1 ring-inset ring-rose-200', label: 'Sev-1 — Critical' },
+    'Sev-2': { color: 'bg-amber-500', chip: 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200', label: 'Sev-2 — High' },
+    'Sev-3': { color: 'bg-blue-500', chip: 'bg-blue-50 text-blue-700 ring-1 ring-inset ring-blue-200', label: 'Sev-3 — Moderate' },
+  };
+
+  const STATUS_STYLES = {
+    investigating: 'bg-rose-50 text-rose-700 ring-1 ring-inset ring-rose-200',
+    mitigated: 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200',
+    resolved: 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200',
+  };
+
+  const STATUS_LABEL = { investigating: 'Investigating', mitigated: 'Mitigated', resolved: 'Resolved' };
+
+  const AVATAR_COLORS = ['bg-neutral-800', 'bg-blue-600', 'bg-violet-600', 'bg-emerald-600', 'bg-amber-600'];
+
+  function initials(name) {
+    return name.split(' ').map(p => p[0]).join('').slice(0, 2).toUpperCase();
+  }
+
+  function avatarColor(name) {
+    const idx = name.split('').reduce((a, c) => a + c.charCodeAt(0), 0) % AVATAR_COLORS.length;
+    return AVATAR_COLORS[idx];
+  }
+
+  const incidents = [
+    {
+      severity: 'Sev-1',
+      title: 'Checkout API returning 500s for PAYUNi callbacks',
+      service: 'payments-api',
+      started: '09:14',
+      duration: '00:47:12',
+      status: 'investigating',
+      responders: ['Devon Ruiz', 'Maya Chen'],
+    },
+    {
+      severity: 'Sev-1',
+      title: 'Coolify VPS unreachable — DNS resolution failing',
+      service: 'infra / coolify-vps',
+      started: '08:52',
+      duration: '01:09:31',
+      status: 'investigating',
+      responders: ['Lena Ford'],
+    },
+    {
+      severity: 'Sev-2',
+      title: 'LINE webhook delivery delayed by 3–5 minutes',
+      service: 'support-desk',
+      started: '07:40',
+      duration: '02:21:04',
+      status: 'mitigated',
+      responders: ['Owen Bates', 'Priya Nair'],
+    },
+    {
+      severity: 'Sev-2',
+      title: 'Course video playback buffering on mobile Safari',
+      service: 'course-player',
+      started: '06:58',
+      duration: '03:03:47',
+      status: 'investigating',
+      responders: ['Sam Okafor'],
+    },
+    {
+      severity: 'Sev-3',
+      title: 'Nightly export job ran 12 minutes over SLA',
+      service: 'reporting-worker',
+      started: '02:00',
+      duration: '00:12:00',
+      status: 'resolved',
+      responders: ['Devon Ruiz'],
+    },
+  ];
+
+  function renderAvatarStack(names) {
+    return `
+      <div class="flex -space-x-2">
+        ${names.map(name => `
+          <div class="h-6 w-6 rounded-full ${avatarColor(name)} text-white text-[10px] font-semibold flex items-center justify-center ring-2 ring-white" title="${name}">
+            ${initials(name)}
+          </div>
+        `).join('')}
+      </div>
+    `;
+  }
+
+  function renderRow(inc) {
+    const sev = SEVERITY_META[inc.severity];
+    const isResolved = inc.status === 'resolved';
+    const titleClass = isResolved
+      ? 'text-sm font-medium text-neutral-400 line-through'
+      : 'text-sm font-medium text-neutral-900';
+
+    return `
+      <div class="flex items-center gap-4 px-5 py-4 ${isResolved ? 'opacity-60' : ''}">
+        <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-[11px] font-medium ${sev.chip} flex-shrink-0">
+          ${inc.severity}
+        </span>
+        <div class="flex-1 min-w-0">
+          <p class="${titleClass} truncate">${inc.title}</p>
+          <p class="text-xs text-neutral-500 mt-0.5">${inc.service} &middot; started ${inc.started}</p>
+        </div>
+        <span class="text-xs font-mono text-neutral-500 flex-shrink-0 tabular-nums">${inc.duration}</span>
+        <div class="flex-shrink-0">${renderAvatarStack(inc.responders)}</div>
+        <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-[11px] font-medium ${STATUS_STYLES[inc.status]} flex-shrink-0">
+          ${STATUS_LABEL[inc.status]}
+        </span>
+      </div>
+    `;
+  }
+
+  function render() {
+    const container = document.getElementById('incident-groups');
+    const order = ['Sev-1', 'Sev-2', 'Sev-3'];
+
+    container.innerHTML = order.map(sevKey => {
+      const group = incidents.filter(i => i.severity === sevKey);
+      if (group.length === 0) return '';
+      const sev = SEVERITY_META[sevKey];
+
+      return `
+        <div>
+          <div class="flex items-center gap-2 mb-2 px-1">
+            <span class="h-2.5 w-2.5 rounded-sm ${sev.color}"></span>
+            <h2 class="text-xs font-semibold uppercase tracking-wide text-neutral-500">${sev.label}</h2>
+          </div>
+          <div class="bg-white border border-neutral-200 rounded-xl divide-y divide-neutral-200">
+            ${group.map(renderRow).join('')}
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    const openCount = incidents.filter(i => i.status !== 'resolved').length;
+    document.getElementById('live-count').textContent = openCount;
+  }
+
+  render();
+</script>
+
+</body>
+</html>

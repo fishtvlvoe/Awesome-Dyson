@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kanban Board</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  html, body { height: 100%; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif; }
+  .card-dragging { opacity: 0.4; transform: rotate(2deg); }
+  .column-drop-target { background-color: rgb(239 246 255) !important; box-shadow: inset 0 0 0 2px rgb(59 130 246); }
+  .card-drop-indicator { border-top: 2px solid rgb(59 130 246); }
+</style>
+</head>
+<body class="bg-neutral-100 text-neutral-900">
+
+  <div class="max-w-6xl mx-auto px-6 py-8">
+
+    <!-- HEADER -->
+    <div class="flex items-center justify-between mb-6">
+      <h1 class="text-xl font-semibold text-neutral-900">StartKiter Roadmap</h1>
+      <div class="flex items-center gap-4">
+        <div class="flex -space-x-2">
+          <div class="h-8 w-8 rounded-full bg-neutral-800 text-white text-xs font-semibold flex items-center justify-center ring-2 ring-neutral-100">MC</div>
+          <div class="h-8 w-8 rounded-full bg-blue-600 text-white text-xs font-semibold flex items-center justify-center ring-2 ring-neutral-100">DR</div>
+          <div class="h-8 w-8 rounded-full bg-violet-600 text-white text-xs font-semibold flex items-center justify-center ring-2 ring-neutral-100">PN</div>
+        </div>
+        <button class="rounded-lg bg-neutral-900 text-white text-sm font-medium px-4 py-2 hover:bg-neutral-800 transition-colors">
+          + New task
+        </button>
+      </div>
+    </div>
+
+    <!-- BOARD -->
+    <div id="board" class="flex gap-4 overflow-x-auto pb-4"></div>
+
+  </div>
+
+<script>
+  const CATEGORY_STYLES = {
+    Bug: 'bg-rose-50 text-rose-700 ring-1 ring-inset ring-rose-200',
+    Feature: 'bg-blue-50 text-blue-700 ring-1 ring-inset ring-blue-200',
+    Infra: 'bg-violet-50 text-violet-700 ring-1 ring-inset ring-violet-200',
+    Content: 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200',
+    Design: 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200',
+  };
+
+  const AVATAR_COLORS = ['bg-neutral-800', 'bg-blue-600', 'bg-violet-600', 'bg-emerald-600', 'bg-amber-600'];
+
+  function initials(name) {
+    return name.split(' ').map(p => p[0]).join('').slice(0, 2).toUpperCase();
+  }
+
+  function avatarColor(name) {
+    const idx = name.split('').reduce((a, c) => a + c.charCodeAt(0), 0) % AVATAR_COLORS.length;
+    return AVATAR_COLORS[idx];
+  }
+
+  const columns = [
+    { id: 'backlog', name: 'Backlog' },
+    { id: 'in-progress', name: 'In progress' },
+    { id: 'in-review', name: 'In review' },
+    { id: 'shipped', name: 'Shipped' },
+  ];
+
+  let cards = [
+    { id: 'c1', column: 'backlog', category: 'Feature', title: 'Bundle playback page for combined courses', assignee: 'Maya Chen', due: 'Aug 28', comments: 3 },
+    { id: 'c2', column: 'backlog', category: 'Bug', title: 'Coupon stacking allows negative totals', assignee: 'Devon Ruiz', due: 'Aug 26', comments: 1 },
+    { id: 'c3', column: 'backlog', category: 'Design', title: 'Empty-state illustration for dashboard', assignee: 'Priya Nair', due: 'Sep 02', comments: 0 },
+    { id: 'c4', column: 'in-progress', category: 'Infra', title: 'Migrate Chatwoot to dedicated Coolify server', assignee: 'Lena Ford', due: 'Aug 24', comments: 5 },
+    { id: 'c5', column: 'in-progress', category: 'Feature', title: 'Sidebar collapse + drag-to-reorder groups', assignee: 'Owen Bates', due: 'Aug 25', comments: 2 },
+    { id: 'c6', column: 'in-review', category: 'Bug', title: 'Fix double-charge on rapid checkout clicks', assignee: 'Sam Okafor', due: 'Aug 23', comments: 4 },
+    { id: 'c7', column: 'in-review', category: 'Content', title: 'AI support agent prompt for spreadsheet export', assignee: 'Maya Chen', due: 'Aug 27', comments: 1 },
+    { id: 'c8', column: 'shipped', category: 'Infra', title: 'LINE Messaging API webhook integration', assignee: 'Devon Ruiz', due: 'Aug 19', comments: 6 },
+    { id: 'c9', column: 'shipped', category: 'Feature', title: 'Telegram Bot API support ticket routing', assignee: 'Lena Ford', due: 'Aug 20', comments: 2 },
+  ];
+
+  let draggedCardId = null;
+
+  function renderCard(card) {
+    const catStyle = CATEGORY_STYLES[card.category] || 'bg-neutral-100 text-neutral-700 ring-1 ring-inset ring-neutral-200';
+    return `
+      <div
+        data-card="${card.id}"
+        draggable="true"
+        class="bg-white rounded-lg border border-neutral-200 p-3 cursor-grab shadow-sm hover:shadow transition-shadow"
+      >
+        <span class="inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-medium ${catStyle} mb-2">
+          ${card.category}
+        </span>
+        <p class="text-sm font-medium text-neutral-900 leading-snug mb-3">${card.title}</p>
+        <div class="flex items-center justify-between">
+          <div class="h-6 w-6 rounded-full ${avatarColor(card.assignee)} text-white text-[10px] font-semibold flex items-center justify-center" title="${card.assignee}">
+            ${initials(card.assignee)}
+          </div>
+          <div class="flex items-center gap-3 text-xs text-neutral-400">
+            <span>${card.due}</span>
+            <span class="inline-flex items-center gap-1">
+              <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+              </svg>
+              ${card.comments}
+            </span>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function renderBoard() {
+    const board = document.getElementById('board');
+
+    board.innerHTML = columns.map(col => {
+      const colCards = cards.filter(c => c.column === col.id);
+      return `
+        <div class="w-72 flex-shrink-0 bg-neutral-50 border border-neutral-200 rounded-xl flex flex-col max-h-[75vh]">
+          <div class="flex items-center justify-between px-3 py-3 flex-shrink-0">
+            <div class="flex items-center gap-2">
+              <h2 class="text-sm font-semibold text-neutral-800">${col.name}</h2>
+              <span class="inline-flex items-center justify-center h-5 min-w-5 px-1.5 rounded-full bg-neutral-200 text-neutral-600 text-[11px] font-medium column-count">
+                ${colCards.length}
+              </span>
+            </div>
+            <span class="text-neutral-400 cursor-pointer select-none">&#8943;</span>
+          </div>
+          <div data-column="${col.id}" class="flex-1 overflow-y-auto px-3 space-y-2 pb-2 min-h-[80px] rounded-lg transition-colors">
+            ${colCards.map(renderCard).join('')}
+          </div>
+          <button data-add-column="${col.id}" class="text-left text-xs text-neutral-400 hover:text-neutral-700 px-3 py-3 flex-shrink-0 transition-colors">
+            + Add task
+          </button>
+        </div>
+      `;
+    }).join('');
+
+    attachDragHandlers();
+    attachAddHandlers();
+  }
+
+  function recountColumns() {
+    document.querySelectorAll('[data-column]').forEach(colEl => {
+      const colId = colEl.dataset.column;
+      const count = colEl.querySelectorAll('[data-card]').length;
+      const badge = colEl.closest('div.flex-shrink-0').querySelector('.column-count');
+      if (badge) badge.textContent = count;
+    });
+  }
+
+  function attachAddHandlers() {
+    document.querySelectorAll('[data-add-column]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const colId = btn.dataset.addColumn;
+        const newCard = {
+          id: 'c' + Date.now(),
+          column: colId,
+          category: 'Feature',
+          title: 'Untitled task',
+          assignee: 'Maya Chen',
+          due: '—',
+          comments: 0,
+        };
+        cards.push(newCard);
+        renderBoard();
+      });
+    });
+  }
+
+  function attachDragHandlers() {
+    document.querySelectorAll('[data-card]').forEach(cardEl => {
+      cardEl.addEventListener('dragstart', e => {
+        draggedCardId = cardEl.dataset.card;
+        cardEl.classList.add('card-dragging');
+        e.dataTransfer.effectAllowed = 'move';
+        e.dataTransfer.setData('text/plain', draggedCardId);
+      });
+
+      cardEl.addEventListener('dragend', () => {
+        cardEl.classList.remove('card-dragging');
+        clearDropIndicators();
+        clearColumnTargets();
+      });
+    });
+
+    document.querySelectorAll('[data-column]').forEach(colEl => {
+      colEl.addEventListener('dragover', e => {
+        e.preventDefault();
+        clearColumnTargets();
+        colEl.classList.add('column-drop-target');
+
+        clearDropIndicators();
+        const afterEl = closestCardBelow(colEl, e.clientY);
+        if (afterEl) {
+          afterEl.classList.add('card-drop-indicator');
+        }
+      });
+
+      colEl.addEventListener('dragleave', e => {
+        if (!colEl.contains(e.relatedTarget)) {
+          colEl.classList.remove('column-drop-target');
+        }
+      });
+
+      colEl.addEventListener('drop', e => {
+        e.preventDefault();
+        colEl.classList.remove('column-drop-target');
+        clearDropIndicators();
+
+        const cardId = draggedCardId || e.dataTransfer.getData('text/plain');
+        const card = cards.find(c => c.id === cardId);
+        if (!card) return;
+
+        const newColumnId = colEl.dataset.column;
+        const afterEl = closestCardBelow(colEl, e.clientY);
+
+        cards = cards.filter(c => c.id !== cardId);
+
+        if (afterEl) {
+          const beforeCardId = afterEl.dataset.card;
+          const beforeIdx = cards.findIndex(c => c.id === beforeCardId);
+          card.column = newColumnId;
+          cards.splice(beforeIdx, 0, card);
+        } else {
+          card.column = newColumnId;
+          cards.push(card);
+        }
+
+        draggedCardId = null;
+        renderBoard();
+        recountColumns();
+      });
+    });
+  }
+
+  function clearColumnTargets() {
+    document.querySelectorAll('[data-column]').forEach(el => el.classList.remove('column-drop-target'));
+  }
+
+  function clearDropIndicators() {
+    document.querySelectorAll('[data-card]').forEach(el => el.classList.remove('card-drop-indicator'));
+  }
+
+  function closestCardBelow(columnEl, pointerY) {
+    const cardEls = [...columnEl.querySelectorAll('[data-card]')].filter(el => el.dataset.card !== draggedCardId);
+    let closest = null;
+    let closestOffset = Number.NEGATIVE_INFINITY;
+
+    for (const el of cardEls) {
+      const rect = el.getBoundingClientRect();
+      const offset = pointerY - (rect.top + rect.height / 2);
+      if (offset < 0 && offset > closestOffset) {
+        closestOffset = offset;
+        closest = el;
+      }
+    }
+    return closest;
+  }
+
+  renderBoard();
+</script>
+
+</body>
+</html>

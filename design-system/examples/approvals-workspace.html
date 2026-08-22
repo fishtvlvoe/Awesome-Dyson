@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Approvals Workspace</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  html, body { height: 100%; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif; }
+  .row-selected { background-color: rgb(250 250 250); border-left-color: rgb(23 23 23); }
+  .row-idle { border-left-color: transparent; }
+  .row-idle:hover { background-color: rgb(250 250 250 / 0.6); }
+</style>
+</head>
+<body class="bg-neutral-100 text-neutral-900">
+
+  <div class="h-screen flex items-stretch justify-center p-6">
+    <div class="w-full max-w-6xl flex border border-neutral-200 rounded-xl overflow-hidden bg-white shadow-sm">
+
+      <!-- LEFT PANE -->
+      <div class="w-[380px] flex-shrink-0 border-r border-neutral-200 flex flex-col">
+        <div class="px-5 py-4 border-b border-neutral-200">
+          <div class="flex items-center justify-between">
+            <h1 class="text-base font-semibold text-neutral-900">Approvals</h1>
+            <span id="pending-badge" class="inline-flex items-center justify-center h-6 min-w-6 px-2 rounded-full bg-neutral-900 text-white text-xs font-medium">4</span>
+          </div>
+          <p class="text-xs text-neutral-500 mt-0.5">Requests waiting on your review</p>
+        </div>
+
+        <div class="px-5 pt-3 pb-2 flex gap-2 border-b border-neutral-200">
+          <button data-filter="pending" class="filter-chip inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium transition-colors">
+            <span class="h-1.5 w-1.5 rounded-full bg-amber-500"></span>
+            Pending
+          </button>
+          <button data-filter="approved" class="filter-chip inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium transition-colors">
+            <span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+            Approved
+          </button>
+          <button data-filter="rejected" class="filter-chip inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium transition-colors">
+            <span class="h-1.5 w-1.5 rounded-full bg-rose-500"></span>
+            Rejected
+          </button>
+        </div>
+
+        <div id="request-list" class="flex-1 overflow-y-auto divide-y divide-neutral-200"></div>
+      </div>
+
+      <!-- RIGHT PANE -->
+      <div class="flex-1 flex flex-col min-w-0">
+        <div id="detail-panel" class="flex-1 overflow-y-auto"></div>
+        <div id="detail-footer"></div>
+      </div>
+
+    </div>
+  </div>
+
+<script>
+  const TYPE_STYLES = {
+    Expense: 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200',
+    Access: 'bg-blue-50 text-blue-700 ring-1 ring-inset ring-blue-200',
+    Contract: 'bg-violet-50 text-violet-700 ring-1 ring-inset ring-violet-200',
+    Refund: 'bg-rose-50 text-rose-700 ring-1 ring-inset ring-rose-200',
+    Vendor: 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200',
+    Budget: 'bg-indigo-50 text-indigo-700 ring-1 ring-inset ring-indigo-200',
+  };
+
+  const STATUS_STYLES = {
+    pending: 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200',
+    approved: 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200',
+    rejected: 'bg-rose-50 text-rose-700 ring-1 ring-inset ring-rose-200',
+  };
+
+  const STATUS_LABEL = { pending: 'Pending', approved: 'Approved', rejected: 'Rejected' };
+
+  const AVATAR_COLORS = ['bg-neutral-800', 'bg-blue-600', 'bg-violet-600', 'bg-emerald-600', 'bg-amber-600', 'bg-rose-600'];
+
+  function initials(name) {
+    return name.split(' ').map(p => p[0]).join('').slice(0, 2).toUpperCase();
+  }
+
+  function avatarColor(name) {
+    const idx = name.split('').reduce((a, c) => a + c.charCodeAt(0), 0) % AVATAR_COLORS.length;
+    return AVATAR_COLORS[idx];
+  }
+
+  const requests = [
+    {
+      id: 1,
+      requester: 'Maya Chen',
+      title: 'Requesting reimbursement for client dinner in Taipei',
+      amount: '$284.50',
+      age: '2h ago',
+      type: 'Expense',
+      status: 'pending',
+      fields: {
+        Requester: 'Maya Chen',
+        Department: 'Sales — APAC',
+        Amount: '$284.50',
+        Category: 'Client Entertainment',
+        Submitted: 'Aug 22, 2026',
+        'Due Date': 'Aug 25, 2026',
+      },
+      justification: 'Dinner with the StartKiter reseller partner ahead of the Q3 renewal call. Attendees: 4. Receipt attached, split evenly across two tables per the venue’s policy.',
+      attachment: { name: 'receipt-taipei-dinner.pdf', size: '482 KB' },
+    },
+    {
+      id: 2,
+      requester: 'Devon Ruiz',
+      title: 'Access request for production database read replica',
+      amount: '—',
+      age: '5h ago',
+      type: 'Access',
+      status: 'pending',
+      fields: {
+        Requester: 'Devon Ruiz',
+        Department: 'Engineering',
+        Amount: '—',
+        Category: 'Infrastructure Access',
+        Submitted: 'Aug 22, 2026',
+        'Due Date': 'Aug 23, 2026',
+      },
+      justification: 'Debugging a reporting discrepancy in the billing export job. Needs read-only access to the replica for two days to trace the query plan without touching prod writes.',
+      attachment: { name: 'incident-4021.log', size: '18 KB' },
+    },
+    {
+      id: 3,
+      requester: 'Priya Nair',
+      title: 'New vendor contract with Meridian Print Co.',
+      amount: '$12,000.00',
+      age: '1d ago',
+      type: 'Contract',
+      status: 'pending',
+      fields: {
+        Requester: 'Priya Nair',
+        Department: 'Marketing',
+        Amount: '$12,000.00',
+        Category: 'Annual Print Run',
+        Submitted: 'Aug 21, 2026',
+        'Due Date': 'Aug 29, 2026',
+      },
+      justification: 'Annual print run for the onboarding kits bundled with the course package. Meridian came in 14% under the incumbent vendor’s quote with the same turnaround time.',
+      attachment: { name: 'meridian-quote-2026.pdf', size: '1.1 MB' },
+    },
+    {
+      id: 4,
+      requester: 'Owen Bates',
+      title: 'Customer refund for duplicate course purchase',
+      amount: '$88.00',
+      age: '1d ago',
+      type: 'Refund',
+      status: 'pending',
+      fields: {
+        Requester: 'Owen Bates',
+        Department: 'Support',
+        Amount: '$88.00',
+        Category: 'Billing Error',
+        Submitted: 'Aug 21, 2026',
+        'Due Date': 'Aug 24, 2026',
+      },
+      justification: 'Customer was charged twice for the same bundle due to a double-click on the checkout button. Payment log confirms two identical charges 4 seconds apart.',
+      attachment: { name: 'payuni-charge-log.csv', size: '6 KB' },
+    },
+    {
+      id: 5,
+      requester: 'Lena Ford',
+      title: 'Onboarded Coolify VPS provider as approved vendor',
+      amount: '$45.00 / mo',
+      age: '3d ago',
+      type: 'Vendor',
+      status: 'approved',
+      fields: {
+        Requester: 'Lena Ford',
+        Department: 'Engineering',
+        Amount: '$45.00 / mo',
+        Category: 'Hosting',
+        Submitted: 'Aug 19, 2026',
+        'Due Date': 'Aug 20, 2026',
+      },
+      justification: 'Replacing the Vercel hosting line item now that StartKiter has consolidated onto the single Coolify VPS. Lower fixed cost, already in use for staging.',
+      attachment: { name: 'coolify-vps-invoice.pdf', size: '210 KB' },
+    },
+    {
+      id: 6,
+      requester: 'Sam Okafor',
+      title: 'Q3 marketing budget reallocation request',
+      amount: '$3,500.00',
+      age: '4d ago',
+      type: 'Budget',
+      status: 'rejected',
+      fields: {
+        Requester: 'Sam Okafor',
+        Department: 'Marketing',
+        Amount: '$3,500.00',
+        Category: 'Paid Social',
+        Submitted: 'Aug 18, 2026',
+        'Due Date': 'Aug 22, 2026',
+      },
+      justification: 'Shift unspent SEO budget into paid social for the launch week push. Rejected pending a fuller breakdown of expected CAC before reallocating quarterly funds.',
+      attachment: { name: 'q3-budget-shift.xlsx', size: '95 KB' },
+    },
+  ];
+
+  let selectedId = requests[0].id;
+  let activeFilter = 'pending';
+
+  function pendingCount() {
+    return requests.filter(r => r.status === 'pending').length;
+  }
+
+  function renderPendingBadge() {
+    document.getElementById('pending-badge').textContent = pendingCount();
+  }
+
+  function renderFilterChips() {
+    document.querySelectorAll('.filter-chip').forEach(btn => {
+      const isActive = btn.dataset.filter === activeFilter;
+      btn.className = 'filter-chip inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium transition-colors ' +
+        (isActive
+          ? 'border-neutral-900 bg-neutral-900 text-white'
+          : 'border-neutral-200 text-neutral-600 hover:border-neutral-300');
+    });
+  }
+
+  function renderList() {
+    const list = document.getElementById('request-list');
+    const visible = requests.filter(r => r.status === activeFilter);
+
+    if (visible.length === 0) {
+      list.innerHTML = `<div class="px-5 py-10 text-center text-sm text-neutral-400">No ${activeFilter} requests</div>`;
+      return;
+    }
+
+    list.innerHTML = visible.map(r => {
+      const isSelected = r.id === selectedId;
+      const rowClass = isSelected ? 'row-selected border-l-2' : 'row-idle border-l-2';
+      const typePill = TYPE_STYLES[r.type] || 'bg-neutral-100 text-neutral-700 ring-1 ring-inset ring-neutral-200';
+      return `
+        <button data-id="${r.id}" class="request-row w-full text-left px-5 py-3.5 flex gap-3 ${rowClass} transition-colors">
+          <div class="flex-shrink-0 h-9 w-9 rounded-full ${avatarColor(r.requester)} text-white text-xs font-semibold flex items-center justify-center">
+            ${initials(r.requester)}
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-start justify-between gap-2">
+              <p class="text-sm font-medium text-neutral-900 leading-snug">${r.title}</p>
+              <span class="flex-shrink-0 inline-flex items-center rounded-full px-2 py-0.5 text-[11px] font-medium ${typePill}">${r.type}</span>
+            </div>
+            <p class="text-xs text-neutral-500 mt-1">${r.amount} &middot; ${r.age}</p>
+          </div>
+        </button>
+      `;
+    }).join('');
+
+    list.querySelectorAll('.request-row').forEach(btn => {
+      btn.addEventListener('click', () => {
+        selectedId = Number(btn.dataset.id);
+        renderList();
+        renderDetail();
+      });
+    });
+  }
+
+  function renderDetail() {
+    const panel = document.getElementById('detail-panel');
+    const footer = document.getElementById('detail-footer');
+    const req = requests.find(r => r.id === selectedId);
+
+    if (!req) {
+      panel.innerHTML = `<div class="h-full flex items-center justify-center text-sm text-neutral-400">Select a request to review</div>`;
+      footer.innerHTML = '';
+      return;
+    }
+
+    const statusPill = STATUS_STYLES[req.status];
+
+    panel.innerHTML = `
+      <div class="px-8 py-6 border-b border-neutral-200">
+        <div class="flex items-center gap-3 mb-1.5">
+          <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${statusPill}">${STATUS_LABEL[req.status]}</span>
+          <span class="text-xs text-neutral-400">Submitted ${req.fields['Submitted']}</span>
+        </div>
+        <h2 class="text-lg font-semibold text-neutral-900 leading-snug">${req.title}</h2>
+      </div>
+
+      <div class="px-8 py-6 border-b border-neutral-200">
+        <dl class="grid grid-cols-2 gap-x-8 gap-y-4">
+          ${Object.entries(req.fields).map(([label, value]) => `
+            <div>
+              <dt class="text-[11px] font-medium uppercase tracking-wide text-neutral-400">${label}</dt>
+              <dd class="text-sm text-neutral-900 mt-0.5">${value}</dd>
+            </div>
+          `).join('')}
+        </dl>
+      </div>
+
+      <div class="px-8 py-6 border-b border-neutral-200">
+        <h3 class="text-xs font-medium uppercase tracking-wide text-neutral-400 mb-2">Justification</h3>
+        <blockquote class="border border-neutral-200 rounded-lg px-4 py-3 text-sm text-neutral-600 leading-relaxed bg-neutral-50">
+          ${req.justification}
+        </blockquote>
+      </div>
+
+      <div class="px-8 py-6">
+        <h3 class="text-xs font-medium uppercase tracking-wide text-neutral-400 mb-2">Attachment</h3>
+        <div class="flex items-center gap-3 border border-neutral-200 rounded-lg px-4 py-3">
+          <svg class="h-5 w-5 text-neutral-400 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+          </svg>
+          <span class="text-sm text-neutral-800 flex-1 truncate">${req.attachment.name}</span>
+          <span class="text-xs text-neutral-400">${req.attachment.size}</span>
+        </div>
+      </div>
+    `;
+
+    const isResolved = req.status !== 'pending';
+
+    footer.innerHTML = `
+      <div class="border-t border-neutral-200 px-8 py-4 flex items-center justify-end gap-3 bg-white sticky bottom-0">
+        <button id="btn-reject" ${isResolved ? 'disabled' : ''} class="rounded-lg border border-rose-300 text-rose-600 text-sm font-medium px-4 py-2 hover:bg-rose-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors">
+          Reject
+        </button>
+        <button id="btn-question" class="rounded-lg border border-neutral-200 text-neutral-700 text-sm font-medium px-4 py-2 hover:bg-neutral-50 transition-colors">
+          Ask a question
+        </button>
+        <button id="btn-approve" ${isResolved ? 'disabled' : ''} class="rounded-lg bg-neutral-900 text-white text-sm font-medium px-4 py-2 hover:bg-neutral-800 disabled:opacity-40 disabled:cursor-not-allowed transition-colors">
+          Approve
+        </button>
+      </div>
+    `;
+
+    if (!isResolved) {
+      document.getElementById('btn-approve').addEventListener('click', () => resolveRequest(req.id, 'approved'));
+      document.getElementById('btn-reject').addEventListener('click', () => resolveRequest(req.id, 'rejected'));
+    }
+  }
+
+  function resolveRequest(id, newStatus) {
+    const req = requests.find(r => r.id === id);
+    if (!req || req.status !== 'pending') return;
+    req.status = newStatus;
+    renderPendingBadge();
+    renderList();
+    renderDetail();
+  }
+
+  document.querySelectorAll('.filter-chip').forEach(btn => {
+    btn.addEventListener('click', () => {
+      activeFilter = btn.dataset.filter;
+      const firstVisible = requests.find(r => r.status === activeFilter);
+      selectedId = firstVisible ? firstVisible.id : null;
+      renderFilterChips();
+      renderList();
+      renderDetail();
+    });
+  });
+
+  renderPendingBadge();
+  renderFilterChips();
+  renderList();
+  renderDetail();
+</script>
+
+</body>
+</html>

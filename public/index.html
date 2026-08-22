@@ -6,930 +6,66 @@
   <title>開發儀表板</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // 設計系統：見 ../design-system/tokens.md（來源 vibeprompts.dev Dashboards
+    // 分類的真實 Tailwind 原始碼）。深色模式走 class 策略，配色邏輯不變，只反轉亮度。
+    tailwind.config = { darkMode: 'class' };
+  </script>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    /* 設計語言參考 Lightdash（saasframe.io/saas/lightdash 實測 CSS Variables／Design
-       Tokens 分頁，非目測猜色）：低調中性灰階、克制的語意色（dimension 藍／calculation
-       綠／metric 橘）、緊縮圓角（4/8/12px）與極淺陰影，走真正 BI／中臺軟體的質感，
-       不是行銷頁那種大量彩色圓角泡泡 */
-    :root {
-      --radius-sm: 4px;
-      --radius-md: 8px;
-      --radius-lg: 12px;
-      --radius-full: 9999px;
-      --bg: #f8f9fa;
-      --paper: #fefefe;
-      --text: #1a1b1e;
-      --text-secondary: #495057;
-      --text-faint: #868e96;
-      --border: #e9ecef;
-      --sidebar-bg: #fefefe;
-      --sidebar-text: #1a1b1e;
-      --sidebar-text-dim: #495057;
-      --sidebar-active-bg: #edf0fd;
-      --sidebar-border: #e9ecef;
-      --accent: #3b5bdb;
-      --accent-soft-bg: #edf0fd;
-      --status-ok: #2b8a3e;
-      --status-ok-bg: #ebf5ed;
-      --status-warn: #de7f0b;
-      --status-warn-bg: #fbe9e0;
-      --status-error: #c92a2a;
-      --status-error-bg: #fff0f0;
-      --badge-blue-bg: #edf0fd; --badge-blue-fg: #3b5bdb;
-      --badge-green-bg: #ebf5ed; --badge-green-fg: #2b8a3e;
-      --badge-purple-bg: #f8f0fc; --badge-purple-fg: #9c36b5;
-      --badge-amber-bg: #fbe9e0; --badge-amber-fg: #de7f0b;
-      --shadow: 0px 1px 2px 0px rgba(10,13,18,0.05);
-    }
-
-    html.dark-mode {
-      --bg: #141414;
-      --paper: #1a1a1a;
-      --text: #fefefe;
-      --text-secondary: #9e9e9e;
-      --text-faint: #7a7a7a;
-      --border: #2e2e2e;
-      --sidebar-bg: #1a1a1a;
-      --sidebar-text: #fefefe;
-      --sidebar-text-dim: #9e9e9e;
-      --sidebar-active-bg: #202539;
-      --sidebar-border: #2e2e2e;
-      --accent: #95aaf0;
-      --accent-soft-bg: #202539;
-      --status-ok: #38af4d;
-      --status-ok-bg: #1d3525;
-      --status-warn: #e08a20;
-      --status-warn-bg: #3e2f1a;
-      --status-error: #e5877a;
-      --status-error-bg: #3a1e1a;
-      --badge-blue-bg: #202539; --badge-blue-fg: #95aaf0;
-      --badge-green-bg: #1d3525; --badge-green-fg: #38af4d;
-      --badge-purple-bg: #2b1a33; --badge-purple-fg: #d599e8;
-      --badge-amber-bg: #3e2f1a; --badge-amber-fg: #e08a20;
-      --shadow: 0px 1px 2px 0px rgba(0,0,0,0.4);
-    }
-
-    @media (prefers-color-scheme: dark) {
-      html:not(.light-mode) {
-        --bg: #141414;
-        --paper: #1a1a1a;
-        --text: #fefefe;
-        --text-secondary: #9e9e9e;
-        --text-faint: #7a7a7a;
-        --border: #2e2e2e;
-        --sidebar-bg: #1a1a1a;
-        --sidebar-text: #fefefe;
-        --sidebar-text-dim: #9e9e9e;
-        --sidebar-active-bg: #202539;
-        --sidebar-border: #2e2e2e;
-        --accent: #95aaf0;
-        --accent-soft-bg: #202539;
-        --status-ok: #38af4d;
-        --status-ok-bg: #1d3525;
-        --status-warn: #e08a20;
-        --status-warn-bg: #3e2f1a;
-        --status-error: #e5877a;
-        --status-error-bg: #3a1e1a;
-        --badge-blue-bg: #202539; --badge-blue-fg: #95aaf0;
-        --badge-green-bg: #1d3525; --badge-green-fg: #38af4d;
-        --badge-purple-bg: #2b1a33; --badge-purple-fg: #d599e8;
-        --badge-amber-bg: #3e2f1a; --badge-amber-fg: #e08a20;
-        --shadow: 0px 1px 2px 0px rgba(0,0,0,0.4);
-      }
-    }
-
-    html, body {
-      height: 100%;
-    }
-
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang TC', Roboto, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      display: flex;
-      min-height: 100%;
-    }
-
-    /* 左側導覽：參考 FlowMapp 產品介面的淺色側邊欄，圖示 + 文字，
-       選中項目用淡藍紫底色的膠囊而不是深色反轉 */
-    .sidebar {
-      width: 220px;
-      flex-shrink: 0;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-      background: var(--sidebar-bg);
-      color: var(--sidebar-text);
-      border-right: 1px solid var(--sidebar-border);
-      padding: 24px 16px;
-    }
-
-    .sidebar .logo {
-      font-family: 'Archivo', sans-serif;
-      font-weight: 800;
-      font-size: 1.05em;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 28px;
-      padding: 0 6px;
-    }
-
-    .sidebar .logo-icon {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 28px;
-      height: 28px;
-      border-radius: var(--radius-md);
-      background: var(--accent);
-      color: #fff;
-      flex-shrink: 0;
-    }
-
-    .sidebar .logo-icon .icon {
-      width: 16px;
-      height: 16px;
-    }
-
-    .sidebar-group-label {
-      font-size: 0.7em;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--text-faint);
-      padding: 0 10px;
-      margin-bottom: 8px;
-    }
-
-    .sidebar-nav {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .sidebar-footer {
-      margin-top: auto;
-      padding-top: 16px;
-      border-top: 1px solid var(--sidebar-border);
-    }
-
-    .sidebar-footer a {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--sidebar-text-dim);
-      text-decoration: none;
-      font-size: 0.85em;
-      padding: 8px 10px;
-      border-radius: var(--radius-md);
-    }
-
-    .sidebar-footer a:hover {
-      background: var(--bg);
-      color: var(--sidebar-text);
-    }
-
-    .sidebar-footer .icon {
-      width: 16px;
-      height: 16px;
-      flex-shrink: 0;
-    }
-
-    .sidebar-nav a {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--sidebar-text-dim);
-      text-decoration: none;
-      font-size: 0.9em;
-      font-weight: 500;
-      padding: 9px 10px;
-      border-radius: var(--radius-md);
-    }
-
-    .sidebar-nav a .icon {
-      width: 16px;
-      height: 16px;
-      flex-shrink: 0;
-    }
-
-    .sidebar-nav a:hover {
-      background: var(--bg);
-      color: var(--sidebar-text);
-    }
-
-    .sidebar-nav a.active {
-      background: var(--sidebar-active-bg);
-      color: var(--accent);
-      font-weight: 700;
-    }
-
-    main {
-      flex: 1;
-      overflow-y: auto;
-      padding: 40px 32px 80px;
-      min-width: 0;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      width: 100%;
-    }
-
-    .eyebrow {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--text-faint);
-      margin-bottom: 8px;
-    }
-
-    .page-title {
-      display: flex;
-      align-items: baseline;
-      flex-wrap: wrap;
-      gap: 16px;
-      margin-bottom: 4px;
-    }
-
-    h1 {
-      font-family: 'Archivo', sans-serif;
-      font-size: 3em;
-      font-weight: 900;
-      letter-spacing: -0.02em;
-      line-height: 1.1;
-      text-wrap: balance;
-    }
-
-    .updated-info {
-      font-size: 0.82em;
-      color: var(--text-faint);
-      font-weight: normal;
-    }
-
-    .one-liner {
-      font-size: 1.1em;
-      color: var(--text-secondary);
-      margin: 12px 0 28px;
-      max-width: 60ch;
-    }
-
-    /* Stats at a glance — 參考 Lightdash KPI Dashboard 的統計磚：
-       白底細邊框卡片 + 大數字，不是裝飾，是真的從資料算出來的數字 */
-    .stats-row {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 12px;
-      margin-bottom: 24px;
-    }
-
-    .stat-tile {
-      background: var(--paper);
-      border: 1px solid var(--border);
-      border-top: 3px solid var(--stat-accent, var(--border));
-      border-radius: var(--radius-lg);
-      padding: 14px 18px 16px;
-      box-shadow: var(--shadow);
-    }
-
-    .stat-tile-alert { --stat-accent: var(--status-error); }
-    .stat-tile-alert .stat-value { color: var(--status-error); }
-
-    .stat-head {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 10px;
-    }
-
-    .stat-head .icon-badge {
-      width: 26px;
-      height: 26px;
-    }
-
-    .stat-head .icon-badge .icon {
-      width: 14px;
-      height: 14px;
-    }
-
-    .icon-badge-red { background: var(--status-error-bg); color: var(--status-error); }
-
-    .stat-label {
-      font-size: 0.78em;
-      color: var(--text-faint);
-      font-weight: 600;
-    }
-
-    .stat-value {
-      font-family: 'Archivo', sans-serif;
-      font-size: 1.9em;
-      font-weight: 800;
-      font-variant-numeric: tabular-nums;
-      color: var(--text);
-    }
-
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 16px;
-      margin-bottom: 32px;
-    }
-
-    .card {
-      background: var(--paper);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 22px;
-      box-shadow: var(--shadow);
-    }
-
-    .card h2 {
-      font-family: 'Archivo', sans-serif;
-      font-size: 1.05em;
-      font-weight: 800;
-      margin-bottom: 6px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .card-icon {
-      display: inline-flex;
-      align-items: center;
-    }
-
-    .icon {
-      width: 1.15em;
-      height: 1.15em;
-      flex-shrink: 0;
-    }
-
-    /* 圖示徽章：參考 Profound 產品介面（saasframe.io/saas/profound「Content」畫面）
-       黑白灰為主、色彩只留給真正的狀態訊號，結構性圖示（區塊標題、分類）一律用
-       中性淺灰底＋灰階圖示，不做裝飾性彩色分類 */
-    .icon-badge {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 30px;
-      height: 30px;
-      border-radius: var(--radius-md);
-      flex-shrink: 0;
-    }
-
-    .icon-badge .icon {
-      width: 16px;
-      height: 16px;
-    }
-
-    .icon-badge-neutral { background: var(--bg); border: 1px solid var(--border); color: var(--text-secondary); }
-    .icon-badge-blue { background: var(--badge-blue-bg); color: var(--badge-blue-fg); }
-    .icon-badge-green { background: var(--badge-green-bg); color: var(--badge-green-fg); }
-    .icon-badge-purple { background: var(--badge-purple-bg); color: var(--badge-purple-fg); }
-    .icon-badge-amber { background: var(--badge-amber-bg); color: var(--badge-amber-fg); }
-
-    .status-badge {
-      display: inline-flex;
-      align-items: center;
-      font-size: 0.82em;
-      font-weight: 700;
-      padding: 3px 10px;
-      border-radius: var(--radius-sm);
-      font-variant-numeric: tabular-nums;
-    }
-
-    .status-badge-ok { background: var(--status-ok-bg); color: var(--status-ok); }
-    .status-badge-warn { background: var(--status-warn-bg); color: var(--status-warn); }
-    .status-badge-error { background: var(--status-error-bg); color: var(--status-error); }
-
-    .card-about, .card-screenshots {
-      background: var(--paper);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 26px 28px;
-      box-shadow: var(--shadow);
-      margin-bottom: 24px;
-    }
-
-    .card-about h2, .card-screenshots h2 {
-      font-family: 'Archivo', sans-serif;
-      font-size: 1.2em;
-      font-weight: 800;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 18px;
-    }
-
-    .about-block {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-      margin-bottom: 22px;
-    }
-
-    .about-block h3 {
-      font-size: 0.78em;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      color: var(--text-faint);
-      text-transform: uppercase;
-      margin-bottom: 6px;
-    }
-
-    .about-block p {
-      font-size: 0.95em;
-      line-height: 1.65;
-      color: var(--text-secondary);
-    }
-
-    .about-features-title {
-      font-size: 0.78em;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      color: var(--text-faint);
-      text-transform: uppercase;
-      margin-bottom: 10px;
-    }
-
-    .feature-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      list-style: none;
-    }
-
-    .feature-list li {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: 6px 14px;
-      font-size: 0.85em;
-      font-weight: 500;
-      color: var(--text-secondary);
-    }
-
-    .screenshots-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 18px;
-    }
-
-    .screenshot {
-      margin: 0;
-    }
-
-    .screenshot img {
-      width: 100%;
-      display: block;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border);
-    }
-
-    .screenshot figcaption {
-      font-size: 0.82em;
-      color: var(--text-faint);
-      margin-top: 8px;
-    }
-
-    .status-legend {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 14px;
-      font-size: 0.78em;
-      color: var(--text-faint);
-      margin-bottom: 16px;
-      padding-bottom: 14px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .status-legend-item {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .change-item {
-      margin-bottom: 18px;
-      padding-bottom: 18px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .change-item:last-child {
-      border-bottom: none;
-      margin-bottom: 0;
-      padding-bottom: 0;
-    }
-
-    .change-display-name {
-      font-weight: 700;
-      font-size: 1.02em;
-      margin-bottom: 2px;
-    }
-
-    .change-plain-summary {
-      font-size: 0.88em;
-      color: var(--text-secondary);
-      margin-bottom: 6px;
-    }
-
-    .change-detail {
-      font-size: 0.88em;
-      line-height: 1.65;
-      color: var(--text-secondary);
-      margin-top: 10px;
-    }
-
-    .change-detail strong {
-      color: var(--text);
-    }
-
-    .change-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      margin-top: 10px;
-      font-size: 0.85em;
-      font-weight: 700;
-      color: var(--accent);
-      text-decoration: none;
-    }
-
-    .change-link:hover {
-      text-decoration: underline;
-    }
-
-    .change-link .icon {
-      width: 0.9em;
-      height: 0.9em;
-    }
-
-    .change-status {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.9em;
-      color: var(--text-secondary);
-      font-variant-numeric: tabular-nums;
-    }
-
-    .status-dot {
-      display: inline-block;
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-
-    .status-ok { background: var(--status-ok); }
-    .status-warn { background: var(--status-warn); }
-    .status-error { background: var(--status-error); }
-
-    .progress-bar {
-      background: var(--border);
-      height: 7px;
-      border-radius: 4px;
-      overflow: hidden;
-      margin-top: 8px;
-    }
-
-    .progress-fill {
-      height: 100%;
-      background: var(--accent);
-      transition: width 0.3s ease;
-    }
-
-    .question-item {
-      margin-bottom: 12px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .question-item:last-child {
-      border-bottom: none;
-      margin-bottom: 0;
-      padding-bottom: 0;
-    }
-
-    .question-text {
-      margin-bottom: 4px;
-    }
-
-    .question-asked {
-      font-size: 0.85em;
-      color: var(--text-faint);
-    }
-
-    .timeline {
-      margin-top: 40px;
-      padding-top: 32px;
-      border-top: 1px solid var(--border);
-    }
-
-    .timeline h2 {
-      font-family: 'Archivo', sans-serif;
-      font-weight: 800;
-      margin-bottom: 24px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 1.3em;
-    }
-
-    .timeline-item {
-      margin-bottom: 24px;
-      position: relative;
-      padding-left: 32px;
-    }
-
-    .timeline-item::before {
-      content: '';
-      position: absolute;
-      left: 8px;
-      top: 6px;
-      width: 8px;
-      height: 8px;
-      background: var(--accent);
-      border-radius: 50%;
-      border: 2px solid var(--bg);
-      box-shadow: inset 0 0 0 2px var(--border);
-    }
-
-    .timeline-item::after {
-      content: '';
-      position: absolute;
-      left: 14px;
-      top: 18px;
-      width: 2px;
-      height: calc(100% + 18px);
-      background: var(--border);
-    }
-
-    .timeline-item:last-child::after {
-      display: none;
-    }
-
-    .timeline-item-header {
-      cursor: pointer;
-      user-select: none;
-    }
-
-    .timeline-item-header:hover {
-      opacity: 0.8;
-    }
-
-    .timeline-date {
-      font-size: 0.85em;
-      color: var(--text-faint);
-      font-weight: 600;
-      font-variant-numeric: tabular-nums;
-    }
-
-    .timeline-topic {
-      font-weight: 700;
-      margin-top: 4px;
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .timeline-expand-icon {
-      display: inline-flex;
-      transition: transform 0.2s ease;
-    }
-
-    .timeline-expand-icon .icon {
-      width: 0.8em;
-      height: 0.8em;
-    }
-
-    .timeline-expand-icon.expanded {
-      transform: rotate(90deg);
-    }
-
-    .timeline-details {
-      display: none;
-      margin-top: 12px;
-      padding-top: 12px;
-      border-top: 1px solid var(--border);
-    }
-
-    .timeline-details.visible {
-      display: block;
-    }
-
-    .timeline-summary {
-      font-size: 0.95em;
-      color: var(--text-secondary);
-      margin-bottom: 8px;
-      line-height: 1.5;
-    }
-
-    .timeline-decisions {
-      font-size: 0.9em;
-      margin-top: 8px;
-    }
-
-    .timeline-decision {
-      background: var(--bg);
-      padding: 6px 10px;
-      border-radius: 6px;
-      display: inline-block;
-      margin-right: 6px;
-      margin-bottom: 4px;
-      border-left: 3px solid var(--accent);
-    }
-
-    .error {
-      background: var(--status-error-bg);
-      color: var(--status-error);
-      padding: 16px;
-      border-radius: var(--radius-lg);
-      margin: 20px 0;
-    }
-
-    .loading {
-      text-align: center;
-      padding: 40px;
-      color: var(--text-faint);
-    }
-
-    .empty-state {
-      padding: 12px 0;
-      color: var(--text-faint);
-      font-size: 0.9em;
-    }
-
-    .connected-systems {
-      margin-top: 24px;
-    }
-
-    .connected-systems-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 8px;
-    }
-
-    .system-tag {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      padding: 6px 12px;
-      border-radius: var(--radius-sm);
-      font-size: 0.85em;
-      color: var(--text);
-    }
-
-    .key-files-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 8px;
-    }
-
-    .tech-details {
-      margin-top: 40px;
-      padding-top: 24px;
-      border-top: 1px solid var(--border);
-    }
-
-    .tech-details summary {
-      cursor: pointer;
-      font-family: 'Archivo', sans-serif;
-      font-weight: 800;
-      font-size: 0.95em;
-      color: var(--text-secondary);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      list-style: none;
-    }
-
-    .tech-details summary::-webkit-details-marker {
-      display: none;
-    }
-
-    .tech-details-note {
-      font-size: 0.8em;
-      color: var(--text-faint);
-      margin: 10px 0 18px;
-    }
-
-    .tech-details-content {
-      margin-top: 16px;
-    }
-
-    .tech-details-content h3 {
-      font-size: 0.75em;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: var(--text-faint);
-      margin: 18px 0 8px;
-    }
-
-    .tech-slug-list {
-      font-family: 'Menlo', 'Monaco', monospace;
-      font-size: 0.78em;
-      color: var(--text-faint);
-      line-height: 1.8;
-    }
-
-    .tech-slug-list code {
-      color: var(--text-secondary);
-    }
-
-    .file-tag {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      padding: 6px 12px;
-      border-radius: var(--radius-sm);
-      font-size: 0.82em;
-      color: var(--text);
-      font-family: 'Menlo', 'Monaco', monospace;
-    }
-
-    .theme-toggle {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: var(--paper);
-      border: 1px solid var(--border);
-      padding: 8px 12px;
-      border-radius: var(--radius-md);
-      cursor: pointer;
-      font-size: 1.2em;
-      box-shadow: var(--shadow);
-      z-index: 1000;
-    }
-
-    @media (max-width: 768px) {
-      body { flex-direction: column; }
-      .sidebar { width: 100%; padding: 16px 20px; }
-      h1 { font-size: 2em; }
-      .cards-grid { grid-template-columns: 1fr; }
-      .page-title { flex-direction: column; gap: 8px; }
-      main { padding: 24px 16px 64px; }
-    }
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang TC', Roboto, sans-serif; }
   </style>
 </head>
-<body>
-  <div class="sidebar">
-    <div class="logo">
-      <span class="logo-icon">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg>
-      </span>
-      待神
-    </div>
-    <div class="sidebar-group-label">檢視</div>
-    <nav class="sidebar-nav">
-      <a href="#overview" class="active">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
-        現況總覽
-      </a>
-      <a href="#history">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 16 14"/></svg>
-        歷史紀錄
-      </a>
-    </nav>
-    <div class="sidebar-footer">
-      <a href="https://github.com/fishtvlvoe/Awesome-Dyson" target="_blank" rel="noopener noreferrer">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
-        原始碼倉庫
-      </a>
-    </div>
+<body class="bg-neutral-50 dark:bg-neutral-900 text-neutral-900 dark:text-neutral-50">
+
+  <div class="flex min-h-screen">
+    <!-- 側邊欄：來源 design-system/examples/vibeprompts-sidebar-stat-cards.html -->
+    <aside class="hidden w-60 flex-shrink-0 flex-col border-r border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-4 lg:flex">
+      <div class="mb-6 flex items-center gap-2 px-2 font-semibold text-neutral-900 dark:text-neutral-50">
+        <span class="flex h-6 w-6 items-center justify-center rounded-md bg-neutral-900 dark:bg-neutral-50 text-white dark:text-neutral-900">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-3.5 w-3.5"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg>
+        </span>
+        待神
+      </div>
+      <p class="px-2 mb-2 text-[11px] font-semibold uppercase tracking-wide text-neutral-400">檢視</p>
+      <nav class="space-y-1 text-sm">
+        <a href="#overview" class="flex items-center gap-2 rounded-lg bg-neutral-900 dark:bg-neutral-50 px-3 py-2 font-medium text-white dark:text-neutral-900">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+          現況總覽
+        </a>
+        <a href="#history" class="flex items-center gap-2 rounded-lg px-3 py-2 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 16 14"/></svg>
+          歷史紀錄
+        </a>
+      </nav>
+      <div class="mt-auto">
+        <a href="https://github.com/fishtvlvoe/Awesome-Dyson" target="_blank" rel="noopener noreferrer"
+           class="flex items-center gap-2 rounded-lg p-2 text-sm text-neutral-500 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 flex-shrink-0"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
+          原始碼倉庫
+        </a>
+      </div>
+    </aside>
+
+    <main class="flex-1 p-6 lg:p-10 overflow-y-auto">
+      <div class="max-w-6xl mx-auto">
+        <div id="app">
+          <div class="text-center py-16 text-sm text-neutral-400">載入中...</div>
+        </div>
+      </div>
+    </main>
   </div>
 
-  <main>
-    <div class="container">
-      <div id="app">
-        <div class="loading">載入中...</div>
-      </div>
-    </div>
-  </main>
-
-  <button class="theme-toggle" title="切換深色/淺色模式" onclick="toggleTheme()"></button>
+  <button id="theme-toggle" onclick="toggleTheme()"
+    class="fixed bottom-5 right-5 flex items-center justify-center h-10 w-10 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-700 shadow-sm z-50"
+    title="切換深色/淺色模式"></button>
 
   <script>
     const APP_CONTAINER = document.getElementById('app');
     const THEME_STORAGE_KEY = 'dev-dashboard-theme';
 
-    // 手繪線條風 SVG icon（stroke=currentColor，跟著文字色走，不用 emoji）
-    const SVG_WRAP_OPEN = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">';
+    const SVG_WRAP_OPEN = '<svg class="h-full w-full" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">';
     const ICONS = {
       target: SVG_WRAP_OPEN + '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>',
       info: SVG_WRAP_OPEN + '<circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11.5"/><circle cx="12" cy="8" r="0.5" fill="currentColor"/></svg>',
@@ -948,53 +84,56 @@
       sun: SVG_WRAP_OPEN + '<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>',
       moon: SVG_WRAP_OPEN + '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>',
       circleHalf: SVG_WRAP_OPEN + '<circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 0 0 20z" fill="currentColor" stroke="none"/></svg>',
+      check: SVG_WRAP_OPEN + '<polyline points="20 6 9 17 4 12"/></svg>',
     };
     const CHANGE_ICON_FALLBACK = ICONS.wrench;
 
-    // Theme management
-    function initTheme() {
-      const saved = localStorage.getItem(THEME_STORAGE_KEY);
-      const html = document.documentElement;
+    // 狀態 → 語意色，統一對照表（design-system/tokens.md 的狀態色規則）
+    const STATUS_META = {
+      ok: { label: '快做完了', pill: 'bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-300', dot: 'bg-green-500', text: 'text-green-600 dark:text-green-400' },
+      warn: { label: '正常進行', pill: 'bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300', dot: 'bg-amber-500', text: 'text-amber-600 dark:text-amber-400' },
+      error: { label: '等你決定', pill: 'bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-300', dot: 'bg-red-500', text: 'text-red-600 dark:text-red-400' },
+    };
 
-      html.classList.remove('light-mode', 'dark-mode');
+    function statusMeta(status) {
+      return STATUS_META[status] || STATUS_META.warn;
+    }
 
-      if (saved === 'light') {
-        html.classList.add('light-mode');
-      } else if (saved === 'dark') {
-        html.classList.add('dark-mode');
-      }
+    // Theme management — 三態（light/dark/auto），dark 用 <html class="dark"> 驅動 Tailwind
+    function effectiveIsDark(pref) {
+      if (pref === 'dark') return true;
+      if (pref === 'light') return false;
+      return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
 
-      updateThemeButton();
+    function applyTheme() {
+      const pref = localStorage.getItem(THEME_STORAGE_KEY) || 'auto';
+      document.documentElement.classList.toggle('dark', effectiveIsDark(pref));
+      updateThemeButton(pref);
     }
 
     function toggleTheme() {
-      const html = document.documentElement;
       const current = localStorage.getItem(THEME_STORAGE_KEY) || 'auto';
       const next = current === 'dark' ? 'light' : (current === 'light' ? 'auto' : 'dark');
-
       localStorage.setItem(THEME_STORAGE_KEY, next);
-
-      html.classList.remove('light-mode', 'dark-mode');
-      if (next === 'light') {
-        html.classList.add('light-mode');
-      } else if (next === 'dark') {
-        html.classList.add('dark-mode');
-      }
-
-      updateThemeButton();
+      applyTheme();
     }
 
-    function updateThemeButton() {
-      const current = localStorage.getItem(THEME_STORAGE_KEY) || 'auto';
-      const btn = document.querySelector('.theme-toggle');
-      if (current === 'dark') {
-        btn.innerHTML = ICONS.sun;
-      } else if (current === 'light') {
-        btn.innerHTML = ICONS.moon;
+    function updateThemeButton(pref) {
+      const btn = document.getElementById('theme-toggle');
+      if (pref === 'dark') {
+        btn.innerHTML = `<span class="h-4 w-4">${ICONS.sun}</span>`;
+      } else if (pref === 'light') {
+        btn.innerHTML = `<span class="h-4 w-4">${ICONS.moon}</span>`;
       } else {
-        btn.innerHTML = ICONS.circleHalf;
+        btn.innerHTML = `<span class="h-4 w-4">${ICONS.circleHalf}</span>`;
       }
     }
+
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+      const pref = localStorage.getItem(THEME_STORAGE_KEY) || 'auto';
+      if (pref === 'auto') applyTheme();
+    });
 
     // Data loading
     async function loadDashboard() {
@@ -1013,7 +152,11 @@
 
         renderDashboard(state, manifest);
       } catch (error) {
-        APP_CONTAINER.innerHTML = `<div class="error">Error loading dashboard: ${escapeHtml(error.message)}</div>`;
+        APP_CONTAINER.innerHTML = `
+          <div class="rounded-2xl border border-red-200 dark:border-red-900 bg-red-50 dark:bg-red-950/40 text-red-700 dark:text-red-300 p-6 text-sm">
+            Error loading dashboard: ${escapeHtml(error.message)}
+          </div>
+        `;
       }
     }
 
@@ -1021,8 +164,8 @@
       const project = state.project || '未命名專案';
       const oneLiner = state.one_liner || '無描述';
 
-      // Update page title dynamically
       document.title = `${project} 開發儀表板`;
+
       const about = state.about || null;
       const screenshots = state.screenshots || [];
       const changesInProgress = state.changes_in_progress || [];
@@ -1032,7 +175,6 @@
       const updatedAt = state.updated_at || 'Unknown';
       const updatedBy = state.updated_by || 'Unknown';
 
-      // Stats at a glance — real numbers computed from state, not decoration
       const inProgressCount = changesInProgress.length;
       const avgPercent = inProgressCount
         ? Math.round(changesInProgress.reduce((sum, c) => sum + (c.total ? (c.done / c.total) * 100 : 0), 0) / inProgressCount)
@@ -1041,214 +183,243 @@
       const stuckCount = changesInProgress.filter(c => c.status === 'error').length;
 
       let html = `
-        <div class="eyebrow">專案開發儀表板</div>
-        <div class="page-title">
-          <h1>${escapeHtml(project)}</h1>
-          <div class="updated-info">
+        <div class="mb-1 text-xs font-semibold uppercase tracking-wide text-neutral-400">專案開發儀表板</div>
+        <div class="flex flex-wrap items-baseline gap-4 mb-1">
+          <h1 class="text-3xl font-extrabold tracking-tight text-neutral-900 dark:text-neutral-50">${escapeHtml(project)}</h1>
+          <div class="text-xs text-neutral-400">
             更新人：${escapeHtml(updatedBy)}<br>
             ${formatTimestamp(updatedAt)}
           </div>
         </div>
-        <div class="one-liner">${escapeHtml(oneLiner)}</div>
+        <p class="text-neutral-600 dark:text-neutral-300 mb-6 max-w-2xl">${escapeHtml(oneLiner)}</p>
 
-        <div class="stats-row">
-          <div class="stat-tile">
-            <div class="stat-head">
-              <span class="icon-badge icon-badge-neutral">${ICONS.checklist}</span>
-              <span class="stat-label">進行中專案</span>
-            </div>
-            <div class="stat-value">${inProgressCount}</div>
+        <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4 mb-8">
+          <div class="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-800 p-5">
+            <p class="text-sm text-neutral-500 dark:text-neutral-400">進行中專案</p>
+            <p class="mt-2 text-2xl font-semibold text-neutral-900 dark:text-neutral-50">${inProgressCount}</p>
           </div>
-          <div class="stat-tile">
-            <div class="stat-head">
-              <span class="icon-badge icon-badge-neutral">${ICONS.barChart}</span>
-              <span class="stat-label">平均完成度</span>
-            </div>
-            <div class="stat-value">${avgPercent}%</div>
+          <div class="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-800 p-5">
+            <p class="text-sm text-neutral-500 dark:text-neutral-400">平均完成度</p>
+            <p class="mt-2 text-2xl font-semibold text-neutral-900 dark:text-neutral-50">${avgPercent}%</p>
           </div>
-          <div class="stat-tile">
-            <div class="stat-head">
-              <span class="icon-badge icon-badge-neutral">${ICONS.question}</span>
-              <span class="stat-label">待確認事項</span>
-            </div>
-            <div class="stat-value">${openQuestionsCount}</div>
+          <div class="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-800 p-5">
+            <p class="text-sm text-neutral-500 dark:text-neutral-400">待確認事項</p>
+            <p class="mt-2 text-2xl font-semibold text-neutral-900 dark:text-neutral-50">${openQuestionsCount}</p>
           </div>
-          <div class="stat-tile${stuckCount > 0 ? ' stat-tile-alert' : ''}">
-            <div class="stat-head">
-              <span class="icon-badge ${stuckCount > 0 ? 'icon-badge-red' : 'icon-badge-neutral'}">${ICONS.wrench}</span>
-              <span class="stat-label">卡住等你決定</span>
-            </div>
-            <div class="stat-value">${stuckCount}</div>
+          <div class="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-800 p-5">
+            <p class="text-sm text-neutral-500 dark:text-neutral-400">卡住等你決定</p>
+            <p class="mt-2 text-2xl font-semibold ${stuckCount > 0 ? 'text-red-600 dark:text-red-400' : 'text-neutral-900 dark:text-neutral-50'}">${stuckCount}</p>
+            ${stuckCount > 0 ? `<p class="mt-1 text-xs text-red-600 dark:text-red-400">需要你裁決</p>` : `<p class="mt-1 text-xs text-green-600 dark:text-green-400">目前沒有卡住</p>`}
           </div>
         </div>
       `;
 
-      // About card — what / how / why / feature list, for human readers
+      // About card
       if (about) {
-        html += `<div class="card-about">`;
-        html += `<h2><span class="card-icon icon-badge icon-badge-neutral">${ICONS.info}</span> 專案說明與使用範圍</h2>`;
-        html += `<div class="about-block">`;
-        if (about.what) {
-          html += `<div><h3>這是什麼</h3><p>${escapeHtml(about.what)}</p></div>`;
-        }
-        if (about.how) {
-          html += `<div><h3>怎麼運作</h3><p>${escapeHtml(about.how)}</p></div>`;
-        }
-        if (about.why) {
-          html += `<div><h3>為什麼要做</h3><p>${escapeHtml(about.why)}</p></div>`;
-        }
-        html += `</div>`;
-        if (about.features && about.features.length > 0) {
-          html += `<div class="about-features-title">目前包含的功能</div><ul class="feature-list">`;
-          about.features.forEach(f => {
-            html += `<li>${escapeHtml(f)}</li>`;
-          });
-          html += `</ul>`;
-        }
-        html += `</div>`;
+        html += `
+          <div class="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-800 p-6 mb-6">
+            <h2 class="flex items-center gap-2 font-semibold text-neutral-900 dark:text-neutral-50 mb-4">
+              <span class="h-4 w-4 text-neutral-400">${ICONS.info}</span>
+              專案說明與使用範圍
+            </h2>
+            <div class="grid gap-6 sm:grid-cols-3 mb-5">
+              ${about.what ? `<div><h3 class="text-[11px] font-semibold uppercase tracking-wide text-neutral-400 mb-1.5">這是什麼</h3><p class="text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed">${escapeHtml(about.what)}</p></div>` : ''}
+              ${about.how ? `<div><h3 class="text-[11px] font-semibold uppercase tracking-wide text-neutral-400 mb-1.5">怎麼運作</h3><p class="text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed">${escapeHtml(about.how)}</p></div>` : ''}
+              ${about.why ? `<div><h3 class="text-[11px] font-semibold uppercase tracking-wide text-neutral-400 mb-1.5">為什麼要做</h3><p class="text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed">${escapeHtml(about.why)}</p></div>` : ''}
+            </div>
+            ${(about.features && about.features.length > 0) ? `
+              <h3 class="text-[11px] font-semibold uppercase tracking-wide text-neutral-400 mb-2">目前包含的功能</h3>
+              <div class="flex flex-wrap gap-2">
+                ${about.features.map(f => `<span class="rounded-full bg-neutral-100 dark:bg-neutral-700 px-2.5 py-1 text-xs text-neutral-600 dark:text-neutral-300">${escapeHtml(f)}</span>`).join('')}
+              </div>
+            ` : ''}
+          </div>
+        `;
       }
 
-      // Screenshots card — what it actually looks like
+      // Screenshots card
       if (screenshots && screenshots.length > 0) {
-        html += `<div class="card-screenshots">`;
-        html += `<h2><span class="card-icon icon-badge icon-badge-neutral">${ICONS.image}</span> 畫面長怎樣</h2>`;
-        html += `<div class="screenshots-grid">`;
-        screenshots.forEach(shot => {
-          html += `
-            <figure class="screenshot">
-              <img src="${escapeHtml(shot.path)}" alt="${escapeHtml(shot.label || '')}" loading="lazy">
-              ${shot.label ? `<figcaption>${escapeHtml(shot.label)}</figcaption>` : ''}
-            </figure>
-          `;
-        });
-        html += `</div></div>`;
+        html += `
+          <div class="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-800 p-6 mb-6">
+            <h2 class="flex items-center gap-2 font-semibold text-neutral-900 dark:text-neutral-50 mb-4">
+              <span class="h-4 w-4 text-neutral-400">${ICONS.image}</span>
+              畫面長怎樣
+            </h2>
+            <div class="grid gap-4 sm:grid-cols-2">
+              ${screenshots.map(shot => `
+                <figure>
+                  <img src="${escapeHtml(shot.path)}" alt="${escapeHtml(shot.label || '')}" loading="lazy"
+                       class="w-full rounded-xl border border-neutral-200 dark:border-neutral-700">
+                  ${shot.label ? `<figcaption class="mt-2 text-xs text-neutral-400">${escapeHtml(shot.label)}</figcaption>` : ''}
+                </figure>
+              `).join('')}
+            </div>
+          </div>
+        `;
       }
 
-      html += `<div class="cards-grid">`;
+      html += `<div class="grid gap-6 lg:grid-cols-3 mb-8">`;
 
-      // Changes in Progress card
+      // Changes in Progress — list card, 1 row per item inside a bordered white panel
       if (changesInProgress && changesInProgress.length > 0) {
         html += `
-          <div class="card">
-            <h2><span class="card-icon icon-badge icon-badge-neutral">${ICONS.checklist}</span> 現在在做的事</h2>
-            <div class="status-legend">
-              <span class="status-legend-item"><span class="status-dot status-ok"></span>快做完了，不用管</span>
-              <span class="status-legend-item"><span class="status-dot status-warn"></span>還在正常進行</span>
-              <span class="status-legend-item"><span class="status-dot status-error"></span>卡住了，等你決定</span>
+          <div class="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-800 lg:col-span-2">
+            <div class="flex items-center justify-between border-b border-neutral-200 dark:border-neutral-700 p-4">
+              <h2 class="flex items-center gap-2 font-semibold text-neutral-900 dark:text-neutral-50">
+                <span class="h-4 w-4 text-neutral-400">${ICONS.checklist}</span>
+                現在在做的事
+                <span class="text-sm font-normal text-neutral-400">${changesInProgress.length}</span>
+              </h2>
+              <div class="hidden sm:flex items-center gap-3 text-xs text-neutral-400">
+                <span class="inline-flex items-center gap-1"><span class="h-1.5 w-1.5 rounded-full bg-green-500"></span>快做完了</span>
+                <span class="inline-flex items-center gap-1"><span class="h-1.5 w-1.5 rounded-full bg-amber-500"></span>正常進行</span>
+                <span class="inline-flex items-center gap-1"><span class="h-1.5 w-1.5 rounded-full bg-red-500"></span>卡住了</span>
+              </div>
             </div>
+            <div class="divide-y divide-neutral-100 dark:divide-neutral-700">
+              ${changesInProgress.map(change => {
+                const percent = change.total ? Math.round((change.done / change.total) * 100) : 0;
+                const meta = statusMeta(change.status);
+                const icon = ICONS[change.icon] || CHANGE_ICON_FALLBACK;
+                const displayName = change.display_name || change.name || '未命名';
+                return `
+                  <div class="p-4">
+                    <div class="flex items-start justify-between gap-3 mb-1.5">
+                      <div class="flex items-center gap-2 min-w-0">
+                        <span class="h-4 w-4 text-neutral-400 flex-shrink-0">${icon}</span>
+                        <span class="font-medium text-neutral-900 dark:text-neutral-50 truncate">${escapeHtml(displayName)}</span>
+                      </div>
+                      <span class="flex-shrink-0 inline-flex items-center rounded-full px-2 py-0.5 text-[11px] font-medium ${meta.pill}">${meta.label}</span>
+                    </div>
+                    ${change.plain_summary ? `<p class="text-sm text-neutral-500 dark:text-neutral-400 mb-2">${escapeHtml(change.plain_summary)}</p>` : ''}
+                    <div class="flex items-center gap-2 mb-2">
+                      <div class="flex-1 h-1.5 rounded-full bg-neutral-100 dark:bg-neutral-700 overflow-hidden">
+                        <div class="h-full rounded-full bg-neutral-900 dark:bg-neutral-50" style="width: ${percent}%"></div>
+                      </div>
+                      <span class="text-xs text-neutral-400 tabular-nums flex-shrink-0">${change.done}/${change.total}</span>
+                    </div>
+                    ${change.detail ? `<p class="text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed">${renderDetailText(change.detail)}</p>` : (change.note ? `<p class="text-sm text-neutral-600 dark:text-neutral-300">${escapeHtml(change.note)}</p>` : '')}
+                    ${change.link ? `<a href="${escapeHtml(change.link)}" target="_blank" rel="noopener noreferrer" class="mt-2 inline-flex items-center gap-1 text-sm font-medium text-neutral-900 dark:text-neutral-50 hover:underline">查看完整規格 <span class="h-3.5 w-3.5">${ICONS.chevron}</span></a>` : ''}
+                  </div>
+                `;
+              }).join('')}
+            </div>
+          </div>
         `;
-        changesInProgress.forEach((change, idx) => {
-          const percent = change.total ? Math.round((change.done / change.total) * 100) : 0;
-          const statusClass = change.status === 'ok' ? 'status-ok' : (change.status === 'warn' ? 'status-warn' : 'status-error');
-          const statusLabel = change.status === 'ok' ? '快做完了' : (change.status === 'warn' ? '正常進行' : '等你決定');
-          const icon = ICONS[change.icon] || CHANGE_ICON_FALLBACK;
-          // 圖示徽章顏色跟隨真實狀態（色彩=訊號），不是裝飾性循環配色
-          const badgeColor = change.status === 'ok' ? 'green' : (change.status === 'warn' ? 'amber' : 'red');
-          const displayName = change.display_name || change.name || '未命名';
-          html += `
-            <div class="change-item">
-              <div class="change-display-name"><span class="card-icon icon-badge icon-badge-${badgeColor}">${icon}</span> ${escapeHtml(displayName)}</div>
-              ${change.plain_summary ? `<div class="change-plain-summary">${escapeHtml(change.plain_summary)}</div>` : ''}
-              <div class="change-status">
-                <span class="status-badge status-badge-${statusClass === 'status-ok' ? 'ok' : (statusClass === 'status-warn' ? 'warn' : 'error')}">${statusLabel}</span>
-                ${change.done}/${change.total} 已完成
-              </div>
-              <div class="progress-bar">
-                <div class="progress-fill" style="width: ${percent}%"></div>
-              </div>
-              ${change.detail ? `<div class="change-detail">${renderDetailText(change.detail)}</div>` : (change.note ? `<div class="change-detail">${escapeHtml(change.note)}</div>` : '')}
-              ${change.link ? `<a class="change-link" href="${escapeHtml(change.link)}" target="_blank" rel="noopener noreferrer">查看完整規格<span class="icon">${ICONS.chevron}</span></a>` : ''}
-            </div>
-          `;
-        });
-        html += `</div>`;
       }
+
+      html += `<div class="flex flex-col gap-6">`;
 
       // Open Questions card
       if (openQuestions && openQuestions.length > 0) {
         html += `
-          <div class="card">
-            <h2><span class="card-icon icon-badge icon-badge-neutral">${ICONS.question}</span> 待確認事項</h2>
-        `;
-        openQuestions.forEach(q => {
-          html += `
-            <div class="question-item">
-              <div class="question-text">${escapeHtml(q.question || '無問題文字')}</div>
-              <div class="question-asked">提問時間：${formatTimestamp(q.asked_at)}</div>
+          <div class="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-800">
+            <div class="border-b border-neutral-200 dark:border-neutral-700 p-4">
+              <h2 class="flex items-center gap-2 font-semibold text-neutral-900 dark:text-neutral-50">
+                <span class="h-4 w-4 text-neutral-400">${ICONS.question}</span>
+                待確認事項
+              </h2>
             </div>
-          `;
-        });
-        html += `</div>`;
+            <div class="divide-y divide-neutral-100 dark:divide-neutral-700">
+              ${openQuestions.map(q => `
+                <div class="p-4">
+                  <p class="text-sm text-neutral-700 dark:text-neutral-200 leading-relaxed">${escapeHtml(q.question || '無問題文字')}</p>
+                  <p class="mt-1.5 text-xs text-neutral-400">提問時間：${formatTimestamp(q.asked_at)}</p>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
       }
 
-      // Connected systems card (human-facing; key_files moved to tech-details below)
+      // Connected systems card
       if (connectedSystems && connectedSystems.length > 0) {
         html += `
-          <div class="card">
-            <h2><span class="card-icon icon-badge icon-badge-neutral">${ICONS.plug}</span> 關聯系統</h2>
-            <div class="connected-systems-list">
+          <div class="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-800">
+            <div class="border-b border-neutral-200 dark:border-neutral-700 p-4">
+              <h2 class="flex items-center gap-2 font-semibold text-neutral-900 dark:text-neutral-50">
+                <span class="h-4 w-4 text-neutral-400">${ICONS.plug}</span>
+                關聯系統
+              </h2>
+            </div>
+            <div class="p-4 flex flex-wrap gap-2">
+              ${connectedSystems.map(system => `<span class="rounded-full bg-neutral-100 dark:bg-neutral-700 px-2.5 py-1 text-xs text-neutral-600 dark:text-neutral-300">${escapeHtml(system)}</span>`).join('')}
+            </div>
+          </div>
         `;
-        connectedSystems.forEach(system => {
-          html += `<span class="system-tag">${escapeHtml(system)}</span>`;
-        });
-        html += `</div></div>`;
       }
 
-      html += `</div>`;
+      if ((!connectedSystems || connectedSystems.length === 0) && (!openQuestions || openQuestions.length === 0)) {
+        html += `<div class="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-800 p-4 text-sm text-neutral-400">沒有待確認事項或關聯系統</div>`;
+      }
 
-      // Timeline / History
+      html += `</div></div>`; // close right column + cards-grid
+
+      // Timeline — 來源 design-system/examples/vibeprompts-activity-feed.html 的圖案
       if (manifest.entries && manifest.entries.length > 0) {
         html += `
-          <div class="timeline">
-            <h2><span class="card-icon icon-badge icon-badge-neutral">${ICONS.history}</span> 歷史紀錄</h2>
-        `;
-        manifest.entries.forEach((entry, idx) => {
-          const entryId = `entry-${idx}`;
-          html += `
-            <div class="timeline-item">
-              <div class="timeline-item-header" onclick="toggleTimelineEntry('${entryId}')">
-                <div class="timeline-date">${escapeHtml(entry.date)}</div>
-                <div class="timeline-topic">
-                  <span class="timeline-expand-icon" id="${entryId}-icon">${ICONS.chevron}</span>
-                  ${escapeHtml(entry.topic)}
-                </div>
-              </div>
-              <div class="timeline-details" id="${entryId}-details">
-                <div class="timeline-summary" id="${entryId}-summary">載入中...</div>
-                <div class="timeline-decisions" id="${entryId}-decisions"></div>
-              </div>
+          <div id="history" class="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-800">
+            <div class="border-b border-neutral-200 dark:border-neutral-700 p-4">
+              <h2 class="flex items-center gap-2 font-semibold text-neutral-900 dark:text-neutral-50">
+                <span class="h-4 w-4 text-neutral-400">${ICONS.history}</span>
+                歷史紀錄
+              </h2>
             </div>
-          `;
-        });
-        html += `</div>`;
+            <ol class="relative space-y-6 p-5 pl-11">
+              <span class="absolute bottom-6 left-6 top-6 w-px -translate-x-1/2 bg-neutral-200 dark:bg-neutral-700"></span>
+              ${manifest.entries.map((entry, idx) => {
+                const entryId = `entry-${idx}`;
+                return `
+                  <li class="relative">
+                    <span class="absolute -left-7 top-1 h-4 w-4 rounded-full bg-neutral-200 dark:bg-neutral-600 ring-4 ring-white dark:ring-neutral-800"></span>
+                    <button type="button" onclick="toggleTimelineEntry('${entryId}')" class="text-left w-full">
+                      <p class="text-xs text-neutral-400 tabular-nums">${escapeHtml(entry.date)}</p>
+                      <p class="text-sm font-medium text-neutral-900 dark:text-neutral-50 flex items-center gap-1.5 mt-0.5">
+                        <span id="${entryId}-icon" class="h-3 w-3 text-neutral-400 transition-transform">${ICONS.chevron}</span>
+                        ${escapeHtml(entry.topic)}
+                      </p>
+                    </button>
+                    <div id="${entryId}-details" class="hidden mt-2 rounded-xl bg-neutral-50 dark:bg-neutral-700/40 p-3 text-sm text-neutral-600 dark:text-neutral-300">
+                      <div id="${entryId}-summary">載入中...</div>
+                      <div id="${entryId}-decisions" class="mt-2"></div>
+                    </div>
+                  </li>
+                `;
+              }).join('')}
+            </ol>
+          </div>
+        `;
       }
 
-      // Technical details — AI/engineer-only: raw slugs, file paths, URLs.
-      // Kept out of the primary human-reading flow per explicit request:
-      // plain-language content stays above; technical identifiers collapse here.
+      // Technical details — AI/engineer-only, collapsed by default
       if ((keyFiles && keyFiles.length > 0) || (changesInProgress && changesInProgress.length > 0)) {
         html += `
-          <details class="tech-details">
-            <summary><span class="card-icon">${ICONS.code}</span> 技術細節（給 AI／工程師看）</summary>
-            <div class="tech-details-note">以下是給 AI 或工程師對接用的原始檔名、技術代號與連結，一般閱讀不需要看這段。</div>
-            <div class="tech-details-content">
+          <details class="mt-8 pt-6 border-t border-neutral-200 dark:border-neutral-800">
+            <summary class="flex items-center gap-2 font-semibold text-sm text-neutral-500 dark:text-neutral-400 cursor-pointer">
+              <span class="h-4 w-4">${ICONS.code}</span>
+              技術細節（給 AI／工程師看）
+            </summary>
+            <p class="mt-3 text-xs text-neutral-400">以下是給 AI 或工程師對接用的原始檔名、技術代號與連結，一般閱讀不需要看這段。</p>
+            <div class="mt-4 space-y-4">
+              ${(changesInProgress && changesInProgress.length > 0) ? `
+                <div>
+                  <h3 class="text-[11px] font-semibold uppercase tracking-wide text-neutral-400 mb-2">SR 技術代號對照</h3>
+                  <div class="font-mono text-xs text-neutral-400 space-y-1">
+                    ${changesInProgress.map(change => `<div>${escapeHtml(change.display_name || change.name || '未命名')} → <code class="text-neutral-500 dark:text-neutral-300">${escapeHtml(change.name || '')}</code></div>`).join('')}
+                  </div>
+                </div>
+              ` : ''}
+              ${(keyFiles && keyFiles.length > 0) ? `
+                <div>
+                  <h3 class="text-[11px] font-semibold uppercase tracking-wide text-neutral-400 mb-2">重要檔案</h3>
+                  <div class="flex flex-wrap gap-2">
+                    ${keyFiles.map(file => `<span class="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800 px-2.5 py-1 text-xs font-mono text-neutral-500 dark:text-neutral-400">${escapeHtml(file)}</span>`).join('')}
+                  </div>
+                </div>
+              ` : ''}
+            </div>
+          </details>
         `;
-        if (changesInProgress && changesInProgress.length > 0) {
-          html += `<h3>SR 技術代號對照</h3><div class="tech-slug-list">`;
-          changesInProgress.forEach(change => {
-            const displayName = change.display_name || change.name || '未命名';
-            html += `${escapeHtml(displayName)} → <code>${escapeHtml(change.name || '')}</code><br>`;
-          });
-          html += `</div>`;
-        }
-        if (keyFiles && keyFiles.length > 0) {
-          html += `<h3>重要檔案</h3><div class="key-files-list">`;
-          keyFiles.forEach(file => {
-            html += `<span class="file-tag">${escapeHtml(file)}</span>`;
-          });
-          html += `</div>`;
-        }
-        html += `</div></details>`;
       }
 
       APP_CONTAINER.innerHTML = html;
@@ -1262,6 +433,40 @@
       }
     }
 
+    function renderDetailText(text) {
+      return escapeHtml(text).replace(/\*\*(.+?)\*\*/g, '<strong class="text-neutral-900 dark:text-neutral-50">$1</strong>');
+    }
+
+    function toggleTimelineEntry(entryId) {
+      const details = document.getElementById(`${entryId}-details`);
+      const icon = document.getElementById(`${entryId}-icon`);
+      const isHidden = details.classList.contains('hidden');
+      details.classList.toggle('hidden', !isHidden);
+      icon.classList.toggle('rotate-90', isHidden);
+    }
+
+    async function loadEntryDetails(entryId, filename) {
+      const summaryEl = document.getElementById(`${entryId}-summary`);
+      const decisionsEl = document.getElementById(`${entryId}-decisions`);
+      if (!summaryEl) return;
+
+      try {
+        const response = await fetch(`./entries/${filename}`);
+        if (!response.ok) throw new Error(`Failed to fetch entry: ${response.status}`);
+        const entry = await response.json();
+
+        summaryEl.textContent = entry.summary || '無摘要';
+
+        if (entry.decisions && entry.decisions.length > 0) {
+          decisionsEl.innerHTML = entry.decisions.map(d =>
+            `<span class="inline-block mr-1.5 mb-1.5 rounded-lg bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 px-2 py-1 text-xs text-neutral-600 dark:text-neutral-300">${escapeHtml(d)}</span>`
+          ).join('');
+        }
+      } catch (error) {
+        summaryEl.textContent = 'Not available';
+      }
+    }
+
     function escapeHtml(text) {
       if (!text) return '';
       const div = document.createElement('div');
@@ -1269,81 +474,24 @@
       return div.innerHTML;
     }
 
-    // Renders detail text that may contain simple **bold** markers, after
-    // escaping so untrusted content can never inject real HTML.
-    function renderDetailText(text) {
-      return escapeHtml(text).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-    }
-
     function formatTimestamp(ts) {
-      if (!ts) return '未知';
+      if (!ts || ts === 'Unknown') return 'Unknown';
       try {
         const date = new Date(ts);
-        const now = new Date();
-        const diff = now - date;
-        const seconds = Math.floor(diff / 1000);
-        const minutes = Math.floor(seconds / 60);
-        const hours = Math.floor(minutes / 60);
-        const days = Math.floor(hours / 24);
-
-        if (days > 0) return `${days} 天前`;
-        if (hours > 0) return `${hours} 小時前`;
-        if (minutes > 0) return `${minutes} 分鐘前`;
-        return '剛才';
-      } catch (e) {
+        if (isNaN(date.getTime())) return ts;
+        return date.toLocaleString('zh-TW', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' });
+      } catch {
         return ts;
       }
     }
 
-    // Timeline interactions
-    function toggleTimelineEntry(entryId) {
-      const detailsEl = document.getElementById(`${entryId}-details`);
-      const iconEl = document.getElementById(`${entryId}-icon`);
-
-      if (detailsEl) {
-        detailsEl.classList.toggle('visible');
-        iconEl?.classList.toggle('expanded');
-      }
-    }
-
-    async function loadEntryDetails(entryId, filename) {
-      try {
-        const response = await fetch(`./entries/${filename}`);
-        if (!response.ok) {
-          throw new Error(`無法載入紀錄: ${filename}`);
-        }
-        const entry = await response.json();
-
-        // Update summary
-        const summaryEl = document.getElementById(`${entryId}-summary`);
-        if (summaryEl) {
-          summaryEl.textContent = entry.summary || '無摘要';
-        }
-
-        // Update decisions
-        const decisionsEl = document.getElementById(`${entryId}-decisions`);
-        if (decisionsEl && entry.decisions && entry.decisions.length > 0) {
-          let decisionsHtml = '<div style="font-weight: bold; margin-bottom: 6px;">決策事項：</div>';
-          entry.decisions.forEach(decision => {
-            decisionsHtml += `<div class="timeline-decision">${escapeHtml(decision)}</div>`;
-          });
-          decisionsEl.innerHTML = decisionsHtml;
-        }
-      } catch (error) {
-        const summaryEl = document.getElementById(`${entryId}-summary`);
-        if (summaryEl) {
-          summaryEl.innerHTML = `<span style="color: var(--status-error);">載入錯誤：${escapeHtml(error.message)}</span>`;
-        }
-      }
-    }
-
-    // Initialize
-    initTheme();
+    applyTheme();
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', loadDashboard);
     } else {
       loadDashboard();
     }
   </script>
+
 </body>
 </html>
