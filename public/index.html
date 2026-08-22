@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dev Project Dashboard</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #ffffff;
+      --text: #000000;
+      --border: #e0e0e0;
+      --accent: #0066cc;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1a1a1a;
+        --text: #ffffff;
+        --border: #333333;
+        --accent: #66b3ff;
+      }
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+      font-size: 2.5em;
+      font-weight: bold;
+    }
+
+    .one-liner {
+      font-size: 1.1em;
+      color: var(--text);
+      opacity: 0.8;
+      margin-bottom: 30px;
+    }
+
+    .error {
+      color: #cc0000;
+      padding: 10px;
+      border: 1px solid #cc0000;
+      border-radius: 4px;
+      margin: 20px 0;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 40px;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="app">
+      <div class="loading">Loading dashboard...</div>
+    </div>
+  </div>
+
+  <script>
+    const APP_CONTAINER = document.getElementById('app');
+
+    async function loadDashboard() {
+      try {
+        const response = await fetch('./state.json');
+        if (!response.ok) {
+          throw new Error(`Failed to fetch state.json: ${response.status}`);
+        }
+        const state = await response.json();
+        renderDashboard(state);
+      } catch (error) {
+        APP_CONTAINER.innerHTML = `<div class="error">Error loading dashboard: ${error.message}</div>`;
+      }
+    }
+
+    function renderDashboard(state) {
+      const project = state.project || 'Unknown project';
+      const oneLiner = state.one_liner || 'No description';
+      const changesInProgress = state.changes_in_progress || [];
+      const openQuestions = state.open_questions || [];
+      const keyFiles = state.key_files || [];
+
+      let html = `
+        <h1>${escapeHtml(project)}</h1>
+        <div class="one-liner">${escapeHtml(oneLiner)}</div>
+      `;
+
+      if (changesInProgress.length > 0) {
+        html += '<h2>In Progress</h2>';
+        changesInProgress.forEach(change => {
+          html += `<p>${escapeHtml(change.name)} (${change.done}/${change.total})</p>`;
+        });
+      }
+
+      if (openQuestions.length > 0) {
+        html += '<h2>Open Questions</h2>';
+        openQuestions.forEach(q => {
+          html += `<p>${escapeHtml(q.question)}</p>`;
+        });
+      }
+
+      if (keyFiles.length > 0) {
+        html += '<h2>Key Files</h2>';
+        keyFiles.forEach(file => {
+          html += `<p>${escapeHtml(file)}</p>`;
+        });
+      }
+
+      APP_CONTAINER.innerHTML = html;
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    // Load on page ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', loadDashboard);
+    } else {
+      loadDashboard();
+    }
+  </script>
+</body>
+</html>

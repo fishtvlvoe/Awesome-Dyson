@@ -1,0 +1,12 @@
+{
+  "name": "awesome-dyson",
+  "version": "0.1.0",
+  "description": "Cross-project dev dashboard system",
+  "scripts": {
+    "test": "node tests/run.js",
+    "test:watch": "node tests/run.js --watch"
+  },
+  "keywords": ["dashboard", "dev-ops"],
+  "author": "fishtv",
+  "license": "MIT"
+}
