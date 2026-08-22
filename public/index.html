@@ -14,67 +14,88 @@
       box-sizing: border-box;
     }
 
-    /* 設計語言參考 vibeprompts.dev：暖白紙感底色、Archivo 特粗大標、
-       Inter 內文、白卡片配淺灰邊框與大圓角，不用漸層或裝飾性配色 */
+    /* 設計語言參考 FlowMapp（saasframe.io/saas/flowmapp 實測色值）：
+       淺灰畫布、白卡片、鮮明藍紫主色、彩色淡色徽章/圖示底，友善的 SaaS 產品感 */
     :root {
-      --bg: #f5f4f0;
+      --bg: #f3f4f7;
       --paper: #ffffff;
-      --text: #14140f;
-      --text-secondary: #6b6a63;
-      --text-faint: #97948b;
-      --border: #e4e2dc;
-      --sidebar-bg: #14140f;
-      --sidebar-text: #f5f4f0;
-      --sidebar-text-dim: #9a988f;
-      --accent: #2f6fed;
-      --status-ok: #1f8a4c;
-      --status-ok-bg: #e6f4ea;
-      --status-warn: #b3711f;
-      --status-warn-bg: #fbf0dd;
-      --status-error: #b3392c;
-      --status-error-bg: #fbe9e6;
-      --shadow: 0 1px 2px rgba(20,20,15,0.04), 0 6px 20px -10px rgba(20,20,15,0.12);
+      --text: #16181d;
+      --text-secondary: #5b5f6b;
+      --text-faint: #9296a1;
+      --border: #e7e9ee;
+      --sidebar-bg: #ffffff;
+      --sidebar-text: #16181d;
+      --sidebar-text-dim: #8a8d97;
+      --sidebar-active-bg: #e8edff;
+      --sidebar-border: #e7e9ee;
+      --accent: #3046ff;
+      --accent-soft-bg: #e6f0ff;
+      --status-ok: #1f9254;
+      --status-ok-bg: #e6f7ee;
+      --status-warn: #b9770e;
+      --status-warn-bg: #fef3e0;
+      --status-error: #c81e26;
+      --status-error-bg: #fde9ea;
+      --badge-blue-bg: #e6f0ff; --badge-blue-fg: #3046ff;
+      --badge-green-bg: #eaf7e4; --badge-green-fg: #2f8f3f;
+      --badge-purple-bg: #f1ecff; --badge-purple-fg: #6b46e5;
+      --badge-amber-bg: #fff3e0; --badge-amber-fg: #b9770e;
+      --shadow: 0 1px 2px rgba(20,20,30,0.04), 0 8px 24px -12px rgba(20,20,30,0.10);
     }
 
     html.dark-mode {
-      --bg: #14161a;
-      --paper: #1c1f24;
-      --text: #f1f0ec;
-      --text-secondary: #a8a6a0;
-      --text-faint: #74726b;
-      --border: #2c2f35;
-      --sidebar-bg: #0b0c0e;
-      --sidebar-text: #f1f0ec;
-      --sidebar-text-dim: #74726b;
-      --accent: #6f9bff;
+      --bg: #101216;
+      --paper: #1a1d24;
+      --text: #eef0f5;
+      --text-secondary: #a7abb6;
+      --text-faint: #6b6f79;
+      --border: #2a2e37;
+      --sidebar-bg: #15171d;
+      --sidebar-text: #eef0f5;
+      --sidebar-text-dim: #7d818c;
+      --sidebar-active-bg: #232a45;
+      --sidebar-border: #262a33;
+      --accent: #7c8bff;
+      --accent-soft-bg: #202a4a;
       --status-ok: #4fbf7f;
-      --status-ok-bg: #163122;
+      --status-ok-bg: #16321f;
       --status-warn: #e0ac4c;
       --status-warn-bg: #362a12;
       --status-error: #e5877a;
       --status-error-bg: #3a1e1a;
-      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 6px 20px -10px rgba(0,0,0,0.5);
+      --badge-blue-bg: #1c2440; --badge-blue-fg: #93a5ff;
+      --badge-green-bg: #17301e; --badge-green-fg: #7bd396;
+      --badge-purple-bg: #2a2149; --badge-purple-fg: #bfa8ff;
+      --badge-amber-bg: #362a12; --badge-amber-fg: #e0ac4c;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
     }
 
     @media (prefers-color-scheme: dark) {
       html:not(.light-mode) {
-        --bg: #14161a;
-        --paper: #1c1f24;
-        --text: #f1f0ec;
-        --text-secondary: #a8a6a0;
-        --text-faint: #74726b;
-        --border: #2c2f35;
-        --sidebar-bg: #0b0c0e;
-        --sidebar-text: #f1f0ec;
-        --sidebar-text-dim: #74726b;
-        --accent: #6f9bff;
+        --bg: #101216;
+        --paper: #1a1d24;
+        --text: #eef0f5;
+        --text-secondary: #a7abb6;
+        --text-faint: #6b6f79;
+        --border: #2a2e37;
+        --sidebar-bg: #15171d;
+        --sidebar-text: #eef0f5;
+        --sidebar-text-dim: #7d818c;
+        --sidebar-active-bg: #232a45;
+        --sidebar-border: #262a33;
+        --accent: #7c8bff;
+        --accent-soft-bg: #202a4a;
         --status-ok: #4fbf7f;
-        --status-ok-bg: #163122;
+        --status-ok-bg: #16321f;
         --status-warn: #e0ac4c;
         --status-warn-bg: #362a12;
         --status-error: #e5877a;
         --status-error-bg: #3a1e1a;
-        --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 6px 20px -10px rgba(0,0,0,0.5);
+        --badge-blue-bg: #1c2440; --badge-blue-fg: #93a5ff;
+        --badge-green-bg: #17301e; --badge-green-fg: #7bd396;
+        --badge-purple-bg: #2a2149; --badge-purple-fg: #bfa8ff;
+        --badge-amber-bg: #362a12; --badge-amber-fg: #e0ac4c;
+        --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
       }
     }
 
@@ -91,13 +112,15 @@
       min-height: 100%;
     }
 
-    /* 左側深色導覽（呼應 vibeprompts.dev 的側邊欄） */
+    /* 左側導覽：參考 FlowMapp 產品介面的淺色側邊欄，圖示 + 文字，
+       選中項目用淡藍紫底色的膠囊而不是深色反轉 */
     .sidebar {
       width: 220px;
       flex-shrink: 0;
       background: var(--sidebar-bg);
       color: var(--sidebar-text);
-      padding: 24px 20px;
+      border-right: 1px solid var(--sidebar-border);
+      padding: 24px 16px;
     }
 
     .sidebar .logo {
@@ -106,12 +129,26 @@
       font-size: 1.05em;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       margin-bottom: 28px;
+      padding: 0 6px;
     }
 
     .sidebar .logo-icon {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: var(--accent);
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .sidebar .logo-icon .icon {
+      width: 16px;
+      height: 16px;
     }
 
     .sidebar-nav {
@@ -121,16 +158,32 @@
     }
 
     .sidebar-nav a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
       color: var(--sidebar-text-dim);
       text-decoration: none;
       font-size: 0.9em;
-      padding: 8px 10px;
+      font-weight: 500;
+      padding: 9px 10px;
       border-radius: 8px;
     }
 
-    .sidebar-nav a:hover, .sidebar-nav a.active {
-      background: rgba(255,255,255,0.08);
+    .sidebar-nav a .icon {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+
+    .sidebar-nav a:hover {
+      background: var(--bg);
       color: var(--sidebar-text);
+    }
+
+    .sidebar-nav a.active {
+      background: var(--sidebar-active-bg);
+      color: var(--accent);
+      font-weight: 700;
     }
 
     main {
@@ -222,6 +275,42 @@
       flex-shrink: 0;
     }
 
+    /* 圖示徽章：呼應 FlowMapp 產品介面裡彩色方塊圖示（Services 橘、About 紫等），
+       用淡色底 + 對應深色描邊圖示，取代單色線條圖示 */
+    .icon-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 9px;
+      flex-shrink: 0;
+    }
+
+    .icon-badge .icon {
+      width: 16px;
+      height: 16px;
+    }
+
+    .icon-badge-blue { background: var(--badge-blue-bg); color: var(--badge-blue-fg); }
+    .icon-badge-green { background: var(--badge-green-bg); color: var(--badge-green-fg); }
+    .icon-badge-purple { background: var(--badge-purple-bg); color: var(--badge-purple-fg); }
+    .icon-badge-amber { background: var(--badge-amber-bg); color: var(--badge-amber-fg); }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      font-size: 0.82em;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .status-badge-ok { background: var(--status-ok-bg); color: var(--status-ok); }
+    .status-badge-warn { background: var(--status-warn-bg); color: var(--status-warn); }
+    .status-badge-error { background: var(--status-error-bg); color: var(--status-error); }
+
     .card-about, .card-screenshots {
       background: var(--paper);
       border: 1px solid var(--border);
@@ -280,13 +369,16 @@
     }
 
     .feature-list li {
-      background: var(--bg);
-      border: 1px solid var(--border);
       border-radius: 20px;
       padding: 6px 14px;
       font-size: 0.85em;
-      color: var(--text);
+      font-weight: 500;
     }
+
+    .feature-list li:nth-child(4n+1) { background: var(--badge-blue-bg); color: var(--badge-blue-fg); }
+    .feature-list li:nth-child(4n+2) { background: var(--badge-green-bg); color: var(--badge-green-fg); }
+    .feature-list li:nth-child(4n+3) { background: var(--badge-purple-bg); color: var(--badge-purple-fg); }
+    .feature-list li:nth-child(4n+4) { background: var(--badge-amber-bg); color: var(--badge-amber-fg); }
 
     .screenshots-grid {
       display: grid;
@@ -697,12 +789,20 @@
 <body>
   <div class="sidebar">
     <div class="logo">
-      <span class="logo-icon">▶</span>
+      <span class="logo-icon">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg>
+      </span>
       待神
     </div>
     <nav class="sidebar-nav">
-      <a href="#overview" class="active">現況總覽</a>
-      <a href="#history">歷史紀錄</a>
+      <a href="#overview" class="active">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+        現況總覽
+      </a>
+      <a href="#history">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 16 14"/></svg>
+        歷史紀錄
+      </a>
     </nav>
   </div>
 
@@ -839,7 +939,7 @@
       // About card — what / how / why / feature list, for human readers
       if (about) {
         html += `<div class="card-about">`;
-        html += `<h2><span class="card-icon">${ICONS.info}</span> 專案說明與使用範圍</h2>`;
+        html += `<h2><span class="card-icon icon-badge icon-badge-blue">${ICONS.info}</span> 專案說明與使用範圍</h2>`;
         html += `<div class="about-block">`;
         if (about.what) {
           html += `<div><h3>這是什麼</h3><p>${escapeHtml(about.what)}</p></div>`;
@@ -864,7 +964,7 @@
       // Screenshots card — what it actually looks like
       if (screenshots && screenshots.length > 0) {
         html += `<div class="card-screenshots">`;
-        html += `<h2><span class="card-icon">${ICONS.image}</span> 畫面長怎樣</h2>`;
+        html += `<h2><span class="card-icon icon-badge icon-badge-purple">${ICONS.image}</span> 畫面長怎樣</h2>`;
         html += `<div class="screenshots-grid">`;
         screenshots.forEach(shot => {
           html += `
@@ -883,24 +983,27 @@
       if (changesInProgress && changesInProgress.length > 0) {
         html += `
           <div class="card">
-            <h2><span class="card-icon">${ICONS.checklist}</span> 現在在做的事</h2>
+            <h2><span class="card-icon icon-badge icon-badge-green">${ICONS.checklist}</span> 現在在做的事</h2>
             <div class="status-legend">
               <span class="status-legend-item"><span class="status-dot status-ok"></span>快做完了，不用管</span>
               <span class="status-legend-item"><span class="status-dot status-warn"></span>還在正常進行</span>
               <span class="status-legend-item"><span class="status-dot status-error"></span>卡住了，等你決定</span>
             </div>
         `;
-        changesInProgress.forEach(change => {
+        const ICON_BADGE_CYCLE = ['blue', 'green', 'purple', 'amber'];
+        changesInProgress.forEach((change, idx) => {
           const percent = change.total ? Math.round((change.done / change.total) * 100) : 0;
           const statusClass = change.status === 'ok' ? 'status-ok' : (change.status === 'warn' ? 'status-warn' : 'status-error');
+          const statusLabel = change.status === 'ok' ? '快做完了' : (change.status === 'warn' ? '正常進行' : '等你決定');
           const icon = ICONS[change.icon] || CHANGE_ICON_FALLBACK;
+          const badgeColor = ICON_BADGE_CYCLE[idx % ICON_BADGE_CYCLE.length];
           const displayName = change.display_name || change.name || '未命名';
           html += `
             <div class="change-item">
-              <div class="change-display-name"><span class="card-icon">${icon}</span> ${escapeHtml(displayName)}</div>
+              <div class="change-display-name"><span class="card-icon icon-badge icon-badge-${badgeColor}">${icon}</span> ${escapeHtml(displayName)}</div>
               ${change.plain_summary ? `<div class="change-plain-summary">${escapeHtml(change.plain_summary)}</div>` : ''}
               <div class="change-status">
-                <span class="status-dot ${statusClass}"></span>
+                <span class="status-badge status-badge-${statusClass === 'status-ok' ? 'ok' : (statusClass === 'status-warn' ? 'warn' : 'error')}">${statusLabel}</span>
                 ${change.done}/${change.total} 已完成
               </div>
               <div class="progress-bar">
@@ -918,7 +1021,7 @@
       if (openQuestions && openQuestions.length > 0) {
         html += `
           <div class="card">
-            <h2><span class="card-icon">${ICONS.question}</span> 待確認事項</h2>
+            <h2><span class="card-icon icon-badge icon-badge-amber">${ICONS.question}</span> 待確認事項</h2>
         `;
         openQuestions.forEach(q => {
           html += `
@@ -935,7 +1038,7 @@
       if (connectedSystems && connectedSystems.length > 0) {
         html += `
           <div class="card">
-            <h2><span class="card-icon">${ICONS.plug}</span> 關聯系統</h2>
+            <h2><span class="card-icon icon-badge icon-badge-blue">${ICONS.plug}</span> 關聯系統</h2>
             <div class="connected-systems-list">
         `;
         connectedSystems.forEach(system => {
@@ -950,7 +1053,7 @@
       if (manifest.entries && manifest.entries.length > 0) {
         html += `
           <div class="timeline">
-            <h2><span class="card-icon">${ICONS.history}</span> 歷史紀錄</h2>
+            <h2><span class="card-icon icon-badge icon-badge-purple">${ICONS.history}</span> 歷史紀錄</h2>
         `;
         manifest.entries.forEach((entry, idx) => {
           const entryId = `entry-${idx}`;
