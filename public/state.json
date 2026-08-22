@@ -1,10 +1,54 @@
 {
-  "project": "example-project",
-  "updated_at": "2026-08-22T08:00:00+08:00",
-  "updated_by": "system",
-  "one_liner": "Example dashboard state",
-  "changes_in_progress": [],
-  "open_questions": [],
-  "key_files": [],
-  "connected_systems": []
+  "project": "startkiter",
+  "updated_at": "2026-08-22T09:15:00+08:00",
+  "updated_by": "claude-code",
+  "one_liner": "課 + 終身代碼包，類似 WordPress 的可擴充平台",
+  "changes_in_progress": [
+    {
+      "name": "core-module-bundles-coupons",
+      "done": 55,
+      "total": 56,
+      "status": "ok",
+      "note": "剩 1 項故意延後，等買家課程播放頁做出來才接"
+    },
+    {
+      "name": "platform-shell-plugin-architecture",
+      "done": 90,
+      "total": 129,
+      "status": "warn",
+      "note": "體量最大的一張，正常施工中，沒卡關"
+    },
+    {
+      "name": "sheets-export-engine",
+      "done": 11,
+      "total": 13,
+      "status": "ok",
+      "note": "剩 AI agent 產表整合"
+    },
+    {
+      "name": "unified-support-desk",
+      "done": 43,
+      "total": 49,
+      "status": "blocked",
+      "note": "LINE Messaging Channel 跟 Telegram Bot 都建好了，剩 Chatwoot 還沒裝到 VPS 上"
+    }
+  ],
+  "open_questions": [
+    {
+      "question": "主站部署完成後要不要順便升級 VPS 規格？",
+      "asked_at": "2026-08-22T08:00:00+08:00"
+    }
+  ],
+  "key_files": [
+    "AGENTS.md",
+    "docs/discuss/2026-08-22-platform-positioning-infra-alignment.md",
+    "openspec/changes/",
+    "docs/dashboard/README.md"
+  ],
+  "connected_systems": [
+    "Cloudflare (DNS + Pages)",
+    "Coolify (VPS)",
+    "LINE Messaging API",
+    "Telegram Bot API"
+  ]
 }
