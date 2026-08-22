@@ -1,0 +1,93 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Dashboard State",
+  "description": "Current project state snapshot for dev project dashboard",
+  "type": "object",
+  "required": ["project", "updated_at", "updated_by"],
+  "properties": {
+    "project": {
+      "type": "string",
+      "description": "Project slug/identifier (e.g., 'startkiter')"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when state was last updated"
+    },
+    "updated_by": {
+      "type": "string",
+      "description": "Identifier of agent/person who updated state (e.g., 'claude-code', 'Fish')"
+    },
+    "one_liner": {
+      "type": "string",
+      "description": "Single-line project description"
+    },
+    "changes_in_progress": {
+      "type": "array",
+      "description": "List of active changes/features being worked on",
+      "items": {
+        "type": "object",
+        "required": ["name", "done", "total"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Change name/title"
+          },
+          "done": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Number of completed tasks"
+          },
+          "total": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Total number of tasks"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["ok", "warn", "error"],
+            "description": "Change status indicator"
+          },
+          "note": {
+            "type": "string",
+            "description": "Optional status note"
+          }
+        }
+      }
+    },
+    "open_questions": {
+      "type": "array",
+      "description": "List of unresolved questions blocking progress",
+      "items": {
+        "type": "object",
+        "required": ["question"],
+        "properties": {
+          "question": {
+            "type": "string",
+            "description": "Question text"
+          },
+          "asked_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "ISO 8601 timestamp when question was asked"
+          }
+        }
+      }
+    },
+    "key_files": {
+      "type": "array",
+      "description": "List of important file paths in the project",
+      "items": {
+        "type": "string"
+      }
+    },
+    "connected_systems": {
+      "type": "array",
+      "description": "List of external services this project depends on",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": false
+}
