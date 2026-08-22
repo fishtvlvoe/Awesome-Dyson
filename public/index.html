@@ -212,16 +212,121 @@
     }
 
     .card-icon {
-      display: inline-block;
-      font-size: 1.15em;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .icon {
+      width: 1.15em;
+      height: 1.15em;
+      flex-shrink: 0;
+    }
+
+    .card-about, .card-screenshots {
+      background: var(--paper);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 26px 28px;
+      box-shadow: var(--shadow);
+      margin-bottom: 24px;
+    }
+
+    .card-about h2, .card-screenshots h2 {
+      font-family: 'Archivo', sans-serif;
+      font-size: 1.2em;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .about-block {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin-bottom: 22px;
+    }
+
+    .about-block h3 {
+      font-size: 0.78em;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--text-faint);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .about-block p {
+      font-size: 0.95em;
+      line-height: 1.65;
+      color: var(--text-secondary);
+    }
+
+    .about-features-title {
+      font-size: 0.78em;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--text-faint);
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .feature-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      list-style: none;
+    }
+
+    .feature-list li {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-size: 0.85em;
+      color: var(--text);
+    }
+
+    .screenshots-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+    }
+
+    .screenshot {
+      margin: 0;
+    }
+
+    .screenshot img {
+      width: 100%;
+      display: block;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+
+    .screenshot figcaption {
+      font-size: 0.82em;
+      color: var(--text-faint);
+      margin-top: 8px;
     }
 
     .status-legend {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 14px;
       font-size: 0.78em;
       color: var(--text-faint);
       margin-bottom: 16px;
       padding-bottom: 14px;
       border-bottom: 1px solid var(--border);
+    }
+
+    .status-legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
 
     .change-item {
@@ -248,11 +353,35 @@
       margin-bottom: 6px;
     }
 
-    .change-name {
-      font-family: 'Menlo', 'Monaco', monospace;
-      font-size: 0.72em;
-      color: var(--text-faint);
-      margin-bottom: 8px;
+    .change-detail {
+      font-size: 0.88em;
+      line-height: 1.65;
+      color: var(--text-secondary);
+      margin-top: 10px;
+    }
+
+    .change-detail strong {
+      color: var(--text);
+    }
+
+    .change-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 10px;
+      font-size: 0.85em;
+      font-weight: 700;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .change-link:hover {
+      text-decoration: underline;
+    }
+
+    .change-link .icon {
+      width: 0.9em;
+      height: 0.9em;
     }
 
     .change-status {
@@ -386,9 +515,13 @@
     }
 
     .timeline-expand-icon {
-      display: inline-block;
+      display: inline-flex;
       transition: transform 0.2s ease;
-      font-size: 0.8em;
+    }
+
+    .timeline-expand-icon .icon {
+      width: 0.8em;
+      height: 0.8em;
     }
 
     .timeline-expand-icon.expanded {
@@ -475,6 +608,58 @@
       margin-top: 8px;
     }
 
+    .tech-details {
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+
+    .tech-details summary {
+      cursor: pointer;
+      font-family: 'Archivo', sans-serif;
+      font-weight: 800;
+      font-size: 0.95em;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      list-style: none;
+    }
+
+    .tech-details summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .tech-details-note {
+      font-size: 0.8em;
+      color: var(--text-faint);
+      margin: 10px 0 18px;
+    }
+
+    .tech-details-content {
+      margin-top: 16px;
+    }
+
+    .tech-details-content h3 {
+      font-size: 0.75em;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      margin: 18px 0 8px;
+    }
+
+    .tech-slug-list {
+      font-family: 'Menlo', 'Monaco', monospace;
+      font-size: 0.78em;
+      color: var(--text-faint);
+      line-height: 1.8;
+    }
+
+    .tech-slug-list code {
+      color: var(--text-secondary);
+    }
+
     .file-tag {
       background: var(--bg);
       border: 1px solid var(--border);
@@ -529,11 +714,34 @@
     </div>
   </main>
 
-  <button class="theme-toggle" title="切換深色/淺色模式" onclick="toggleTheme()">🌙</button>
+  <button class="theme-toggle" title="切換深色/淺色模式" onclick="toggleTheme()"></button>
 
   <script>
     const APP_CONTAINER = document.getElementById('app');
     const THEME_STORAGE_KEY = 'dev-dashboard-theme';
+
+    // 手繪線條風 SVG icon（stroke=currentColor，跟著文字色走，不用 emoji）
+    const SVG_WRAP_OPEN = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">';
+    const ICONS = {
+      target: SVG_WRAP_OPEN + '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>',
+      info: SVG_WRAP_OPEN + '<circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11.5"/><circle cx="12" cy="8" r="0.5" fill="currentColor"/></svg>',
+      checklist: SVG_WRAP_OPEN + '<rect x="9" y="2" width="6" height="4" rx="1"/><path d="M9 4H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-3"/><path d="M9 12l2 2 4-4"/></svg>',
+      question: SVG_WRAP_OPEN + '<circle cx="12" cy="12" r="10"/><path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 1.5-2.5 2-2.5 4"/><circle cx="12" cy="17" r="0.5" fill="currentColor"/></svg>',
+      plug: SVG_WRAP_OPEN + '<path d="M9 2v6M15 2v6M6 10h12v4a6 6 0 0 1-12 0v-4z"/><path d="M8 20h8"/><path d="M12 16v4"/></svg>',
+      image: SVG_WRAP_OPEN + '<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>',
+      code: SVG_WRAP_OPEN + '<polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>',
+      history: SVG_WRAP_OPEN + '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
+      gift: SVG_WRAP_OPEN + '<rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 1 1 0-5C11 3 12 8 12 8"/><path d="M16.5 8a2.5 2.5 0 1 0 0-5C13 3 12 8 12 8"/></svg>',
+      layers: SVG_WRAP_OPEN + '<polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>',
+      barChart: SVG_WRAP_OPEN + '<line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>',
+      headset: SVG_WRAP_OPEN + '<path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>',
+      wrench: SVG_WRAP_OPEN + '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>',
+      chevron: SVG_WRAP_OPEN + '<polyline points="9 18 15 12 9 6"/></svg>',
+      sun: SVG_WRAP_OPEN + '<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>',
+      moon: SVG_WRAP_OPEN + '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>',
+      circleHalf: SVG_WRAP_OPEN + '<circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 0 0 20z" fill="currentColor" stroke="none"/></svg>',
+    };
+    const CHANGE_ICON_FALLBACK = ICONS.wrench;
 
     // Theme management
     function initTheme() {
@@ -572,11 +780,11 @@
       const current = localStorage.getItem(THEME_STORAGE_KEY) || 'auto';
       const btn = document.querySelector('.theme-toggle');
       if (current === 'dark') {
-        btn.textContent = '☀️';
+        btn.innerHTML = ICONS.sun;
       } else if (current === 'light') {
-        btn.textContent = '🌙';
+        btn.innerHTML = ICONS.moon;
       } else {
-        btn.textContent = '🌗';
+        btn.innerHTML = ICONS.circleHalf;
       }
     }
 
@@ -607,6 +815,8 @@
 
       // Update page title dynamically
       document.title = `${project} 開發儀表板`;
+      const about = state.about || null;
+      const screenshots = state.screenshots || [];
       const changesInProgress = state.changes_in_progress || [];
       const openQuestions = state.open_questions || [];
       const keyFiles = state.key_files || [];
@@ -624,27 +834,71 @@
           </div>
         </div>
         <div class="one-liner">${escapeHtml(oneLiner)}</div>
-
-        <div class="cards-grid">
       `;
+
+      // About card — what / how / why / feature list, for human readers
+      if (about) {
+        html += `<div class="card-about">`;
+        html += `<h2><span class="card-icon">${ICONS.info}</span> 專案說明與使用範圍</h2>`;
+        html += `<div class="about-block">`;
+        if (about.what) {
+          html += `<div><h3>這是什麼</h3><p>${escapeHtml(about.what)}</p></div>`;
+        }
+        if (about.how) {
+          html += `<div><h3>怎麼運作</h3><p>${escapeHtml(about.how)}</p></div>`;
+        }
+        if (about.why) {
+          html += `<div><h3>為什麼要做</h3><p>${escapeHtml(about.why)}</p></div>`;
+        }
+        html += `</div>`;
+        if (about.features && about.features.length > 0) {
+          html += `<div class="about-features-title">目前包含的功能</div><ul class="feature-list">`;
+          about.features.forEach(f => {
+            html += `<li>${escapeHtml(f)}</li>`;
+          });
+          html += `</ul>`;
+        }
+        html += `</div>`;
+      }
+
+      // Screenshots card — what it actually looks like
+      if (screenshots && screenshots.length > 0) {
+        html += `<div class="card-screenshots">`;
+        html += `<h2><span class="card-icon">${ICONS.image}</span> 畫面長怎樣</h2>`;
+        html += `<div class="screenshots-grid">`;
+        screenshots.forEach(shot => {
+          html += `
+            <figure class="screenshot">
+              <img src="${escapeHtml(shot.path)}" alt="${escapeHtml(shot.label || '')}" loading="lazy">
+              ${shot.label ? `<figcaption>${escapeHtml(shot.label)}</figcaption>` : ''}
+            </figure>
+          `;
+        });
+        html += `</div></div>`;
+      }
+
+      html += `<div class="cards-grid">`;
 
       // Changes in Progress card
       if (changesInProgress && changesInProgress.length > 0) {
         html += `
           <div class="card">
-            <h2><span class="card-icon">📋</span> 現在在做的事</h2>
-            <div class="status-legend">🟢 快做完了，不用管　🟠 還在正常進行　🔴 卡住了，等你決定</div>
+            <h2><span class="card-icon">${ICONS.checklist}</span> 現在在做的事</h2>
+            <div class="status-legend">
+              <span class="status-legend-item"><span class="status-dot status-ok"></span>快做完了，不用管</span>
+              <span class="status-legend-item"><span class="status-dot status-warn"></span>還在正常進行</span>
+              <span class="status-legend-item"><span class="status-dot status-error"></span>卡住了，等你決定</span>
+            </div>
         `;
         changesInProgress.forEach(change => {
           const percent = change.total ? Math.round((change.done / change.total) * 100) : 0;
           const statusClass = change.status === 'ok' ? 'status-ok' : (change.status === 'warn' ? 'status-warn' : 'status-error');
-          const icon = change.icon || '🔧';
+          const icon = ICONS[change.icon] || CHANGE_ICON_FALLBACK;
           const displayName = change.display_name || change.name || '未命名';
           html += `
             <div class="change-item">
-              <div class="change-display-name">${icon} ${escapeHtml(displayName)}</div>
+              <div class="change-display-name"><span class="card-icon">${icon}</span> ${escapeHtml(displayName)}</div>
               ${change.plain_summary ? `<div class="change-plain-summary">${escapeHtml(change.plain_summary)}</div>` : ''}
-              <div class="change-name">${escapeHtml(change.name || '')}</div>
               <div class="change-status">
                 <span class="status-dot ${statusClass}"></span>
                 ${change.done}/${change.total} 已完成
@@ -652,7 +906,8 @@
               <div class="progress-bar">
                 <div class="progress-fill" style="width: ${percent}%"></div>
               </div>
-              ${change.note ? `<div style="font-size: 0.85em; color: var(--text-secondary); margin-top: 6px;">${escapeHtml(change.note)}</div>` : ''}
+              ${change.detail ? `<div class="change-detail">${renderDetailText(change.detail)}</div>` : (change.note ? `<div class="change-detail">${escapeHtml(change.note)}</div>` : '')}
+              ${change.link ? `<a class="change-link" href="${escapeHtml(change.link)}" target="_blank" rel="noopener noreferrer">查看完整規格<span class="icon">${ICONS.chevron}</span></a>` : ''}
             </div>
           `;
         });
@@ -663,7 +918,7 @@
       if (openQuestions && openQuestions.length > 0) {
         html += `
           <div class="card">
-            <h2><span class="card-icon">❓</span> 待確認事項</h2>
+            <h2><span class="card-icon">${ICONS.question}</span> 待確認事項</h2>
         `;
         openQuestions.forEach(q => {
           html += `
@@ -676,23 +931,11 @@
         html += `</div>`;
       }
 
-      // Key Files & Systems card
-      html += `<div class="card">`;
-      if (keyFiles && keyFiles.length > 0) {
-        html += `
-          <div class="key-files">
-            <h2><span class="card-icon">📁</span> 重要檔案</h2>
-            <div class="key-files-list">
-        `;
-        keyFiles.forEach(file => {
-          html += `<span class="file-tag">${escapeHtml(file)}</span>`;
-        });
-        html += `</div></div>`;
-      }
+      // Connected systems card (human-facing; key_files moved to tech-details below)
       if (connectedSystems && connectedSystems.length > 0) {
         html += `
-          <div class="connected-systems">
-            <div style="font-weight: bold; margin-bottom: 8px;"><span class="card-icon">⚙️</span> 關聯系統</div>
+          <div class="card">
+            <h2><span class="card-icon">${ICONS.plug}</span> 關聯系統</h2>
             <div class="connected-systems-list">
         `;
         connectedSystems.forEach(system => {
@@ -700,10 +943,6 @@
         });
         html += `</div></div>`;
       }
-      if ((keyFiles && keyFiles.length === 0) && (!connectedSystems || connectedSystems.length === 0)) {
-        html += `<div class="empty-state">沒有設定重要檔案或系統</div>`;
-      }
-      html += `</div>`;
 
       html += `</div>`;
 
@@ -711,7 +950,7 @@
       if (manifest.entries && manifest.entries.length > 0) {
         html += `
           <div class="timeline">
-            <h2><span class="card-icon">📜</span> 歷史紀錄</h2>
+            <h2><span class="card-icon">${ICONS.history}</span> 歷史紀錄</h2>
         `;
         manifest.entries.forEach((entry, idx) => {
           const entryId = `entry-${idx}`;
@@ -720,7 +959,7 @@
               <div class="timeline-item-header" onclick="toggleTimelineEntry('${entryId}')">
                 <div class="timeline-date">${escapeHtml(entry.date)}</div>
                 <div class="timeline-topic">
-                  <span class="timeline-expand-icon" id="${entryId}-icon">▶</span>
+                  <span class="timeline-expand-icon" id="${entryId}-icon">${ICONS.chevron}</span>
                   ${escapeHtml(entry.topic)}
                 </div>
               </div>
@@ -732,6 +971,34 @@
           `;
         });
         html += `</div>`;
+      }
+
+      // Technical details — AI/engineer-only: raw slugs, file paths, URLs.
+      // Kept out of the primary human-reading flow per explicit request:
+      // plain-language content stays above; technical identifiers collapse here.
+      if ((keyFiles && keyFiles.length > 0) || (changesInProgress && changesInProgress.length > 0)) {
+        html += `
+          <details class="tech-details">
+            <summary><span class="card-icon">${ICONS.code}</span> 技術細節（給 AI／工程師看）</summary>
+            <div class="tech-details-note">以下是給 AI 或工程師對接用的原始檔名、技術代號與連結，一般閱讀不需要看這段。</div>
+            <div class="tech-details-content">
+        `;
+        if (changesInProgress && changesInProgress.length > 0) {
+          html += `<h3>SR 技術代號對照</h3><div class="tech-slug-list">`;
+          changesInProgress.forEach(change => {
+            const displayName = change.display_name || change.name || '未命名';
+            html += `${escapeHtml(displayName)} → <code>${escapeHtml(change.name || '')}</code><br>`;
+          });
+          html += `</div>`;
+        }
+        if (keyFiles && keyFiles.length > 0) {
+          html += `<h3>重要檔案</h3><div class="key-files-list">`;
+          keyFiles.forEach(file => {
+            html += `<span class="file-tag">${escapeHtml(file)}</span>`;
+          });
+          html += `</div>`;
+        }
+        html += `</div></details>`;
       }
 
       APP_CONTAINER.innerHTML = html;
@@ -750,6 +1017,12 @@
       const div = document.createElement('div');
       div.textContent = text;
       return div.innerHTML;
+    }
+
+    // Renders detail text that may contain simple **bold** markers, after
+    // escaping so untrusted content can never inject real HTML.
+    function renderDetailText(text) {
+      return escapeHtml(text).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
     }
 
     function formatTimestamp(ts) {

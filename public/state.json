@@ -1,54 +1,81 @@
 {
   "project": "startkiter",
-  "updated_at": "2026-08-22T09:20:00+08:00",
+  "updated_at": "2026-08-22T09:45:00+08:00",
   "updated_by": "claude-code",
   "one_liner": "一套買了就能自己開站、還能像搭積木一樣自由加裝功能的網站工具包",
+  "about": {
+    "what": "StartKiter（對外課名「開站包」）是「課程 + 終身代碼包」的組合：買家付一次錢（NT$8,800），同時拿到教學課程跟一整套可以自己接手開發的網站原始碼，不是租用服務，是真的把整套系統帶走。",
+    "how": "整個網站設計成像 WordPress 一樣的架構：有一套共用的骨架（登入、金流、後台），功能則是一個個獨立模組（課程、優惠券、客服系統⋯）。要加新功能就是裝一個新模組，不需要重寫整個網站，買家自己或找人維護都比較容易上手。",
+    "why": "一般人想做自己的線上事業，常卡在「要花錢找工程師」或「學了半天還是不敢自己維護」。開站包讓買家用一次性的價格拿到完整網站＋教學，之後不管自己改、找人改、還是叫 AI 改，都因為架構模組化而好懂、好接手。",
+    "features": [
+      "台灣金流（PAYUNi，一次買斷 NT$8,800）",
+      "課程系統（觀看畫面、權限管理）",
+      "組合包與優惠券",
+      "站內 AI 客服 agent（唯讀，不能亂動代碼）",
+      "外掛式擴充架構（像 WordPress 一樣裝新功能）",
+      "多管道客服整合（網站 / LINE / Telegram）"
+    ]
+  },
+  "screenshots": [
+    {
+      "path": "screenshots/startkiter-landing.png",
+      "label": "首頁（測試站實際畫面，2026-08-22 截圖）"
+    }
+  ],
   "changes_in_progress": [
     {
       "name": "core-module-bundles-coupons",
-      "icon": "🎁",
+      "icon": "gift",
       "display_name": "組合包與優惠券",
       "plain_summary": "讓學生可以把幾堂課包在一起買，或用折扣碼便宜買課",
+      "detail": "功能幾乎做完了，剩 1 件事故意先跳過：買家買組合包後，要能看到裡面每一堂課的播放頁——但我們發現這個播放頁根本還沒做出來（現在買家看到的 3 堂課是寫死的假資料，跟真正的課程資料庫是兩套不相關的系統，接不上）。這不是改幾行代碼能解決的，是要先做出一個全新的播放頁面。等那個做出來，才能回頭把組合包接上真正的課程內容。",
       "done": 55,
       "total": 56,
       "status": "ok",
-      "note": "只剩 1 項故意先不做：要等「買家版課程播放頁」蓋好才能接上"
+      "link": "https://github.com/fishtvlvoe/startkiter/tree/main/openspec/changes/core-module-bundles-coupons"
     },
     {
       "name": "platform-shell-plugin-architecture",
-      "icon": "🧱",
+      "icon": "layers",
       "display_name": "網站骨架與擴充功能",
       "plain_summary": "決定整個網站以後能不能像 WordPress 一樣自由加裝新功能，這是打地基的工程",
+      "detail": "工程量最大的一張，還在動的部分：①把新版側邊選單跑一輪代碼審查跟畫面截圖比對，確認沒改壞舊功能 ②後台要顯示「你的版本落後，可以複製這三行指令更新」③側邊欄要能像 WordPress 一樣收折、拖拉分組、手機版要有漢堡選單 ④加一個「用戶管理」選單項目。**有一件事卡住等你決定**：舊制度下已經用「唯讀同步」完成履約的買家，要不要一次性遷移到新機制？要不要提前通知、給多久期限？裁決前這些買家的權限不會被異動。",
       "done": 90,
       "total": 129,
       "status": "warn",
-      "note": "工程量最大的一塊，還在正常施工中，沒有卡住"
+      "link": "https://github.com/fishtvlvoe/startkiter/tree/main/openspec/changes/platform-shell-plugin-architecture"
     },
     {
       "name": "sheets-export-engine",
-      "icon": "📊",
+      "icon": "barChart",
       "display_name": "報表匯出功能",
       "plain_summary": "讓後台的數據可以一鍵匯出成 Excel 表格",
+      "detail": "核心的匯出功能已經做完，剩兩件事讓 AI 也能幫忙產報表：①讓站內 AI 客服看懂你的指令，自動生成試算表 ②讓後台對話框能直接跳出「下載這份 Excel」的連結，或直接在網頁上先預覽再下載。",
       "done": 11,
       "total": 13,
       "status": "ok",
-      "note": "快做完了，剩下讓 AI 也能自動產出報表"
+      "link": "https://github.com/fishtvlvoe/startkiter/tree/main/openspec/changes/sheets-export-engine"
     },
     {
       "name": "unified-support-desk",
-      "icon": "🎧",
+      "icon": "headset",
       "display_name": "客服訊息整合",
       "plain_summary": "把網站客服、LINE、Telegram 的訊息全部匯進同一個地方，不用切換好幾個 App",
+      "detail": "LINE 跟 Telegram 的串接都做完了。剩 Chatwoot（客服系統）還沒裝到伺服器上，要做 3 步：①在 Coolify 新增一台獨立伺服器，一鍵裝 Chatwoot ②接網域、確認 SSL 證書簽發成功 ③在 Chatwoot 後台開 1-5 個客服帳號。裝完才能做最後一步：實際測試「網站／LINE／Telegram 三個管道都能成功建立客服單」。",
       "done": 43,
       "total": 49,
       "status": "error",
-      "note": "LINE 跟 Telegram 都接好了，卡在客服系統還沒裝進伺服器"
+      "link": "https://github.com/fishtvlvoe/startkiter/tree/main/openspec/changes/unified-support-desk"
     }
   ],
   "open_questions": [
     {
       "question": "主站部署完成後要不要順便升級 VPS（伺服器）的規格？",
       "asked_at": "2026-08-22T08:00:00+08:00"
+    },
+    {
+      "question": "舊制度下已經用「唯讀同步」完成履約的買家，要不要一次性遷移到新的骨架機制？要不要提前通知、給多久期限？（來自「網站骨架與擴充功能」task 42.1）",
+      "asked_at": "2026-08-22T09:30:00+08:00"
     }
   ],
   "key_files": [

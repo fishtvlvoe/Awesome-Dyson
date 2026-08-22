@@ -22,6 +22,48 @@
       "type": "string",
       "description": "Single-line project description"
     },
+    "about": {
+      "type": "object",
+      "description": "Full human-facing product explanation shown near the top of the dashboard",
+      "properties": {
+        "what": {
+          "type": "string",
+          "description": "Plain-language explanation of what this project actually is"
+        },
+        "how": {
+          "type": "string",
+          "description": "Plain-language explanation of how it works / is structured"
+        },
+        "why": {
+          "type": "string",
+          "description": "Plain-language explanation of why this project exists / the problem it solves"
+        },
+        "features": {
+          "type": "array",
+          "description": "List of current features, in plain language",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "screenshots": {
+      "type": "array",
+      "description": "Real screenshots of the actual product UI, shown on the dashboard",
+      "items": {
+        "type": "object",
+        "required": ["path"],
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Path to the image file, relative to the dashboard's public/ directory"
+          },
+          "label": {
+            "type": "string",
+            "description": "Plain-language caption describing what the screenshot shows"
+          }
+        }
+      }
+    },
     "changes_in_progress": {
       "type": "array",
       "description": "List of active changes/features being worked on",
@@ -35,7 +77,7 @@
           },
           "icon": {
             "type": "string",
-            "description": "Single emoji shown next to display_name for quick visual scanning"
+            "description": "Key into the dashboard template's built-in SVG icon set (e.g. 'gift', 'layers', 'headset'), shown next to display_name. Falls back to a generic wrench icon if the key is unknown."
           },
           "display_name": {
             "type": "string",
@@ -44,6 +86,15 @@
           "plain_summary": {
             "type": "string",
             "description": "One-line plain-language explanation of what this change actually does, for non-technical readers"
+          },
+          "detail": {
+            "type": "string",
+            "description": "Full plain-language status: real goals, actual blockers, and what's genuinely happening — not vague filler. Supports simple **bold** markers."
+          },
+          "link": {
+            "type": "string",
+            "format": "uri",
+            "description": "URL to the change's full SR docs (proposal/design/tasks) for readers who want more detail. Rendered as a plain-language labeled link, never shown as raw text."
           },
           "done": {
             "type": "integer",
