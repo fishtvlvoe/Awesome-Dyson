@@ -266,6 +266,15 @@
       display: none;
     }
 
+    .timeline-item-header {
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .timeline-item-header:hover {
+      opacity: 0.8;
+    }
+
     .timeline-date {
       font-size: 0.85em;
       color: var(--text-secondary);
@@ -276,6 +285,52 @@
       font-weight: bold;
       margin-top: 4px;
       margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .timeline-expand-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
+      font-size: 0.8em;
+    }
+
+    .timeline-expand-icon.expanded {
+      transform: rotate(90deg);
+    }
+
+    .timeline-details {
+      display: none;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    .timeline-details.visible {
+      display: block;
+    }
+
+    .timeline-summary {
+      font-size: 0.95em;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
+
+    .timeline-decisions {
+      font-size: 0.9em;
+      margin-top: 8px;
+    }
+
+    .timeline-decision {
+      background: var(--bg);
+      padding: 6px 8px;
+      border-radius: 3px;
+      display: inline-block;
+      margin-right: 6px;
+      margin-bottom: 4px;
+      border-left: 3px solid var(--accent);
     }
 
     .error {
@@ -536,11 +591,21 @@
           <div class="timeline">
             <h2><span class="card-icon">📜</span> History</h2>
         `;
-        manifest.entries.forEach(entry => {
+        manifest.entries.forEach((entry, idx) => {
+          const entryId = `entry-${idx}`;
           html += `
             <div class="timeline-item">
-              <div class="timeline-date">${escapeHtml(entry.date)}</div>
-              <div class="timeline-topic">${escapeHtml(entry.topic)}</div>
+              <div class="timeline-item-header" onclick="toggleTimelineEntry('${entryId}')">
+                <div class="timeline-date">${escapeHtml(entry.date)}</div>
+                <div class="timeline-topic">
+                  <span class="timeline-expand-icon" id="${entryId}-icon">▶</span>
+                  ${escapeHtml(entry.topic)}
+                </div>
+              </div>
+              <div class="timeline-details" id="${entryId}-details">
+                <div class="timeline-summary" id="${entryId}-summary">Loading...</div>
+                <div class="timeline-decisions" id="${entryId}-decisions"></div>
+              </div>
             </div>
           `;
         });
@@ -548,6 +613,14 @@
       }
 
       APP_CONTAINER.innerHTML = html;
+
+      // Load entry details asynchronously
+      if (manifest.entries && manifest.entries.length > 0) {
+        manifest.entries.forEach((entry, idx) => {
+          const entryId = `entry-${idx}`;
+          loadEntryDetails(entryId, entry.file);
+        });
+      }
     }
 
     function escapeHtml(text) {
@@ -574,6 +647,48 @@
         return 'just now';
       } catch (e) {
         return ts;
+      }
+    }
+
+    // Timeline interactions
+    function toggleTimelineEntry(entryId) {
+      const detailsEl = document.getElementById(`${entryId}-details`);
+      const iconEl = document.getElementById(`${entryId}-icon`);
+
+      if (detailsEl) {
+        detailsEl.classList.toggle('visible');
+        iconEl?.classList.toggle('expanded');
+      }
+    }
+
+    async function loadEntryDetails(entryId, filename) {
+      try {
+        const response = await fetch(`./entries/${filename}`);
+        if (!response.ok) {
+          throw new Error(`Failed to load entry: ${filename}`);
+        }
+        const entry = await response.json();
+
+        // Update summary
+        const summaryEl = document.getElementById(`${entryId}-summary`);
+        if (summaryEl) {
+          summaryEl.textContent = entry.summary || 'No summary';
+        }
+
+        // Update decisions
+        const decisionsEl = document.getElementById(`${entryId}-decisions`);
+        if (decisionsEl && entry.decisions && entry.decisions.length > 0) {
+          let decisionsHtml = '<div style="font-weight: bold; margin-bottom: 6px;">Decisions:</div>';
+          entry.decisions.forEach(decision => {
+            decisionsHtml += `<div class="timeline-decision">${escapeHtml(decision)}</div>`;
+          });
+          decisionsEl.innerHTML = decisionsHtml;
+        }
+      } catch (error) {
+        const summaryEl = document.getElementById(`${entryId}-summary`);
+        if (summaryEl) {
+          summaryEl.innerHTML = `<span style="color: var(--status-error);">Error loading entry: ${escapeHtml(error.message)}</span>`;
+        }
       }
     }
 
