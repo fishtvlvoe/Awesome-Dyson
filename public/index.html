@@ -23,8 +23,20 @@
       --status-error: #dd0000;
     }
 
+    html.dark-mode {
+      --bg: #1a1a1a;
+      --bg-secondary: #2a2a2a;
+      --text: #ffffff;
+      --text-secondary: #aaaaaa;
+      --border: #404040;
+      --accent: #66b3ff;
+      --status-ok: #44dd77;
+      --status-warn: #ffaa33;
+      --status-error: #ff5555;
+    }
+
     @media (prefers-color-scheme: dark) {
-      :root {
+      html:not(.light-mode) {
         --bg: #1a1a1a;
         --bg-secondary: #2a2a2a;
         --text: #ffffff;
@@ -423,7 +435,7 @@
     <div class="header-content">
       <div class="logo">
         <span class="logo-icon">▶</span>
-        Dev Project Dashboard
+        專案開發儀表板
       </div>
     </div>
   </header>
@@ -431,12 +443,12 @@
   <main>
     <div class="container">
       <div id="app">
-        <div class="loading">Loading dashboard...</div>
+        <div class="loading">載入中...</div>
       </div>
     </div>
   </main>
 
-  <button class="theme-toggle" title="Toggle theme" onclick="toggleTheme()">🌙</button>
+  <button class="theme-toggle" title="切換深色/淺色模式" onclick="toggleTheme()">🌙</button>
 
   <script>
     const APP_CONTAINER = document.getElementById('app');
@@ -445,26 +457,46 @@
     // Theme management
     function initTheme() {
       const saved = localStorage.getItem(THEME_STORAGE_KEY);
+      const html = document.documentElement;
+
+      html.classList.remove('light-mode', 'dark-mode');
+
       if (saved === 'light') {
-        document.documentElement.style.colorScheme = 'light';
+        html.classList.add('light-mode');
       } else if (saved === 'dark') {
-        document.documentElement.style.colorScheme = 'dark';
+        html.classList.add('dark-mode');
       }
+
       updateThemeButton();
     }
 
     function toggleTheme() {
+      const html = document.documentElement;
       const current = localStorage.getItem(THEME_STORAGE_KEY) || 'auto';
-      const next = current === 'dark' ? 'light' : 'dark';
+      const next = current === 'dark' ? 'light' : (current === 'light' ? 'auto' : 'dark');
+
       localStorage.setItem(THEME_STORAGE_KEY, next);
-      document.documentElement.style.colorScheme = next;
+
+      html.classList.remove('light-mode', 'dark-mode');
+      if (next === 'light') {
+        html.classList.add('light-mode');
+      } else if (next === 'dark') {
+        html.classList.add('dark-mode');
+      }
+
       updateThemeButton();
     }
 
     function updateThemeButton() {
       const current = localStorage.getItem(THEME_STORAGE_KEY) || 'auto';
       const btn = document.querySelector('.theme-toggle');
-      btn.textContent = current === 'dark' ? '☀️' : '🌙';
+      if (current === 'dark') {
+        btn.textContent = '☀️';
+      } else if (current === 'light') {
+        btn.textContent = '🌙';
+      } else {
+        btn.textContent = '🌗';
+      }
     }
 
     // Data loading
@@ -489,8 +521,8 @@
     }
 
     function renderDashboard(state, manifest) {
-      const project = state.project || 'Unknown project';
-      const oneLiner = state.one_liner || 'No description';
+      const project = state.project || '未命名專案';
+      const oneLiner = state.one_liner || '無描述';
       const changesInProgress = state.changes_in_progress || [];
       const openQuestions = state.open_questions || [];
       const keyFiles = state.key_files || [];
@@ -502,7 +534,7 @@
         <div class="page-title">
           <h1>${escapeHtml(project)}</h1>
           <div class="updated-info">
-            Last updated by ${escapeHtml(updatedBy)}<br>
+            更新人：${escapeHtml(updatedBy)}<br>
             ${formatTimestamp(updatedAt)}
           </div>
         </div>
@@ -515,17 +547,17 @@
       if (changesInProgress && changesInProgress.length > 0) {
         html += `
           <div class="card">
-            <h2><span class="card-icon">📋</span> In Progress</h2>
+            <h2><span class="card-icon">📋</span> 進行中的任務</h2>
         `;
         changesInProgress.forEach(change => {
           const percent = change.total ? Math.round((change.done / change.total) * 100) : 0;
           const statusClass = change.status === 'ok' ? 'status-ok' : (change.status === 'warn' ? 'status-warn' : 'status-error');
           html += `
             <div class="change-item">
-              <div class="change-name">${escapeHtml(change.name || 'Unnamed')}</div>
+              <div class="change-name">${escapeHtml(change.name || '未命名')}</div>
               <div class="change-status">
                 <span class="status-dot ${statusClass}"></span>
-                ${change.done}/${change.total} done
+                ${change.done}/${change.total} 已完成
               </div>
               <div class="progress-bar">
                 <div class="progress-fill" style="width: ${percent}%"></div>
@@ -541,13 +573,13 @@
       if (openQuestions && openQuestions.length > 0) {
         html += `
           <div class="card">
-            <h2><span class="card-icon">❓</span> Open Questions</h2>
+            <h2><span class="card-icon">❓</span> 待確認事項</h2>
         `;
         openQuestions.forEach(q => {
           html += `
             <div class="question-item">
-              <div class="question-text">${escapeHtml(q.question || 'No question text')}</div>
-              <div class="question-asked">Asked: ${formatTimestamp(q.asked_at)}</div>
+              <div class="question-text">${escapeHtml(q.question || '無問題文字')}</div>
+              <div class="question-asked">提問時間：${formatTimestamp(q.asked_at)}</div>
             </div>
           `;
         });
@@ -559,7 +591,7 @@
       if (keyFiles && keyFiles.length > 0) {
         html += `
           <div class="key-files">
-            <h2><span class="card-icon">📁</span> Key Files</h2>
+            <h2><span class="card-icon">📁</span> 重要檔案</h2>
             <div class="key-files-list">
         `;
         keyFiles.forEach(file => {
@@ -570,7 +602,7 @@
       if (connectedSystems && connectedSystems.length > 0) {
         html += `
           <div class="connected-systems">
-            <div style="font-weight: bold; margin-bottom: 8px;"><span class="card-icon">⚙️</span> Connected Systems</div>
+            <div style="font-weight: bold; margin-bottom: 8px;"><span class="card-icon">⚙️</span> 關聯系統</div>
             <div class="connected-systems-list">
         `;
         connectedSystems.forEach(system => {
@@ -579,7 +611,7 @@
         html += `</div></div>`;
       }
       if ((keyFiles && keyFiles.length === 0) && (!connectedSystems || connectedSystems.length === 0)) {
-        html += `<div class="empty-state">No key files or systems configured</div>`;
+        html += `<div class="empty-state">沒有設定重要檔案或系統</div>`;
       }
       html += `</div>`;
 
@@ -589,7 +621,7 @@
       if (manifest.entries && manifest.entries.length > 0) {
         html += `
           <div class="timeline">
-            <h2><span class="card-icon">📜</span> History</h2>
+            <h2><span class="card-icon">📜</span> 歷史紀錄</h2>
         `;
         manifest.entries.forEach((entry, idx) => {
           const entryId = `entry-${idx}`;
@@ -603,7 +635,7 @@
                 </div>
               </div>
               <div class="timeline-details" id="${entryId}-details">
-                <div class="timeline-summary" id="${entryId}-summary">Loading...</div>
+                <div class="timeline-summary" id="${entryId}-summary">載入中...</div>
                 <div class="timeline-decisions" id="${entryId}-decisions"></div>
               </div>
             </div>
@@ -631,7 +663,7 @@
     }
 
     function formatTimestamp(ts) {
-      if (!ts) return 'Unknown';
+      if (!ts) return '未知';
       try {
         const date = new Date(ts);
         const now = new Date();
@@ -641,10 +673,10 @@
         const hours = Math.floor(minutes / 60);
         const days = Math.floor(hours / 24);
 
-        if (days > 0) return `${days}d ago`;
-        if (hours > 0) return `${hours}h ago`;
-        if (minutes > 0) return `${minutes}m ago`;
-        return 'just now';
+        if (days > 0) return `${days} 天前`;
+        if (hours > 0) return `${hours} 小時前`;
+        if (minutes > 0) return `${minutes} 分鐘前`;
+        return '剛才';
       } catch (e) {
         return ts;
       }
@@ -665,20 +697,20 @@
       try {
         const response = await fetch(`./entries/${filename}`);
         if (!response.ok) {
-          throw new Error(`Failed to load entry: ${filename}`);
+          throw new Error(`無法載入紀錄: ${filename}`);
         }
         const entry = await response.json();
 
         // Update summary
         const summaryEl = document.getElementById(`${entryId}-summary`);
         if (summaryEl) {
-          summaryEl.textContent = entry.summary || 'No summary';
+          summaryEl.textContent = entry.summary || '無摘要';
         }
 
         // Update decisions
         const decisionsEl = document.getElementById(`${entryId}-decisions`);
         if (decisionsEl && entry.decisions && entry.decisions.length > 0) {
-          let decisionsHtml = '<div style="font-weight: bold; margin-bottom: 6px;">Decisions:</div>';
+          let decisionsHtml = '<div style="font-weight: bold; margin-bottom: 6px;">決策事項：</div>';
           entry.decisions.forEach(decision => {
             decisionsHtml += `<div class="timeline-decision">${escapeHtml(decision)}</div>`;
           });
@@ -687,7 +719,7 @@
       } catch (error) {
         const summaryEl = document.getElementById(`${entryId}-summary`);
         if (summaryEl) {
-          summaryEl.innerHTML = `<span style="color: var(--status-error);">Error loading entry: ${escapeHtml(error.message)}</span>`;
+          summaryEl.innerHTML = `<span style="color: var(--status-error);">載入錯誤：${escapeHtml(error.message)}</span>`;
         }
       }
     }
