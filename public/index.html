@@ -123,6 +123,9 @@
     .sidebar {
       width: 220px;
       flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
       background: var(--sidebar-bg);
       color: var(--sidebar-text);
       border-right: 1px solid var(--sidebar-border);
@@ -157,10 +160,48 @@
       height: 16px;
     }
 
+    .sidebar-group-label {
+      font-size: 0.7em;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      padding: 0 10px;
+      margin-bottom: 8px;
+    }
+
     .sidebar-nav {
       display: flex;
       flex-direction: column;
       gap: 4px;
+    }
+
+    .sidebar-footer {
+      margin-top: auto;
+      padding-top: 16px;
+      border-top: 1px solid var(--sidebar-border);
+    }
+
+    .sidebar-footer a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--sidebar-text-dim);
+      text-decoration: none;
+      font-size: 0.85em;
+      padding: 8px 10px;
+      border-radius: var(--radius-md);
+    }
+
+    .sidebar-footer a:hover {
+      background: var(--bg);
+      color: var(--sidebar-text);
+    }
+
+    .sidebar-footer .icon {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
     }
 
     .sidebar-nav a {
@@ -263,9 +304,6 @@
       box-shadow: var(--shadow);
     }
 
-    .stat-tile-blue { --stat-accent: var(--badge-blue-fg); }
-    .stat-tile-green { --stat-accent: var(--badge-green-fg); }
-    .stat-tile-amber { --stat-accent: var(--badge-amber-fg); }
     .stat-tile-alert { --stat-accent: var(--status-error); }
     .stat-tile-alert .stat-value { color: var(--status-error); }
 
@@ -338,8 +376,9 @@
       flex-shrink: 0;
     }
 
-    /* 圖示徽章：呼應 FlowMapp 產品介面裡彩色方塊圖示（Services 橘、About 紫等），
-       用淡色底 + 對應深色描邊圖示，取代單色線條圖示 */
+    /* 圖示徽章：參考 Profound 產品介面（saasframe.io/saas/profound「Content」畫面）
+       黑白灰為主、色彩只留給真正的狀態訊號，結構性圖示（區塊標題、分類）一律用
+       中性淺灰底＋灰階圖示，不做裝飾性彩色分類 */
     .icon-badge {
       display: inline-flex;
       align-items: center;
@@ -355,6 +394,7 @@
       height: 16px;
     }
 
+    .icon-badge-neutral { background: var(--bg); border: 1px solid var(--border); color: var(--text-secondary); }
     .icon-badge-blue { background: var(--badge-blue-bg); color: var(--badge-blue-fg); }
     .icon-badge-green { background: var(--badge-green-bg); color: var(--badge-green-fg); }
     .icon-badge-purple { background: var(--badge-purple-bg); color: var(--badge-purple-fg); }
@@ -432,16 +472,14 @@
     }
 
     .feature-list li {
+      background: var(--bg);
+      border: 1px solid var(--border);
       border-radius: var(--radius-sm);
       padding: 6px 14px;
       font-size: 0.85em;
       font-weight: 500;
+      color: var(--text-secondary);
     }
-
-    .feature-list li:nth-child(4n+1) { background: var(--badge-blue-bg); color: var(--badge-blue-fg); }
-    .feature-list li:nth-child(4n+2) { background: var(--badge-green-bg); color: var(--badge-green-fg); }
-    .feature-list li:nth-child(4n+3) { background: var(--badge-purple-bg); color: var(--badge-purple-fg); }
-    .feature-list li:nth-child(4n+4) { background: var(--badge-amber-bg); color: var(--badge-amber-fg); }
 
     .screenshots-grid {
       display: grid;
@@ -857,6 +895,7 @@
       </span>
       待神
     </div>
+    <div class="sidebar-group-label">檢視</div>
     <nav class="sidebar-nav">
       <a href="#overview" class="active">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
@@ -867,6 +906,12 @@
         歷史紀錄
       </a>
     </nav>
+    <div class="sidebar-footer">
+      <a href="https://github.com/fishtvlvoe/Awesome-Dyson" target="_blank" rel="noopener noreferrer">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
+        原始碼倉庫
+      </a>
+    </div>
   </div>
 
   <main>
@@ -1007,30 +1052,30 @@
         <div class="one-liner">${escapeHtml(oneLiner)}</div>
 
         <div class="stats-row">
-          <div class="stat-tile stat-tile-blue">
+          <div class="stat-tile">
             <div class="stat-head">
-              <span class="icon-badge icon-badge-blue">${ICONS.checklist}</span>
+              <span class="icon-badge icon-badge-neutral">${ICONS.checklist}</span>
               <span class="stat-label">進行中專案</span>
             </div>
             <div class="stat-value">${inProgressCount}</div>
           </div>
-          <div class="stat-tile stat-tile-green">
+          <div class="stat-tile">
             <div class="stat-head">
-              <span class="icon-badge icon-badge-green">${ICONS.barChart}</span>
+              <span class="icon-badge icon-badge-neutral">${ICONS.barChart}</span>
               <span class="stat-label">平均完成度</span>
             </div>
             <div class="stat-value">${avgPercent}%</div>
           </div>
-          <div class="stat-tile stat-tile-amber">
+          <div class="stat-tile">
             <div class="stat-head">
-              <span class="icon-badge icon-badge-amber">${ICONS.question}</span>
+              <span class="icon-badge icon-badge-neutral">${ICONS.question}</span>
               <span class="stat-label">待確認事項</span>
             </div>
             <div class="stat-value">${openQuestionsCount}</div>
           </div>
-          <div class="stat-tile${stuckCount > 0 ? ' stat-tile-alert' : ' stat-tile-green'}">
+          <div class="stat-tile${stuckCount > 0 ? ' stat-tile-alert' : ''}">
             <div class="stat-head">
-              <span class="icon-badge ${stuckCount > 0 ? 'icon-badge-red' : 'icon-badge-green'}">${ICONS.wrench}</span>
+              <span class="icon-badge ${stuckCount > 0 ? 'icon-badge-red' : 'icon-badge-neutral'}">${ICONS.wrench}</span>
               <span class="stat-label">卡住等你決定</span>
             </div>
             <div class="stat-value">${stuckCount}</div>
@@ -1041,7 +1086,7 @@
       // About card — what / how / why / feature list, for human readers
       if (about) {
         html += `<div class="card-about">`;
-        html += `<h2><span class="card-icon icon-badge icon-badge-blue">${ICONS.info}</span> 專案說明與使用範圍</h2>`;
+        html += `<h2><span class="card-icon icon-badge icon-badge-neutral">${ICONS.info}</span> 專案說明與使用範圍</h2>`;
         html += `<div class="about-block">`;
         if (about.what) {
           html += `<div><h3>這是什麼</h3><p>${escapeHtml(about.what)}</p></div>`;
@@ -1066,7 +1111,7 @@
       // Screenshots card — what it actually looks like
       if (screenshots && screenshots.length > 0) {
         html += `<div class="card-screenshots">`;
-        html += `<h2><span class="card-icon icon-badge icon-badge-purple">${ICONS.image}</span> 畫面長怎樣</h2>`;
+        html += `<h2><span class="card-icon icon-badge icon-badge-neutral">${ICONS.image}</span> 畫面長怎樣</h2>`;
         html += `<div class="screenshots-grid">`;
         screenshots.forEach(shot => {
           html += `
@@ -1085,20 +1130,20 @@
       if (changesInProgress && changesInProgress.length > 0) {
         html += `
           <div class="card">
-            <h2><span class="card-icon icon-badge icon-badge-green">${ICONS.checklist}</span> 現在在做的事</h2>
+            <h2><span class="card-icon icon-badge icon-badge-neutral">${ICONS.checklist}</span> 現在在做的事</h2>
             <div class="status-legend">
               <span class="status-legend-item"><span class="status-dot status-ok"></span>快做完了，不用管</span>
               <span class="status-legend-item"><span class="status-dot status-warn"></span>還在正常進行</span>
               <span class="status-legend-item"><span class="status-dot status-error"></span>卡住了，等你決定</span>
             </div>
         `;
-        const ICON_BADGE_CYCLE = ['blue', 'green', 'purple', 'amber'];
         changesInProgress.forEach((change, idx) => {
           const percent = change.total ? Math.round((change.done / change.total) * 100) : 0;
           const statusClass = change.status === 'ok' ? 'status-ok' : (change.status === 'warn' ? 'status-warn' : 'status-error');
           const statusLabel = change.status === 'ok' ? '快做完了' : (change.status === 'warn' ? '正常進行' : '等你決定');
           const icon = ICONS[change.icon] || CHANGE_ICON_FALLBACK;
-          const badgeColor = ICON_BADGE_CYCLE[idx % ICON_BADGE_CYCLE.length];
+          // 圖示徽章顏色跟隨真實狀態（色彩=訊號），不是裝飾性循環配色
+          const badgeColor = change.status === 'ok' ? 'green' : (change.status === 'warn' ? 'amber' : 'red');
           const displayName = change.display_name || change.name || '未命名';
           html += `
             <div class="change-item">
@@ -1123,7 +1168,7 @@
       if (openQuestions && openQuestions.length > 0) {
         html += `
           <div class="card">
-            <h2><span class="card-icon icon-badge icon-badge-amber">${ICONS.question}</span> 待確認事項</h2>
+            <h2><span class="card-icon icon-badge icon-badge-neutral">${ICONS.question}</span> 待確認事項</h2>
         `;
         openQuestions.forEach(q => {
           html += `
@@ -1140,7 +1185,7 @@
       if (connectedSystems && connectedSystems.length > 0) {
         html += `
           <div class="card">
-            <h2><span class="card-icon icon-badge icon-badge-blue">${ICONS.plug}</span> 關聯系統</h2>
+            <h2><span class="card-icon icon-badge icon-badge-neutral">${ICONS.plug}</span> 關聯系統</h2>
             <div class="connected-systems-list">
         `;
         connectedSystems.forEach(system => {
@@ -1155,7 +1200,7 @@
       if (manifest.entries && manifest.entries.length > 0) {
         html += `
           <div class="timeline">
-            <h2><span class="card-icon icon-badge icon-badge-purple">${ICONS.history}</span> 歷史紀錄</h2>
+            <h2><span class="card-icon icon-badge icon-badge-neutral">${ICONS.history}</span> 歷史紀錄</h2>
         `;
         manifest.entries.forEach((entry, idx) => {
           const entryId = `entry-${idx}`;
