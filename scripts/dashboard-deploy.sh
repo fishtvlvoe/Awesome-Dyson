@@ -35,8 +35,16 @@ function deploy_dashboard() {
 
   echo "🔒 Lock acquired, starting deployment..."
 
-  # Deploy using wrangler
-  if ! wrangler pages deploy "$dashboard_dir" --project-name="${project_slug}-dashboard" 2>&1; then
+  # Deploy using wrangler.
+  # NOTE: --branch=main is required regardless of the local git branch name.
+  # Cloudflare Pages only treats the deployment as "Production" when the
+  # branch passed matches the project's configured production branch
+  # (default "main"). This repo's local branch is "master"; without this
+  # flag, every deploy silently lands as a Preview deployment (its own
+  # per-deploy subdomain) and the main `<slug>-dashboard.pages.dev` URL
+  # keeps serving Cloudflare's soft-404 template forever — which itself
+  # returns HTTP 200, so a plain status-code check won't catch it.
+  if ! wrangler pages deploy "$dashboard_dir" --project-name="${project_slug}-dashboard" --branch=main 2>&1; then
     bash "$LOCK_SCRIPT" release "$project_slug" 2>/dev/null || true
     die "Deployment failed"
   fi
@@ -53,13 +61,15 @@ function deploy_dashboard() {
   echo "📍 URL: $dashboard_url"
   echo ""
 
-  # Verify URL is accessible
+  # Verify URL is accessible AND actually serving the dashboard (Cloudflare's
+  # own soft-404 template also returns HTTP 200, so status code alone proves
+  # nothing — check for real page content instead).
   echo "🔍 Verifying accessibility..."
   if command -v curl &> /dev/null; then
-    if curl -s -o /dev/null -w "%{http_code}" "$dashboard_url" | grep -q "200"; then
-      echo "✅ Dashboard is accessible"
+    if curl -s "$dashboard_url" | grep -q "<title>Dev Project Dashboard</title>"; then
+      echo "✅ Dashboard is accessible and serving real content"
     else
-      echo "⚠️  Dashboard may not be accessible yet (DNS propagation delay)"
+      die "Dashboard URL returned 200 but did not contain expected content — likely deployed to Preview, not Production. Check --branch=main was used."
     fi
   fi
 }
