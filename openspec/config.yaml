@@ -1,0 +1,31 @@
+context: |
+  tech_stack:
+    - Cloudflare Pages（純靜態部署）
+    - 純 JSON 資料檔（無後端、無資料庫）
+    - Shell script（鎖機制、部署腳本）
+
+project:
+  name: Awesome-Dyson
+  description: 待神（Dyson）——跨專案開發儀表板系統。任何 CLI/LLM 接手專案前先開這個固定網址，一次看懂現況、進度、待確認事項與歷史紀錄，不用重新對焦。
+  type: infrastructure
+
+  tech_stack:
+    - Cloudflare Pages
+    - Cloudflare Workers（僅供未來評估，本輪不用）
+    - Shell / Bash
+    - HTML / CSS / 原生 JS（無框架）
+  languages:
+    - Shell
+    - JavaScript
+    - HTML
+  conventions:
+    - 繁體中文（含註解、commit）
+    - conventional commits
+    - Spectra SDD 工作流
+    - 純靜態檔案優先，避免引入不必要的後端/框架依賴
+
+rules:
+  testing: required
+  review: required
+  commit_format: conventional
+  language: zh-TW
