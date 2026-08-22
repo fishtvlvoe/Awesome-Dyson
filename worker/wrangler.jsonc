@@ -1,0 +1,12 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "dashboard-comments",
+  "main": "comments.js",
+  "compatibility_date": "2026-08-01",
+  "kv_namespaces": [
+    {
+      "binding": "DASHBOARD_COMMENTS",
+      "id": "c17b5cb954424fa4a02992fd40a4bfef"
+    }
+  ]
+}

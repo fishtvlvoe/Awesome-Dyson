@@ -38,6 +38,10 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 16 14"/></svg>
           歷史紀錄
         </a>
+        <a href="#comments" class="flex items-center gap-2 rounded-lg px-3 py-2 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          留言討論
+        </a>
       </nav>
       <div class="mt-auto">
         <a href="https://github.com/fishtvlvoe/Awesome-Dyson" target="_blank" rel="noopener noreferrer"
@@ -85,8 +89,11 @@
       moon: SVG_WRAP_OPEN + '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>',
       circleHalf: SVG_WRAP_OPEN + '<circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 0 0 20z" fill="currentColor" stroke="none"/></svg>',
       check: SVG_WRAP_OPEN + '<polyline points="20 6 9 17 4 12"/></svg>',
+      message: SVG_WRAP_OPEN + '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>',
     };
     const CHANGE_ICON_FALLBACK = ICONS.wrench;
+    // 留言功能 Worker（KV 儲存，見 openspec/changes/dev-project-dashboard-system/design.md「決策異動」）
+    const COMMENTS_WORKER_URL = 'https://dashboard-comments.fishandy1213.workers.dev';
 
     // 狀態 → 語意色，統一對照表（design-system/tokens.md 的狀態色規則）
     const STATUS_META = {
@@ -391,6 +398,33 @@
         `;
       }
 
+      // Comments — Worker+KV backed, loaded async after initial render
+      html += `
+        <div id="comments" class="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-800">
+          <div class="border-b border-neutral-200 dark:border-neutral-700 p-4">
+            <h2 class="flex items-center gap-2 font-semibold text-neutral-900 dark:text-neutral-50">
+              <span class="h-4 w-4 text-neutral-400">${ICONS.message}</span>
+              留言討論
+            </h2>
+          </div>
+          <div class="p-4 space-y-4">
+            <form id="comment-form" onsubmit="submitComment(event, '${escapeHtml(project)}')" class="space-y-2">
+              <input id="comment-author" type="text" maxlength="80" placeholder="你的名字（選填）"
+                class="w-full rounded-lg border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900 px-3 py-2 text-sm text-neutral-900 dark:text-neutral-50 placeholder:text-neutral-400" />
+              <textarea id="comment-text" required maxlength="2000" rows="2" placeholder="留言..."
+                class="w-full rounded-lg border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900 px-3 py-2 text-sm text-neutral-900 dark:text-neutral-50 placeholder:text-neutral-400"></textarea>
+              <div class="flex items-center justify-between">
+                <span id="comment-error" class="text-xs text-red-600 dark:text-red-400"></span>
+                <button type="submit" class="rounded-lg bg-neutral-900 dark:bg-neutral-50 px-3 py-1.5 text-xs font-medium text-white dark:text-neutral-900">送出</button>
+              </div>
+            </form>
+            <div id="comment-list" class="space-y-3 pt-2 border-t border-neutral-100 dark:border-neutral-700">
+              <p class="text-xs text-neutral-400">載入留言中...</p>
+            </div>
+          </div>
+        </div>
+      `;
+
       // Technical details — AI/engineer-only, collapsed by default
       if ((keyFiles && keyFiles.length > 0) || (changesInProgress && changesInProgress.length > 0)) {
         html += `
@@ -430,6 +464,68 @@
           const entryId = `entry-${idx}`;
           loadEntryDetails(entryId, entry.file);
         });
+      }
+
+      loadComments(project);
+    }
+
+    async function loadComments(projectSlug) {
+      const listEl = document.getElementById('comment-list');
+      if (!listEl) return;
+      try {
+        const response = await fetch(`${COMMENTS_WORKER_URL}/comments?project=${encodeURIComponent(projectSlug)}`);
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const data = await response.json();
+        renderCommentList(data.comments || []);
+      } catch (error) {
+        listEl.innerHTML = `<p class="text-xs text-neutral-400">留言載入失敗：${escapeHtml(error.message)}</p>`;
+      }
+    }
+
+    function renderCommentList(comments) {
+      const listEl = document.getElementById('comment-list');
+      if (!listEl) return;
+      if (comments.length === 0) {
+        listEl.innerHTML = `<p class="text-xs text-neutral-400">還沒有留言，第一個留言的人是你</p>`;
+        return;
+      }
+      listEl.innerHTML = comments.slice().reverse().map(c => `
+        <div class="text-sm">
+          <div class="flex items-center gap-2">
+            <span class="font-medium text-neutral-900 dark:text-neutral-50">${escapeHtml(c.author || '匿名')}</span>
+            <span class="text-xs text-neutral-400">${escapeHtml(new Date(c.created_at).toLocaleString('zh-TW'))}</span>
+          </div>
+          <p class="text-neutral-600 dark:text-neutral-300 whitespace-pre-wrap mt-0.5">${escapeHtml(c.text)}</p>
+        </div>
+      `).join('');
+    }
+
+    async function submitComment(event, projectSlug) {
+      event.preventDefault();
+      const authorEl = document.getElementById('comment-author');
+      const textEl = document.getElementById('comment-text');
+      const errorEl = document.getElementById('comment-error');
+      errorEl.textContent = '';
+
+      const text = textEl.value.trim();
+      if (!text) {
+        errorEl.textContent = '請輸入留言內容';
+        return;
+      }
+
+      try {
+        const response = await fetch(`${COMMENTS_WORKER_URL}/comments`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ project: projectSlug, author: authorEl.value.trim(), text }),
+        });
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || `HTTP ${response.status}`);
+
+        textEl.value = '';
+        await loadComments(projectSlug);
+      } catch (error) {
+        errorEl.textContent = `送出失敗：${error.message}`;
       }
     }
 

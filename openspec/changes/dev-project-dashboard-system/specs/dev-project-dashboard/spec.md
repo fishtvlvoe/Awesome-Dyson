@@ -59,12 +59,29 @@ Before writing to any part of a project's dashboard (`state.json`, `entries/mani
 - **THEN** a new agent attempting to write SHALL treat the lock as stale, remove it, and acquire a fresh lock
 - **THEN** the new agent SHALL proceed with its write
 
-### Requirement: No backend code or database required
+### Requirement: No backend code or database required for core functionality
 
-The dashboard SHALL be deployable and updatable using only static file uploads (HTML/CSS/JS/JSON) to Cloudflare Pages. No Cloudflare Worker, D1 database, or other backend service SHALL be required for core functionality (viewing status, viewing history, updating status, adding history entries).
+The dashboard's core functionality (viewing status, viewing history, updating status, adding history entries) SHALL be deployable and updatable using only static file uploads (HTML/CSS/JS/JSON) to Cloudflare Pages. No Cloudflare Worker, D1 database, or other backend service SHALL be required for these core features. This requirement does not extend to optional add-on features (e.g. comments) that are explicitly scoped to need a backend — see the "Comment/discussion feature" requirement below.
 
 #### Scenario: Deploying a brand-new project's dashboard
 
 - **WHEN** a new project is initialized
 - **THEN** setting up its dashboard SHALL require only creating a Cloudflare Pages project and uploading the template files plus an initial `state.json`
-- **THEN** no server-side code SHALL need to be written or deployed for the dashboard to function
+- **THEN** no server-side code SHALL need to be written or deployed for the dashboard's core status/history features to function
+
+### Requirement: Comment/discussion feature backed by a Worker + KV
+
+Each project dashboard SHALL support a comment/discussion thread that any viewer can post to and read, backed by a Cloudflare Worker and a KV namespace (an explicit exception to the "no backend" rule above, approved by Fish 2026-08-22 for this one feature).
+
+#### Scenario: A viewer posts a comment on a dashboard
+
+- **WHEN** a viewer submits a comment through the dashboard's comment form
+- **THEN** a POST request SHALL be sent to the Worker's `/comments` endpoint with the project slug and comment text
+- **THEN** the Worker SHALL validate the input (required fields, length limit) and store it in KV keyed by project slug
+- **THEN** the comment SHALL appear in the dashboard's comment list on next read without a page redeploy
+
+#### Scenario: An agent checks for new comments without opening a browser
+
+- **WHEN** an agent is asked whether there are new comments on a project's dashboard
+- **THEN** the agent SHALL be able to run a local script that calls the Worker's `GET /comments?project=<slug>` endpoint and prints the results
+- **THEN** the agent SHALL NOT need to open a browser to answer this question
