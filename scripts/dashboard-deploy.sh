@@ -35,6 +35,30 @@ function deploy_dashboard() {
 
   echo "🔒 Lock acquired, starting deployment..."
 
+  # Prefer the purpose-specific Pages credential from the shared machine
+  # credential store. A project .env may contain a DNS-only token under the
+  # legacy CLOUDFLARE_API_TOKEN name; letting Wrangler auto-load that token
+  # makes Pages deployments fail with an authentication error.
+  local auth_file="${CLOUDFLARE_AUTH_FILE:-$HOME/.cloudflared/api-tokens.json}"
+  local pages_token=""
+  if [[ -f "$auth_file" ]]; then
+    if ! command -v jq &> /dev/null; then
+      bash "$LOCK_SCRIPT" release "$project_slug" 2>/dev/null || true
+      die "jq is required to read the centralized Cloudflare credential file: $auth_file"
+    fi
+    if ! pages_token="$(jq -r '.cloudflare.tokens.pages_deploy // empty' "$auth_file")"; then
+      bash "$LOCK_SCRIPT" release "$project_slug" 2>/dev/null || true
+      die "Invalid centralized Cloudflare credential file: $auth_file"
+    fi
+    if [[ -z "$pages_token" ]]; then
+      bash "$LOCK_SCRIPT" release "$project_slug" 2>/dev/null || true
+      die "Missing .cloudflare.tokens.pages_deploy in centralized credential file: $auth_file"
+    fi
+  fi
+  if [[ -n "$pages_token" ]]; then
+    echo "🔑 Using centralized Cloudflare Pages credential"
+  fi
+
   # Deploy using wrangler.
   # NOTE: --branch=main is required regardless of the local git branch name.
   # Cloudflare Pages only treats the deployment as "Production" when the
@@ -44,7 +68,12 @@ function deploy_dashboard() {
   # per-deploy subdomain) and the main `<slug>-dashboard.pages.dev` URL
   # keeps serving Cloudflare's soft-404 template forever — which itself
   # returns HTTP 200, so a plain status-code check won't catch it.
-  if ! wrangler pages deploy "$dashboard_dir" --project-name="${project_slug}-dashboard" --branch=main 2>&1; then
+  if [[ -n "$pages_token" ]]; then
+    if ! CLOUDFLARE_API_TOKEN="$pages_token" wrangler pages deploy "$dashboard_dir" --project-name="${project_slug}-dashboard" --branch=main 2>&1; then
+      bash "$LOCK_SCRIPT" release "$project_slug" 2>/dev/null || true
+      die "Deployment failed"
+    fi
+  elif ! wrangler pages deploy "$dashboard_dir" --project-name="${project_slug}-dashboard" --branch=main 2>&1; then
     bash "$LOCK_SCRIPT" release "$project_slug" 2>/dev/null || true
     die "Deployment failed"
   fi
