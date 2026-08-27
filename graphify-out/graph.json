@@ -1,0 +1,1700 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "label": "assert.js",
+      "file_type": "code",
+      "source_file": "tests/assert.js",
+      "source_location": "L1",
+      "id": "tests_assert_js",
+      "community": 1,
+      "norm_label": "assert.js"
+    },
+    {
+      "label": "AssertionError",
+      "file_type": "code",
+      "source_file": "tests/assert.js",
+      "source_location": "L3",
+      "id": "tests_assert_assertionerror",
+      "community": 1,
+      "norm_label": "assertionerror"
+    },
+    {
+      "label": ".constructor()",
+      "file_type": "code",
+      "source_file": "tests/assert.js",
+      "source_location": "L4",
+      "id": "tests_assert_assertionerror_constructor",
+      "community": 1,
+      "norm_label": ".constructor()"
+    },
+    {
+      "label": "assert()",
+      "file_type": "code",
+      "source_file": "tests/assert.js",
+      "source_location": "L10",
+      "id": "tests_assert_assert",
+      "community": 1,
+      "norm_label": "assert()"
+    },
+    {
+      "label": "assertEqual()",
+      "file_type": "code",
+      "source_file": "tests/assert.js",
+      "source_location": "L16",
+      "id": "tests_assert_assertequal",
+      "community": 1,
+      "norm_label": "assertequal()"
+    },
+    {
+      "label": "assertDeepEqual()",
+      "file_type": "code",
+      "source_file": "tests/assert.js",
+      "source_location": "L24",
+      "id": "tests_assert_assertdeepequal",
+      "community": 1,
+      "norm_label": "assertdeepequal()"
+    },
+    {
+      "label": "assertThrows()",
+      "file_type": "code",
+      "source_file": "tests/assert.js",
+      "source_location": "L32",
+      "id": "tests_assert_assertthrows",
+      "community": 1,
+      "norm_label": "assertthrows()"
+    },
+    {
+      "label": "assertFileExists()",
+      "file_type": "code",
+      "source_file": "tests/assert.js",
+      "source_location": "L45",
+      "id": "tests_assert_assertfileexists",
+      "community": 1,
+      "norm_label": "assertfileexists()"
+    },
+    {
+      "label": "assertFileDoesNotExist()",
+      "file_type": "code",
+      "source_file": "tests/assert.js",
+      "source_location": "L52",
+      "id": "tests_assert_assertfiledoesnotexist",
+      "community": 1,
+      "norm_label": "assertfiledoesnotexist()"
+    },
+    {
+      "label": "run.js",
+      "file_type": "code",
+      "source_file": "tests/run.js",
+      "source_location": "L1",
+      "id": "tests_run_js",
+      "community": 4,
+      "norm_label": "run.js"
+    },
+    {
+      "label": "fs",
+      "file_type": "code",
+      "source_file": "tests/run.js",
+      "source_location": "L3",
+      "id": "tests_run_fs",
+      "community": 4,
+      "norm_label": "fs"
+    },
+    {
+      "label": "path",
+      "file_type": "code",
+      "source_file": "tests/run.js",
+      "source_location": "L4",
+      "id": "tests_run_path",
+      "community": 4,
+      "norm_label": "path"
+    },
+    {
+      "label": "{ execSync }",
+      "file_type": "code",
+      "source_file": "tests/run.js",
+      "source_location": "L5",
+      "id": "tests_run_execsync",
+      "community": 4,
+      "norm_label": "{ execsync }"
+    },
+    {
+      "label": "testFiles",
+      "file_type": "code",
+      "source_file": "tests/run.js",
+      "source_location": "L8",
+      "id": "tests_run_testfiles",
+      "community": 4,
+      "norm_label": "testfiles"
+    },
+    {
+      "label": "testPath",
+      "file_type": "code",
+      "source_file": "tests/run.js",
+      "source_location": "L19",
+      "id": "tests_run_testpath",
+      "community": 4,
+      "norm_label": "testpath"
+    },
+    {
+      "label": "result",
+      "file_type": "code",
+      "source_file": "tests/run.js",
+      "source_location": "L23",
+      "id": "tests_run_result",
+      "community": 4,
+      "norm_label": "result"
+    },
+    {
+      "label": "test-append-only-entries.js",
+      "file_type": "code",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L1",
+      "id": "tests_test_append_only_entries_js",
+      "community": 0,
+      "norm_label": "test-append-only-entries.js"
+    },
+    {
+      "label": "fs",
+      "file_type": "code",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L9",
+      "id": "tests_test_append_only_entries_fs",
+      "community": 0,
+      "norm_label": "fs"
+    },
+    {
+      "label": "os",
+      "file_type": "code",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L10",
+      "id": "tests_test_append_only_entries_os",
+      "community": 0,
+      "norm_label": "os"
+    },
+    {
+      "label": "path",
+      "file_type": "code",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L11",
+      "id": "tests_test_append_only_entries_path",
+      "community": 0,
+      "norm_label": "path"
+    },
+    {
+      "label": "{ assert, assertFileExists, assertDeepEqual }",
+      "file_type": "code",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L12",
+      "id": "tests_test_append_only_entries_assert_assertfileexists_assertdeepequal",
+      "community": 0,
+      "norm_label": "{ assert, assertfileexists, assertdeepequal }"
+    },
+    {
+      "label": "REAL_ENTRIES_DIR",
+      "file_type": "code",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L14",
+      "id": "tests_test_append_only_entries_real_entries_dir",
+      "community": 0,
+      "norm_label": "real_entries_dir"
+    },
+    {
+      "label": "REAL_MANIFEST_FILE",
+      "file_type": "code",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L15",
+      "id": "tests_test_append_only_entries_real_manifest_file",
+      "community": 0,
+      "norm_label": "real_manifest_file"
+    },
+    {
+      "label": "ADD_ENTRY_SCRIPT",
+      "file_type": "code",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L16",
+      "id": "tests_test_append_only_entries_add_entry_script",
+      "community": 0,
+      "norm_label": "add_entry_script"
+    },
+    {
+      "label": "makeIsolatedEntriesDir()",
+      "file_type": "code",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L18",
+      "id": "tests_test_append_only_entries_makeisolatedentriesdir",
+      "community": 0,
+      "norm_label": "makeisolatedentriesdir()"
+    },
+    {
+      "label": "cleanup()",
+      "file_type": "code",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L24",
+      "id": "tests_test_append_only_entries_cleanup",
+      "community": 0,
+      "norm_label": "cleanup()"
+    },
+    {
+      "label": "manifestContent",
+      "file_type": "code",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L43",
+      "id": "tests_test_append_only_entries_manifestcontent",
+      "community": 0,
+      "norm_label": "manifestcontent"
+    },
+    {
+      "label": "manifest",
+      "file_type": "code",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L44",
+      "id": "tests_test_append_only_entries_manifest",
+      "community": 0,
+      "norm_label": "manifest"
+    },
+    {
+      "label": "entriesDir",
+      "file_type": "code",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L53",
+      "id": "tests_test_append_only_entries_entriesdir",
+      "community": 0,
+      "norm_label": "entriesdir"
+    },
+    {
+      "label": "testEntry1",
+      "file_type": "code",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L55",
+      "id": "tests_test_append_only_entries_testentry1",
+      "community": 0,
+      "norm_label": "testentry1"
+    },
+    {
+      "label": "testEntry2",
+      "file_type": "code",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L56",
+      "id": "tests_test_append_only_entries_testentry2",
+      "community": 0,
+      "norm_label": "testentry2"
+    },
+    {
+      "label": "entry1Data",
+      "file_type": "code",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L58",
+      "id": "tests_test_append_only_entries_entry1data",
+      "community": 0,
+      "norm_label": "entry1data"
+    },
+    {
+      "label": "entry2Data",
+      "file_type": "code",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L66",
+      "id": "tests_test_append_only_entries_entry2data",
+      "community": 0,
+      "norm_label": "entry2data"
+    },
+    {
+      "label": "file1Content",
+      "file_type": "code",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L81",
+      "id": "tests_test_append_only_entries_file1content",
+      "community": 0,
+      "norm_label": "file1content"
+    },
+    {
+      "label": "file2Content",
+      "file_type": "code",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L82",
+      "id": "tests_test_append_only_entries_file2content",
+      "community": 0,
+      "norm_label": "file2content"
+    },
+    {
+      "label": "manifestFile",
+      "file_type": "code",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L94",
+      "id": "tests_test_append_only_entries_manifestfile",
+      "community": 0,
+      "norm_label": "manifestfile"
+    },
+    {
+      "label": "testEntry",
+      "file_type": "code",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L95",
+      "id": "tests_test_append_only_entries_testentry",
+      "community": 0,
+      "norm_label": "testentry"
+    },
+    {
+      "label": "initialManifest",
+      "file_type": "code",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L97",
+      "id": "tests_test_append_only_entries_initialmanifest",
+      "community": 0,
+      "norm_label": "initialmanifest"
+    },
+    {
+      "label": "entryData",
+      "file_type": "code",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L100",
+      "id": "tests_test_append_only_entries_entrydata",
+      "community": 0,
+      "norm_label": "entrydata"
+    },
+    {
+      "label": "newManifest",
+      "file_type": "code",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L111",
+      "id": "tests_test_append_only_entries_newmanifest",
+      "community": 0,
+      "norm_label": "newmanifest"
+    },
+    {
+      "label": "updatedManifest",
+      "file_type": "code",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L119",
+      "id": "tests_test_append_only_entries_updatedmanifest",
+      "community": 0,
+      "norm_label": "updatedmanifest"
+    },
+    {
+      "label": "test-lock-blocks-second-writer.js",
+      "file_type": "code",
+      "source_file": "tests/test-lock-blocks-second-writer.js",
+      "source_location": "L1",
+      "id": "tests_test_lock_blocks_second_writer_js",
+      "community": 1,
+      "norm_label": "test-lock-blocks-second-writer.js"
+    },
+    {
+      "label": "fs",
+      "file_type": "code",
+      "source_file": "tests/test-lock-blocks-second-writer.js",
+      "source_location": "L5",
+      "id": "tests_test_lock_blocks_second_writer_fs",
+      "community": 1,
+      "norm_label": "fs"
+    },
+    {
+      "label": "path",
+      "file_type": "code",
+      "source_file": "tests/test-lock-blocks-second-writer.js",
+      "source_location": "L6",
+      "id": "tests_test_lock_blocks_second_writer_path",
+      "community": 1,
+      "norm_label": "path"
+    },
+    {
+      "label": "{ execSync }",
+      "file_type": "code",
+      "source_file": "tests/test-lock-blocks-second-writer.js",
+      "source_location": "L7",
+      "id": "tests_test_lock_blocks_second_writer_execsync",
+      "community": 1,
+      "norm_label": "{ execsync }"
+    },
+    {
+      "label": "{ assert, assertEqual, assertFileExists }",
+      "file_type": "code",
+      "source_file": "tests/test-lock-blocks-second-writer.js",
+      "source_location": "L8",
+      "id": "tests_test_lock_blocks_second_writer_assert_assertequal_assertfileexists",
+      "community": 1,
+      "norm_label": "{ assert, assertequal, assertfileexists }"
+    },
+    {
+      "label": "LOCK_SCRIPT",
+      "file_type": "code",
+      "source_file": "tests/test-lock-blocks-second-writer.js",
+      "source_location": "L10",
+      "id": "tests_test_lock_blocks_second_writer_lock_script",
+      "community": 1,
+      "norm_label": "lock_script"
+    },
+    {
+      "label": "LOCK_DIR",
+      "file_type": "code",
+      "source_file": "tests/test-lock-blocks-second-writer.js",
+      "source_location": "L11",
+      "id": "tests_test_lock_blocks_second_writer_lock_dir",
+      "community": 1,
+      "norm_label": "lock_dir"
+    },
+    {
+      "label": "TEST_LOCK_FILE",
+      "file_type": "code",
+      "source_file": "tests/test-lock-blocks-second-writer.js",
+      "source_location": "L13",
+      "id": "tests_test_lock_blocks_second_writer_test_lock_file",
+      "community": 1,
+      "norm_label": "test_lock_file"
+    },
+    {
+      "label": "lockContent",
+      "file_type": "code",
+      "source_file": "tests/test-lock-blocks-second-writer.js",
+      "source_location": "L43",
+      "id": "tests_test_lock_blocks_second_writer_lockcontent",
+      "community": 1,
+      "norm_label": "lockcontent"
+    },
+    {
+      "label": "test-expired-lock-is-clearable.js",
+      "file_type": "code",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L1",
+      "id": "tests_test_expired_lock_is_clearable_js",
+      "community": 2,
+      "norm_label": "test-expired-lock-is-clearable.js"
+    },
+    {
+      "label": "fs",
+      "file_type": "code",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L5",
+      "id": "tests_test_expired_lock_is_clearable_fs",
+      "community": 2,
+      "norm_label": "fs"
+    },
+    {
+      "label": "path",
+      "file_type": "code",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L6",
+      "id": "tests_test_expired_lock_is_clearable_path",
+      "community": 2,
+      "norm_label": "path"
+    },
+    {
+      "label": "{ execSync }",
+      "file_type": "code",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L7",
+      "id": "tests_test_expired_lock_is_clearable_execsync",
+      "community": 2,
+      "norm_label": "{ execsync }"
+    },
+    {
+      "label": "{ assert, assertFileExists }",
+      "file_type": "code",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L8",
+      "id": "tests_test_expired_lock_is_clearable_assert_assertfileexists",
+      "community": 2,
+      "norm_label": "{ assert, assertfileexists }"
+    },
+    {
+      "label": "LOCK_SCRIPT",
+      "file_type": "code",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L10",
+      "id": "tests_test_expired_lock_is_clearable_lock_script",
+      "community": 2,
+      "norm_label": "lock_script"
+    },
+    {
+      "label": "LOCK_DIR",
+      "file_type": "code",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L11",
+      "id": "tests_test_expired_lock_is_clearable_lock_dir",
+      "community": 2,
+      "norm_label": "lock_dir"
+    },
+    {
+      "label": "TEST_LOCK_FILE",
+      "file_type": "code",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L13",
+      "id": "tests_test_expired_lock_is_clearable_test_lock_file",
+      "community": 2,
+      "norm_label": "test_lock_file"
+    },
+    {
+      "label": "oldTimestamp",
+      "file_type": "code",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L31",
+      "id": "tests_test_expired_lock_is_clearable_oldtimestamp",
+      "community": 2,
+      "norm_label": "oldtimestamp"
+    },
+    {
+      "label": "oldLock",
+      "file_type": "code",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L32",
+      "id": "tests_test_expired_lock_is_clearable_oldlock",
+      "community": 2,
+      "norm_label": "oldlock"
+    },
+    {
+      "label": "newLock",
+      "file_type": "code",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L62",
+      "id": "tests_test_expired_lock_is_clearable_newlock",
+      "community": 2,
+      "norm_label": "newlock"
+    },
+    {
+      "label": "firstLock",
+      "file_type": "code",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L102",
+      "id": "tests_test_expired_lock_is_clearable_firstlock",
+      "community": 2,
+      "norm_label": "firstlock"
+    },
+    {
+      "label": "stillFirstLock",
+      "file_type": "code",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L118",
+      "id": "tests_test_expired_lock_is_clearable_stillfirstlock",
+      "community": 2,
+      "norm_label": "stillfirstlock"
+    },
+    {
+      "label": "test-index-html-graceful-degrade.js",
+      "file_type": "code",
+      "source_file": "tests/test-index-html-graceful-degrade.js",
+      "source_location": "L1",
+      "id": "tests_test_index_html_graceful_degrade_js",
+      "community": 3,
+      "norm_label": "test-index-html-graceful-degrade.js"
+    },
+    {
+      "label": "fs",
+      "file_type": "code",
+      "source_file": "tests/test-index-html-graceful-degrade.js",
+      "source_location": "L5",
+      "id": "tests_test_index_html_graceful_degrade_fs",
+      "community": 3,
+      "norm_label": "fs"
+    },
+    {
+      "label": "path",
+      "file_type": "code",
+      "source_file": "tests/test-index-html-graceful-degrade.js",
+      "source_location": "L6",
+      "id": "tests_test_index_html_graceful_degrade_path",
+      "community": 3,
+      "norm_label": "path"
+    },
+    {
+      "label": "{ assert }",
+      "file_type": "code",
+      "source_file": "tests/test-index-html-graceful-degrade.js",
+      "source_location": "L7",
+      "id": "tests_test_index_html_graceful_degrade_assert",
+      "community": 3,
+      "norm_label": "{ assert }"
+    },
+    {
+      "label": "INDEX_HTML_PATH",
+      "file_type": "code",
+      "source_file": "tests/test-index-html-graceful-degrade.js",
+      "source_location": "L9",
+      "id": "tests_test_index_html_graceful_degrade_index_html_path",
+      "community": 3,
+      "norm_label": "index_html_path"
+    },
+    {
+      "label": "htmlContent",
+      "file_type": "code",
+      "source_file": "tests/test-index-html-graceful-degrade.js",
+      "source_location": "L20",
+      "id": "tests_test_index_html_graceful_degrade_htmlcontent",
+      "community": 3,
+      "norm_label": "htmlcontent"
+    },
+    {
+      "label": "hasUnsafeDotAccess",
+      "file_type": "code",
+      "source_file": "tests/test-index-html-graceful-degrade.js",
+      "source_location": "L33",
+      "id": "tests_test_index_html_graceful_degrade_hasunsafedotaccess",
+      "community": 3,
+      "norm_label": "hasunsafedotaccess"
+    },
+    {
+      "label": "hasUnsafeOneLinerAccess",
+      "file_type": "code",
+      "source_file": "tests/test-index-html-graceful-degrade.js",
+      "source_location": "L45",
+      "id": "tests_test_index_html_graceful_degrade_hasunsafeonelineraccess",
+      "community": 3,
+      "norm_label": "hasunsafeonelineraccess"
+    },
+    {
+      "label": "hasUnsafeChangesAccess",
+      "file_type": "code",
+      "source_file": "tests/test-index-html-graceful-degrade.js",
+      "source_location": "L57",
+      "id": "tests_test_index_html_graceful_degrade_hasunsafechangesaccess",
+      "community": 3,
+      "norm_label": "hasunsafechangesaccess"
+    },
+    {
+      "label": "hasUnsafeQuestionsAccess",
+      "file_type": "code",
+      "source_file": "tests/test-index-html-graceful-degrade.js",
+      "source_location": "L69",
+      "id": "tests_test_index_html_graceful_degrade_hasunsafequestionsaccess",
+      "community": 3,
+      "norm_label": "hasunsafequestionsaccess"
+    },
+    {
+      "label": "hasUnsafeKeyFilesAccess",
+      "file_type": "code",
+      "source_file": "tests/test-index-html-graceful-degrade.js",
+      "source_location": "L81",
+      "id": "tests_test_index_html_graceful_degrade_hasunsafekeyfilesaccess",
+      "community": 3,
+      "norm_label": "hasunsafekeyfilesaccess"
+    },
+    {
+      "label": "comments.js",
+      "file_type": "code",
+      "source_file": "worker/comments.js",
+      "source_location": "L1",
+      "id": "worker_comments_js",
+      "community": 5,
+      "norm_label": "comments.js"
+    },
+    {
+      "label": "CORS_HEADERS",
+      "file_type": "code",
+      "source_file": "worker/comments.js",
+      "source_location": "L8",
+      "id": "worker_comments_cors_headers",
+      "community": 5,
+      "norm_label": "cors_headers"
+    },
+    {
+      "label": "jsonResponse()",
+      "file_type": "code",
+      "source_file": "worker/comments.js",
+      "source_location": "L14",
+      "id": "worker_comments_jsonresponse",
+      "community": 5,
+      "norm_label": "jsonresponse()"
+    },
+    {
+      "label": "kvKey()",
+      "file_type": "code",
+      "source_file": "worker/comments.js",
+      "source_location": "L21",
+      "id": "worker_comments_kvkey",
+      "community": 5,
+      "norm_label": "kvkey()"
+    },
+    {
+      "label": "handleGet()",
+      "file_type": "code",
+      "source_file": "worker/comments.js",
+      "source_location": "L25",
+      "id": "worker_comments_handleget",
+      "community": 5,
+      "norm_label": "handleget()"
+    },
+    {
+      "label": "handlePost()",
+      "file_type": "code",
+      "source_file": "worker/comments.js",
+      "source_location": "L35",
+      "id": "worker_comments_handlepost",
+      "community": 5,
+      "norm_label": "handlepost()"
+    },
+    {
+      "label": "fetch()",
+      "file_type": "code",
+      "source_file": "worker/comments.js",
+      "source_location": "L80",
+      "id": "worker_comments_fetch",
+      "community": 5,
+      "norm_label": "fetch()"
+    }
+  ],
+  "links": [
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/assert.js",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "tests_assert_js",
+      "target": "tests_assert_assertionerror",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/assert.js",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "tests_assert_js",
+      "target": "tests_assert_assert",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/assert.js",
+      "source_location": "L16",
+      "weight": 1.0,
+      "source": "tests_assert_js",
+      "target": "tests_assert_assertequal",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/assert.js",
+      "source_location": "L24",
+      "weight": 1.0,
+      "source": "tests_assert_js",
+      "target": "tests_assert_assertdeepequal",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/assert.js",
+      "source_location": "L32",
+      "weight": 1.0,
+      "source": "tests_assert_js",
+      "target": "tests_assert_assertthrows",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/assert.js",
+      "source_location": "L45",
+      "weight": 1.0,
+      "source": "tests_assert_js",
+      "target": "tests_assert_assertfileexists",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/assert.js",
+      "source_location": "L52",
+      "weight": 1.0,
+      "source": "tests_assert_js",
+      "target": "tests_assert_assertfiledoesnotexist",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "tests_test_append_only_entries_js",
+      "target": "tests_assert_js",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-lock-blocks-second-writer.js",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "tests_test_lock_blocks_second_writer_js",
+      "target": "tests_assert_js",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "tests_test_expired_lock_is_clearable_js",
+      "target": "tests_assert_js",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-index-html-graceful-degrade.js",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "tests_test_index_html_graceful_degrade_js",
+      "target": "tests_assert_js",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/assert.js",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "tests_assert_assertionerror",
+      "target": "tests_assert_assertionerror_constructor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "tests_test_append_only_entries_js",
+      "target": "tests_assert_assert",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-lock-blocks-second-writer.js",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "tests_test_lock_blocks_second_writer_js",
+      "target": "tests_assert_assert",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "tests_test_expired_lock_is_clearable_js",
+      "target": "tests_assert_assert",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-index-html-graceful-degrade.js",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "tests_test_index_html_graceful_degrade_js",
+      "target": "tests_assert_assert",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-lock-blocks-second-writer.js",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "tests_test_lock_blocks_second_writer_js",
+      "target": "tests_assert_assertequal",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "tests_test_append_only_entries_js",
+      "target": "tests_assert_assertdeepequal",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "tests_test_append_only_entries_js",
+      "target": "tests_assert_assertfileexists",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-lock-blocks-second-writer.js",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "tests_test_lock_blocks_second_writer_js",
+      "target": "tests_assert_assertfileexists",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "tests_test_expired_lock_is_clearable_js",
+      "target": "tests_assert_assertfileexists",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/run.js",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "tests_run_js",
+      "target": "tests_run_fs",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/run.js",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "tests_run_js",
+      "target": "tests_run_path",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/run.js",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "tests_run_js",
+      "target": "tests_run_execsync",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/run.js",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "tests_run_js",
+      "target": "tests_run_testfiles",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/run.js",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "tests_run_js",
+      "target": "tests_run_testpath",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/run.js",
+      "source_location": "L23",
+      "weight": 1.0,
+      "source": "tests_run_js",
+      "target": "tests_run_result",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "tests_test_append_only_entries_js",
+      "target": "tests_test_append_only_entries_fs",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "tests_test_append_only_entries_js",
+      "target": "tests_test_append_only_entries_os",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "tests_test_append_only_entries_js",
+      "target": "tests_test_append_only_entries_path",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "tests_test_append_only_entries_js",
+      "target": "tests_test_append_only_entries_assert_assertfileexists_assertdeepequal",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "tests_test_append_only_entries_js",
+      "target": "tests_test_append_only_entries_real_entries_dir",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L15",
+      "weight": 1.0,
+      "source": "tests_test_append_only_entries_js",
+      "target": "tests_test_append_only_entries_real_manifest_file",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L16",
+      "weight": 1.0,
+      "source": "tests_test_append_only_entries_js",
+      "target": "tests_test_append_only_entries_add_entry_script",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L18",
+      "weight": 1.0,
+      "source": "tests_test_append_only_entries_js",
+      "target": "tests_test_append_only_entries_makeisolatedentriesdir",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L24",
+      "weight": 1.0,
+      "source": "tests_test_append_only_entries_js",
+      "target": "tests_test_append_only_entries_cleanup",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L43",
+      "weight": 1.0,
+      "source": "tests_test_append_only_entries_js",
+      "target": "tests_test_append_only_entries_manifestcontent",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L44",
+      "weight": 1.0,
+      "source": "tests_test_append_only_entries_js",
+      "target": "tests_test_append_only_entries_manifest",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L92",
+      "weight": 1.0,
+      "source": "tests_test_append_only_entries_js",
+      "target": "tests_test_append_only_entries_entriesdir",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L55",
+      "weight": 1.0,
+      "source": "tests_test_append_only_entries_js",
+      "target": "tests_test_append_only_entries_testentry1",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L56",
+      "weight": 1.0,
+      "source": "tests_test_append_only_entries_js",
+      "target": "tests_test_append_only_entries_testentry2",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L58",
+      "weight": 1.0,
+      "source": "tests_test_append_only_entries_js",
+      "target": "tests_test_append_only_entries_entry1data",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L66",
+      "weight": 1.0,
+      "source": "tests_test_append_only_entries_js",
+      "target": "tests_test_append_only_entries_entry2data",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L81",
+      "weight": 1.0,
+      "source": "tests_test_append_only_entries_js",
+      "target": "tests_test_append_only_entries_file1content",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L82",
+      "weight": 1.0,
+      "source": "tests_test_append_only_entries_js",
+      "target": "tests_test_append_only_entries_file2content",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L94",
+      "weight": 1.0,
+      "source": "tests_test_append_only_entries_js",
+      "target": "tests_test_append_only_entries_manifestfile",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L95",
+      "weight": 1.0,
+      "source": "tests_test_append_only_entries_js",
+      "target": "tests_test_append_only_entries_testentry",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L97",
+      "weight": 1.0,
+      "source": "tests_test_append_only_entries_js",
+      "target": "tests_test_append_only_entries_initialmanifest",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L100",
+      "weight": 1.0,
+      "source": "tests_test_append_only_entries_js",
+      "target": "tests_test_append_only_entries_entrydata",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L111",
+      "weight": 1.0,
+      "source": "tests_test_append_only_entries_js",
+      "target": "tests_test_append_only_entries_newmanifest",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L119",
+      "weight": 1.0,
+      "source": "tests_test_append_only_entries_js",
+      "target": "tests_test_append_only_entries_updatedmanifest",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-lock-blocks-second-writer.js",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "tests_test_lock_blocks_second_writer_js",
+      "target": "tests_test_lock_blocks_second_writer_fs",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-lock-blocks-second-writer.js",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "tests_test_lock_blocks_second_writer_js",
+      "target": "tests_test_lock_blocks_second_writer_path",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-lock-blocks-second-writer.js",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "tests_test_lock_blocks_second_writer_js",
+      "target": "tests_test_lock_blocks_second_writer_execsync",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-lock-blocks-second-writer.js",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "tests_test_lock_blocks_second_writer_js",
+      "target": "tests_test_lock_blocks_second_writer_assert_assertequal_assertfileexists",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-lock-blocks-second-writer.js",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "tests_test_lock_blocks_second_writer_js",
+      "target": "tests_test_lock_blocks_second_writer_lock_script",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-lock-blocks-second-writer.js",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "tests_test_lock_blocks_second_writer_js",
+      "target": "tests_test_lock_blocks_second_writer_lock_dir",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-lock-blocks-second-writer.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "tests_test_lock_blocks_second_writer_js",
+      "target": "tests_test_lock_blocks_second_writer_test_lock_file",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-lock-blocks-second-writer.js",
+      "source_location": "L43",
+      "weight": 1.0,
+      "source": "tests_test_lock_blocks_second_writer_js",
+      "target": "tests_test_lock_blocks_second_writer_lockcontent",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "tests_test_expired_lock_is_clearable_js",
+      "target": "tests_test_expired_lock_is_clearable_fs",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "tests_test_expired_lock_is_clearable_js",
+      "target": "tests_test_expired_lock_is_clearable_path",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "tests_test_expired_lock_is_clearable_js",
+      "target": "tests_test_expired_lock_is_clearable_execsync",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "tests_test_expired_lock_is_clearable_js",
+      "target": "tests_test_expired_lock_is_clearable_assert_assertfileexists",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "tests_test_expired_lock_is_clearable_js",
+      "target": "tests_test_expired_lock_is_clearable_lock_script",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "tests_test_expired_lock_is_clearable_js",
+      "target": "tests_test_expired_lock_is_clearable_lock_dir",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "tests_test_expired_lock_is_clearable_js",
+      "target": "tests_test_expired_lock_is_clearable_test_lock_file",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L31",
+      "weight": 1.0,
+      "source": "tests_test_expired_lock_is_clearable_js",
+      "target": "tests_test_expired_lock_is_clearable_oldtimestamp",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L32",
+      "weight": 1.0,
+      "source": "tests_test_expired_lock_is_clearable_js",
+      "target": "tests_test_expired_lock_is_clearable_oldlock",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L62",
+      "weight": 1.0,
+      "source": "tests_test_expired_lock_is_clearable_js",
+      "target": "tests_test_expired_lock_is_clearable_newlock",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L102",
+      "weight": 1.0,
+      "source": "tests_test_expired_lock_is_clearable_js",
+      "target": "tests_test_expired_lock_is_clearable_firstlock",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L118",
+      "weight": 1.0,
+      "source": "tests_test_expired_lock_is_clearable_js",
+      "target": "tests_test_expired_lock_is_clearable_stillfirstlock",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-index-html-graceful-degrade.js",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "tests_test_index_html_graceful_degrade_js",
+      "target": "tests_test_index_html_graceful_degrade_fs",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-index-html-graceful-degrade.js",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "tests_test_index_html_graceful_degrade_js",
+      "target": "tests_test_index_html_graceful_degrade_path",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-index-html-graceful-degrade.js",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "tests_test_index_html_graceful_degrade_js",
+      "target": "tests_test_index_html_graceful_degrade_assert",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-index-html-graceful-degrade.js",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "tests_test_index_html_graceful_degrade_js",
+      "target": "tests_test_index_html_graceful_degrade_index_html_path",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-index-html-graceful-degrade.js",
+      "source_location": "L102",
+      "weight": 1.0,
+      "source": "tests_test_index_html_graceful_degrade_js",
+      "target": "tests_test_index_html_graceful_degrade_htmlcontent",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-index-html-graceful-degrade.js",
+      "source_location": "L33",
+      "weight": 1.0,
+      "source": "tests_test_index_html_graceful_degrade_js",
+      "target": "tests_test_index_html_graceful_degrade_hasunsafedotaccess",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-index-html-graceful-degrade.js",
+      "source_location": "L45",
+      "weight": 1.0,
+      "source": "tests_test_index_html_graceful_degrade_js",
+      "target": "tests_test_index_html_graceful_degrade_hasunsafeonelineraccess",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-index-html-graceful-degrade.js",
+      "source_location": "L57",
+      "weight": 1.0,
+      "source": "tests_test_index_html_graceful_degrade_js",
+      "target": "tests_test_index_html_graceful_degrade_hasunsafechangesaccess",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-index-html-graceful-degrade.js",
+      "source_location": "L69",
+      "weight": 1.0,
+      "source": "tests_test_index_html_graceful_degrade_js",
+      "target": "tests_test_index_html_graceful_degrade_hasunsafequestionsaccess",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-index-html-graceful-degrade.js",
+      "source_location": "L81",
+      "weight": 1.0,
+      "source": "tests_test_index_html_graceful_degrade_js",
+      "target": "tests_test_index_html_graceful_degrade_hasunsafekeyfilesaccess",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "worker/comments.js",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "worker_comments_js",
+      "target": "worker_comments_cors_headers",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "worker/comments.js",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "worker_comments_js",
+      "target": "worker_comments_jsonresponse",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "worker/comments.js",
+      "source_location": "L21",
+      "weight": 1.0,
+      "source": "worker_comments_js",
+      "target": "worker_comments_kvkey",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "worker/comments.js",
+      "source_location": "L25",
+      "weight": 1.0,
+      "source": "worker_comments_js",
+      "target": "worker_comments_handleget",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "worker/comments.js",
+      "source_location": "L35",
+      "weight": 1.0,
+      "source": "worker_comments_js",
+      "target": "worker_comments_handlepost",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "worker/comments.js",
+      "source_location": "L80",
+      "weight": 1.0,
+      "source": "worker_comments_js",
+      "target": "worker_comments_fetch",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "worker/comments.js",
+      "source_location": "L28",
+      "weight": 1.0,
+      "source": "worker_comments_handleget",
+      "target": "worker_comments_jsonresponse",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "worker/comments.js",
+      "source_location": "L40",
+      "weight": 1.0,
+      "source": "worker_comments_handlepost",
+      "target": "worker_comments_jsonresponse",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "worker/comments.js",
+      "source_location": "L88",
+      "weight": 1.0,
+      "source": "worker_comments_fetch",
+      "target": "worker_comments_jsonresponse",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "worker/comments.js",
+      "source_location": "L30",
+      "weight": 1.0,
+      "source": "worker_comments_handleget",
+      "target": "worker_comments_kvkey",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "worker/comments.js",
+      "source_location": "L58",
+      "weight": 1.0,
+      "source": "worker_comments_handlepost",
+      "target": "worker_comments_kvkey",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "worker/comments.js",
+      "source_location": "L92",
+      "weight": 1.0,
+      "source": "worker_comments_fetch",
+      "target": "worker_comments_handleget",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "worker/comments.js",
+      "source_location": "L95",
+      "weight": 1.0,
+      "source": "worker_comments_fetch",
+      "target": "worker_comments_handlepost",
+      "confidence_score": 1.0
+    }
+  ],
+  "hyperedges": [],
+  "built_at_commit": "0aef97ad3c52627e4e7aa35e93e086a9db38b412"
+}

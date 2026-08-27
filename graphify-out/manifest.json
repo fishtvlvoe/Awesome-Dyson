@@ -1,0 +1,98 @@
+{
+  "/Users/fishtv/Development/Awesome-Dyson/tests/assert.js": {
+    "mtime": 1787358828.2834542,
+    "hash": "e89d07c687cb34f78906a1a807bcbb1d"
+  },
+  "/Users/fishtv/Development/Awesome-Dyson/tests/run.js": {
+    "mtime": 1787358824.1576269,
+    "hash": "d2813c348dd0f77bd8277961458926ff"
+  },
+  "/Users/fishtv/Development/Awesome-Dyson/tests/test-append-only-entries.js": {
+    "mtime": 1787360760.1446393,
+    "hash": "9c99368a6f12a9faa2a714a9ede35624"
+  },
+  "/Users/fishtv/Development/Awesome-Dyson/tests/test-lock-blocks-second-writer.js": {
+    "mtime": 1787358839.5264063,
+    "hash": "ba35f7e7bc8645e6640d1c16b761de36"
+  },
+  "/Users/fishtv/Development/Awesome-Dyson/tests/test-expired-lock-is-clearable.js": {
+    "mtime": 1787358849.4829314,
+    "hash": "0d82e67c7af5450b7c6b7feac1bb7132"
+  },
+  "/Users/fishtv/Development/Awesome-Dyson/tests/test-index-html-graceful-degrade.js": {
+    "mtime": 1787358860.2360582,
+    "hash": "3b64650cbb2d678878add772ae1b6dae"
+  },
+  "/Users/fishtv/Development/Awesome-Dyson/worker/comments.js": {
+    "mtime": 1787382597.414277,
+    "hash": "4eb93532a9e690562dac9dc7db329e8f"
+  },
+  "/Users/fishtv/Development/Awesome-Dyson/README.md": {
+    "mtime": 1787358257.5816312,
+    "hash": "ea89fb47d8b291534ab09d6732749aaa"
+  },
+  "/Users/fishtv/Development/Awesome-Dyson/GEMINI.md": {
+    "mtime": 1787358362.0581717,
+    "hash": "20f3c786b3c8394e71979b7f9f828e87"
+  },
+  "/Users/fishtv/Development/Awesome-Dyson/AGENTS.md": {
+    "mtime": 1787358362.0537155,
+    "hash": "a9c5d12e26a5bcb4b519451bf8ab19b9"
+  },
+  "/Users/fishtv/Development/Awesome-Dyson/CLAUDE.md": {
+    "mtime": 1787358362.049262,
+    "hash": "20f3c786b3c8394e71979b7f9f828e87"
+  },
+  "/Users/fishtv/Development/Awesome-Dyson/public/index.html": {
+    "mtime": 1787382674.6961515,
+    "hash": "88da156f2a39d9c48f384467896d720b"
+  },
+  "/Users/fishtv/Development/Awesome-Dyson/design-system/README.md": {
+    "mtime": 1787378248.2375293,
+    "hash": "fcc0f30882462b4df0aef450f8edfbfc"
+  },
+  "/Users/fishtv/Development/Awesome-Dyson/design-system/examples/vibeprompts-sidebar-stat-cards.html": {
+    "mtime": 1787378197.23227,
+    "hash": "afec740ebc36ba6087ecb5e33a6d4016"
+  },
+  "/Users/fishtv/Development/Awesome-Dyson/design-system/examples/vibeprompts-activity-feed.html": {
+    "mtime": 1787378215.715004,
+    "hash": "b0e7a13bdec96fd7359486a24ce2ace7"
+  },
+  "/Users/fishtv/Development/Awesome-Dyson/design-system/examples/approvals-workspace.html": {
+    "mtime": 1787377796.576354,
+    "hash": "f79135fc156c61315b3a4a8f9553be67"
+  },
+  "/Users/fishtv/Development/Awesome-Dyson/design-system/examples/vibeprompts-data-table.html": {
+    "mtime": 1787378236.0161872,
+    "hash": "d5b8d92a40936afc25e5a1b4a8eb9efa"
+  },
+  "/Users/fishtv/Development/Awesome-Dyson/design-system/examples/kanban-board.html": {
+    "mtime": 1787377796.5825982,
+    "hash": "1f7a4d93a4d5fa5e686dd65e8763b2f9"
+  },
+  "/Users/fishtv/Development/Awesome-Dyson/design-system/examples/incident-board.html": {
+    "mtime": 1787377796.5795574,
+    "hash": "0a2ae4d3d7df885de714b424cae7b8bf"
+  },
+  "/Users/fishtv/Development/Awesome-Dyson/openspec/config.yaml": {
+    "mtime": 1787358202.5865378,
+    "hash": "998cb3383a94909f4a3e9aebd8b9c5e4"
+  },
+  "/Users/fishtv/Development/Awesome-Dyson/openspec/changes/dev-project-dashboard-system/tasks.md": {
+    "mtime": 1787382791.912692,
+    "hash": "8392919fcf81dc5cf90fc5b7746b264e"
+  },
+  "/Users/fishtv/Development/Awesome-Dyson/openspec/changes/dev-project-dashboard-system/design.md": {
+    "mtime": 1787382381.393822,
+    "hash": "6c0bc8ab95d5ec08f280f9dc24c2f3e5"
+  },
+  "/Users/fishtv/Development/Awesome-Dyson/openspec/changes/dev-project-dashboard-system/proposal.md": {
+    "mtime": 1787358188.5063634,
+    "hash": "bee0d5e12b7ce6d770717d327d5d3a5f"
+  },
+  "/Users/fishtv/Development/Awesome-Dyson/openspec/changes/dev-project-dashboard-system/specs/dev-project-dashboard/spec.md": {
+    "mtime": 1787382365.481436,
+    "hash": "b5880e1c482444fe2f7f897b4223e466"
+  }
+}

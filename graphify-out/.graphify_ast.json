@@ -1,0 +1,1653 @@
+{
+  "nodes": [
+    {
+      "id": "tests_assert_js",
+      "label": "assert.js",
+      "file_type": "code",
+      "source_file": "tests/assert.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "tests_assert_assertionerror",
+      "label": "AssertionError",
+      "file_type": "code",
+      "source_file": "tests/assert.js",
+      "source_location": "L3"
+    },
+    {
+      "id": "tests_assert_assertionerror_constructor",
+      "label": ".constructor()",
+      "file_type": "code",
+      "source_file": "tests/assert.js",
+      "source_location": "L4"
+    },
+    {
+      "id": "tests_assert_assert",
+      "label": "assert()",
+      "file_type": "code",
+      "source_file": "tests/assert.js",
+      "source_location": "L10"
+    },
+    {
+      "id": "tests_assert_assertequal",
+      "label": "assertEqual()",
+      "file_type": "code",
+      "source_file": "tests/assert.js",
+      "source_location": "L16"
+    },
+    {
+      "id": "tests_assert_assertdeepequal",
+      "label": "assertDeepEqual()",
+      "file_type": "code",
+      "source_file": "tests/assert.js",
+      "source_location": "L24"
+    },
+    {
+      "id": "tests_assert_assertthrows",
+      "label": "assertThrows()",
+      "file_type": "code",
+      "source_file": "tests/assert.js",
+      "source_location": "L32"
+    },
+    {
+      "id": "tests_assert_assertfileexists",
+      "label": "assertFileExists()",
+      "file_type": "code",
+      "source_file": "tests/assert.js",
+      "source_location": "L45"
+    },
+    {
+      "id": "tests_assert_assertfiledoesnotexist",
+      "label": "assertFileDoesNotExist()",
+      "file_type": "code",
+      "source_file": "tests/assert.js",
+      "source_location": "L52"
+    },
+    {
+      "id": "tests_run_js",
+      "label": "run.js",
+      "file_type": "code",
+      "source_file": "tests/run.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "tests_run_fs",
+      "label": "fs",
+      "file_type": "code",
+      "source_file": "tests/run.js",
+      "source_location": "L3"
+    },
+    {
+      "id": "tests_run_path",
+      "label": "path",
+      "file_type": "code",
+      "source_file": "tests/run.js",
+      "source_location": "L4"
+    },
+    {
+      "id": "tests_run_execsync",
+      "label": "{ execSync }",
+      "file_type": "code",
+      "source_file": "tests/run.js",
+      "source_location": "L5"
+    },
+    {
+      "id": "tests_run_testfiles",
+      "label": "testFiles",
+      "file_type": "code",
+      "source_file": "tests/run.js",
+      "source_location": "L8"
+    },
+    {
+      "id": "tests_run_testpath",
+      "label": "testPath",
+      "file_type": "code",
+      "source_file": "tests/run.js",
+      "source_location": "L19"
+    },
+    {
+      "id": "tests_run_result",
+      "label": "result",
+      "file_type": "code",
+      "source_file": "tests/run.js",
+      "source_location": "L23"
+    },
+    {
+      "id": "tests_test_append_only_entries_js",
+      "label": "test-append-only-entries.js",
+      "file_type": "code",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "tests_test_append_only_entries_fs",
+      "label": "fs",
+      "file_type": "code",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L9"
+    },
+    {
+      "id": "tests_test_append_only_entries_os",
+      "label": "os",
+      "file_type": "code",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L10"
+    },
+    {
+      "id": "tests_test_append_only_entries_path",
+      "label": "path",
+      "file_type": "code",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L11"
+    },
+    {
+      "id": "tests_test_append_only_entries_assert_assertfileexists_assertdeepequal",
+      "label": "{ assert, assertFileExists, assertDeepEqual }",
+      "file_type": "code",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L12"
+    },
+    {
+      "id": "tests_test_append_only_entries_real_entries_dir",
+      "label": "REAL_ENTRIES_DIR",
+      "file_type": "code",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L14"
+    },
+    {
+      "id": "tests_test_append_only_entries_real_manifest_file",
+      "label": "REAL_MANIFEST_FILE",
+      "file_type": "code",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L15"
+    },
+    {
+      "id": "tests_test_append_only_entries_add_entry_script",
+      "label": "ADD_ENTRY_SCRIPT",
+      "file_type": "code",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L16"
+    },
+    {
+      "id": "tests_test_append_only_entries_makeisolatedentriesdir",
+      "label": "makeIsolatedEntriesDir()",
+      "file_type": "code",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L18"
+    },
+    {
+      "id": "tests_test_append_only_entries_cleanup",
+      "label": "cleanup()",
+      "file_type": "code",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L24"
+    },
+    {
+      "id": "tests_test_append_only_entries_manifestcontent",
+      "label": "manifestContent",
+      "file_type": "code",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L43"
+    },
+    {
+      "id": "tests_test_append_only_entries_manifest",
+      "label": "manifest",
+      "file_type": "code",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L44"
+    },
+    {
+      "id": "tests_test_append_only_entries_entriesdir",
+      "label": "entriesDir",
+      "file_type": "code",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L53"
+    },
+    {
+      "id": "tests_test_append_only_entries_testentry1",
+      "label": "testEntry1",
+      "file_type": "code",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L55"
+    },
+    {
+      "id": "tests_test_append_only_entries_testentry2",
+      "label": "testEntry2",
+      "file_type": "code",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L56"
+    },
+    {
+      "id": "tests_test_append_only_entries_entry1data",
+      "label": "entry1Data",
+      "file_type": "code",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L58"
+    },
+    {
+      "id": "tests_test_append_only_entries_entry2data",
+      "label": "entry2Data",
+      "file_type": "code",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L66"
+    },
+    {
+      "id": "tests_test_append_only_entries_file1content",
+      "label": "file1Content",
+      "file_type": "code",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L81"
+    },
+    {
+      "id": "tests_test_append_only_entries_file2content",
+      "label": "file2Content",
+      "file_type": "code",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L82"
+    },
+    {
+      "id": "tests_test_append_only_entries_manifestfile",
+      "label": "manifestFile",
+      "file_type": "code",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L94"
+    },
+    {
+      "id": "tests_test_append_only_entries_testentry",
+      "label": "testEntry",
+      "file_type": "code",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L95"
+    },
+    {
+      "id": "tests_test_append_only_entries_initialmanifest",
+      "label": "initialManifest",
+      "file_type": "code",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L97"
+    },
+    {
+      "id": "tests_test_append_only_entries_entrydata",
+      "label": "entryData",
+      "file_type": "code",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L100"
+    },
+    {
+      "id": "tests_test_append_only_entries_newmanifest",
+      "label": "newManifest",
+      "file_type": "code",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L111"
+    },
+    {
+      "id": "tests_test_append_only_entries_updatedmanifest",
+      "label": "updatedManifest",
+      "file_type": "code",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L119"
+    },
+    {
+      "id": "tests_test_lock_blocks_second_writer_js",
+      "label": "test-lock-blocks-second-writer.js",
+      "file_type": "code",
+      "source_file": "tests/test-lock-blocks-second-writer.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "tests_test_lock_blocks_second_writer_fs",
+      "label": "fs",
+      "file_type": "code",
+      "source_file": "tests/test-lock-blocks-second-writer.js",
+      "source_location": "L5"
+    },
+    {
+      "id": "tests_test_lock_blocks_second_writer_path",
+      "label": "path",
+      "file_type": "code",
+      "source_file": "tests/test-lock-blocks-second-writer.js",
+      "source_location": "L6"
+    },
+    {
+      "id": "tests_test_lock_blocks_second_writer_execsync",
+      "label": "{ execSync }",
+      "file_type": "code",
+      "source_file": "tests/test-lock-blocks-second-writer.js",
+      "source_location": "L7"
+    },
+    {
+      "id": "tests_test_lock_blocks_second_writer_assert_assertequal_assertfileexists",
+      "label": "{ assert, assertEqual, assertFileExists }",
+      "file_type": "code",
+      "source_file": "tests/test-lock-blocks-second-writer.js",
+      "source_location": "L8"
+    },
+    {
+      "id": "tests_test_lock_blocks_second_writer_lock_script",
+      "label": "LOCK_SCRIPT",
+      "file_type": "code",
+      "source_file": "tests/test-lock-blocks-second-writer.js",
+      "source_location": "L10"
+    },
+    {
+      "id": "tests_test_lock_blocks_second_writer_lock_dir",
+      "label": "LOCK_DIR",
+      "file_type": "code",
+      "source_file": "tests/test-lock-blocks-second-writer.js",
+      "source_location": "L11"
+    },
+    {
+      "id": "tests_test_lock_blocks_second_writer_test_lock_file",
+      "label": "TEST_LOCK_FILE",
+      "file_type": "code",
+      "source_file": "tests/test-lock-blocks-second-writer.js",
+      "source_location": "L13"
+    },
+    {
+      "id": "tests_test_lock_blocks_second_writer_lockcontent",
+      "label": "lockContent",
+      "file_type": "code",
+      "source_file": "tests/test-lock-blocks-second-writer.js",
+      "source_location": "L43"
+    },
+    {
+      "id": "tests_test_expired_lock_is_clearable_js",
+      "label": "test-expired-lock-is-clearable.js",
+      "file_type": "code",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "tests_test_expired_lock_is_clearable_fs",
+      "label": "fs",
+      "file_type": "code",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L5"
+    },
+    {
+      "id": "tests_test_expired_lock_is_clearable_path",
+      "label": "path",
+      "file_type": "code",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L6"
+    },
+    {
+      "id": "tests_test_expired_lock_is_clearable_execsync",
+      "label": "{ execSync }",
+      "file_type": "code",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L7"
+    },
+    {
+      "id": "tests_test_expired_lock_is_clearable_assert_assertfileexists",
+      "label": "{ assert, assertFileExists }",
+      "file_type": "code",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L8"
+    },
+    {
+      "id": "tests_test_expired_lock_is_clearable_lock_script",
+      "label": "LOCK_SCRIPT",
+      "file_type": "code",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L10"
+    },
+    {
+      "id": "tests_test_expired_lock_is_clearable_lock_dir",
+      "label": "LOCK_DIR",
+      "file_type": "code",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L11"
+    },
+    {
+      "id": "tests_test_expired_lock_is_clearable_test_lock_file",
+      "label": "TEST_LOCK_FILE",
+      "file_type": "code",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L13"
+    },
+    {
+      "id": "tests_test_expired_lock_is_clearable_oldtimestamp",
+      "label": "oldTimestamp",
+      "file_type": "code",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L31"
+    },
+    {
+      "id": "tests_test_expired_lock_is_clearable_oldlock",
+      "label": "oldLock",
+      "file_type": "code",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L32"
+    },
+    {
+      "id": "tests_test_expired_lock_is_clearable_newlock",
+      "label": "newLock",
+      "file_type": "code",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L62"
+    },
+    {
+      "id": "tests_test_expired_lock_is_clearable_firstlock",
+      "label": "firstLock",
+      "file_type": "code",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L102"
+    },
+    {
+      "id": "tests_test_expired_lock_is_clearable_stillfirstlock",
+      "label": "stillFirstLock",
+      "file_type": "code",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L118"
+    },
+    {
+      "id": "tests_test_index_html_graceful_degrade_js",
+      "label": "test-index-html-graceful-degrade.js",
+      "file_type": "code",
+      "source_file": "tests/test-index-html-graceful-degrade.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "tests_test_index_html_graceful_degrade_fs",
+      "label": "fs",
+      "file_type": "code",
+      "source_file": "tests/test-index-html-graceful-degrade.js",
+      "source_location": "L5"
+    },
+    {
+      "id": "tests_test_index_html_graceful_degrade_path",
+      "label": "path",
+      "file_type": "code",
+      "source_file": "tests/test-index-html-graceful-degrade.js",
+      "source_location": "L6"
+    },
+    {
+      "id": "tests_test_index_html_graceful_degrade_assert",
+      "label": "{ assert }",
+      "file_type": "code",
+      "source_file": "tests/test-index-html-graceful-degrade.js",
+      "source_location": "L7"
+    },
+    {
+      "id": "tests_test_index_html_graceful_degrade_index_html_path",
+      "label": "INDEX_HTML_PATH",
+      "file_type": "code",
+      "source_file": "tests/test-index-html-graceful-degrade.js",
+      "source_location": "L9"
+    },
+    {
+      "id": "tests_test_index_html_graceful_degrade_htmlcontent",
+      "label": "htmlContent",
+      "file_type": "code",
+      "source_file": "tests/test-index-html-graceful-degrade.js",
+      "source_location": "L20"
+    },
+    {
+      "id": "tests_test_index_html_graceful_degrade_hasunsafedotaccess",
+      "label": "hasUnsafeDotAccess",
+      "file_type": "code",
+      "source_file": "tests/test-index-html-graceful-degrade.js",
+      "source_location": "L33"
+    },
+    {
+      "id": "tests_test_index_html_graceful_degrade_hasunsafeonelineraccess",
+      "label": "hasUnsafeOneLinerAccess",
+      "file_type": "code",
+      "source_file": "tests/test-index-html-graceful-degrade.js",
+      "source_location": "L45"
+    },
+    {
+      "id": "tests_test_index_html_graceful_degrade_hasunsafechangesaccess",
+      "label": "hasUnsafeChangesAccess",
+      "file_type": "code",
+      "source_file": "tests/test-index-html-graceful-degrade.js",
+      "source_location": "L57"
+    },
+    {
+      "id": "tests_test_index_html_graceful_degrade_hasunsafequestionsaccess",
+      "label": "hasUnsafeQuestionsAccess",
+      "file_type": "code",
+      "source_file": "tests/test-index-html-graceful-degrade.js",
+      "source_location": "L69"
+    },
+    {
+      "id": "tests_test_index_html_graceful_degrade_hasunsafekeyfilesaccess",
+      "label": "hasUnsafeKeyFilesAccess",
+      "file_type": "code",
+      "source_file": "tests/test-index-html-graceful-degrade.js",
+      "source_location": "L81"
+    },
+    {
+      "id": "worker_comments_js",
+      "label": "comments.js",
+      "file_type": "code",
+      "source_file": "worker/comments.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "worker_comments_cors_headers",
+      "label": "CORS_HEADERS",
+      "file_type": "code",
+      "source_file": "worker/comments.js",
+      "source_location": "L8"
+    },
+    {
+      "id": "worker_comments_jsonresponse",
+      "label": "jsonResponse()",
+      "file_type": "code",
+      "source_file": "worker/comments.js",
+      "source_location": "L14"
+    },
+    {
+      "id": "worker_comments_kvkey",
+      "label": "kvKey()",
+      "file_type": "code",
+      "source_file": "worker/comments.js",
+      "source_location": "L21"
+    },
+    {
+      "id": "worker_comments_handleget",
+      "label": "handleGet()",
+      "file_type": "code",
+      "source_file": "worker/comments.js",
+      "source_location": "L25"
+    },
+    {
+      "id": "worker_comments_handlepost",
+      "label": "handlePost()",
+      "file_type": "code",
+      "source_file": "worker/comments.js",
+      "source_location": "L35"
+    },
+    {
+      "id": "worker_comments_fetch",
+      "label": "fetch()",
+      "file_type": "code",
+      "source_file": "worker/comments.js",
+      "source_location": "L80"
+    }
+  ],
+  "edges": [
+    {
+      "source": "tests_assert_js",
+      "target": "tests_assert_assertionerror",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/assert.js",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_assert_assertionerror",
+      "target": "tests_assert_assertionerror_constructor",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/assert.js",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_assert_js",
+      "target": "tests_assert_assert",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/assert.js",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_assert_js",
+      "target": "tests_assert_assertequal",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/assert.js",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_assert_js",
+      "target": "tests_assert_assertdeepequal",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/assert.js",
+      "source_location": "L24",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_assert_js",
+      "target": "tests_assert_assertthrows",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/assert.js",
+      "source_location": "L32",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_assert_js",
+      "target": "tests_assert_assertfileexists",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/assert.js",
+      "source_location": "L45",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_assert_js",
+      "target": "tests_assert_assertfiledoesnotexist",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/assert.js",
+      "source_location": "L52",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_run_js",
+      "target": "fs",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/run.js",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_run_js",
+      "target": "tests_run_fs",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/run.js",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_run_js",
+      "target": "path",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/run.js",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_run_js",
+      "target": "tests_run_path",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/run.js",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_run_js",
+      "target": "child_process",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/run.js",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_run_js",
+      "target": "tests_run_execsync",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/run.js",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_run_js",
+      "target": "tests_run_testfiles",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/run.js",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_run_js",
+      "target": "tests_run_testpath",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/run.js",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_run_js",
+      "target": "tests_run_result",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/run.js",
+      "source_location": "L23",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_append_only_entries_js",
+      "target": "fs",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_append_only_entries_js",
+      "target": "tests_test_append_only_entries_fs",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_append_only_entries_js",
+      "target": "os",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_append_only_entries_js",
+      "target": "tests_test_append_only_entries_os",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_append_only_entries_js",
+      "target": "path",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_append_only_entries_js",
+      "target": "tests_test_append_only_entries_path",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_append_only_entries_js",
+      "target": "tests_assert_js",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_append_only_entries_js",
+      "target": "tests_assert_assert",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_append_only_entries_js",
+      "target": "tests_assert_assertfileexists",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_append_only_entries_js",
+      "target": "tests_assert_assertdeepequal",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_append_only_entries_js",
+      "target": "tests_test_append_only_entries_assert_assertfileexists_assertdeepequal",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_append_only_entries_js",
+      "target": "tests_test_append_only_entries_real_entries_dir",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_append_only_entries_js",
+      "target": "tests_test_append_only_entries_real_manifest_file",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_append_only_entries_js",
+      "target": "tests_test_append_only_entries_add_entry_script",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_append_only_entries_js",
+      "target": "tests_test_append_only_entries_makeisolatedentriesdir",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_append_only_entries_js",
+      "target": "tests_test_append_only_entries_cleanup",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L24",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_append_only_entries_js",
+      "target": "tests_test_append_only_entries_manifestcontent",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L43",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_append_only_entries_js",
+      "target": "tests_test_append_only_entries_manifest",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L44",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_append_only_entries_js",
+      "target": "tests_test_append_only_entries_entriesdir",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L53",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_append_only_entries_js",
+      "target": "tests_test_append_only_entries_testentry1",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L55",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_append_only_entries_js",
+      "target": "tests_test_append_only_entries_testentry2",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L56",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_append_only_entries_js",
+      "target": "tests_test_append_only_entries_entry1data",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L58",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_append_only_entries_js",
+      "target": "tests_test_append_only_entries_entry2data",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L66",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_append_only_entries_js",
+      "target": "tests_test_append_only_entries_file1content",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L81",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_append_only_entries_js",
+      "target": "tests_test_append_only_entries_file2content",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L82",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_append_only_entries_js",
+      "target": "tests_test_append_only_entries_entriesdir",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L92",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_append_only_entries_js",
+      "target": "tests_test_append_only_entries_manifestfile",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L94",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_append_only_entries_js",
+      "target": "tests_test_append_only_entries_testentry",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L95",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_append_only_entries_js",
+      "target": "tests_test_append_only_entries_initialmanifest",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L97",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_append_only_entries_js",
+      "target": "tests_test_append_only_entries_entrydata",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L100",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_append_only_entries_js",
+      "target": "tests_test_append_only_entries_newmanifest",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L111",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_append_only_entries_js",
+      "target": "tests_test_append_only_entries_updatedmanifest",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-append-only-entries.js",
+      "source_location": "L119",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_lock_blocks_second_writer_js",
+      "target": "fs",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-lock-blocks-second-writer.js",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_lock_blocks_second_writer_js",
+      "target": "tests_test_lock_blocks_second_writer_fs",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-lock-blocks-second-writer.js",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_lock_blocks_second_writer_js",
+      "target": "path",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-lock-blocks-second-writer.js",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_lock_blocks_second_writer_js",
+      "target": "tests_test_lock_blocks_second_writer_path",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-lock-blocks-second-writer.js",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_lock_blocks_second_writer_js",
+      "target": "child_process",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-lock-blocks-second-writer.js",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_lock_blocks_second_writer_js",
+      "target": "tests_test_lock_blocks_second_writer_execsync",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-lock-blocks-second-writer.js",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_lock_blocks_second_writer_js",
+      "target": "tests_assert_js",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-lock-blocks-second-writer.js",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_lock_blocks_second_writer_js",
+      "target": "tests_assert_assert",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-lock-blocks-second-writer.js",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_lock_blocks_second_writer_js",
+      "target": "tests_assert_assertequal",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-lock-blocks-second-writer.js",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_lock_blocks_second_writer_js",
+      "target": "tests_assert_assertfileexists",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-lock-blocks-second-writer.js",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_lock_blocks_second_writer_js",
+      "target": "tests_test_lock_blocks_second_writer_assert_assertequal_assertfileexists",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-lock-blocks-second-writer.js",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_lock_blocks_second_writer_js",
+      "target": "tests_test_lock_blocks_second_writer_lock_script",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-lock-blocks-second-writer.js",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_lock_blocks_second_writer_js",
+      "target": "tests_test_lock_blocks_second_writer_lock_dir",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-lock-blocks-second-writer.js",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_lock_blocks_second_writer_js",
+      "target": "tests_test_lock_blocks_second_writer_test_lock_file",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-lock-blocks-second-writer.js",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_lock_blocks_second_writer_js",
+      "target": "tests_test_lock_blocks_second_writer_lockcontent",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-lock-blocks-second-writer.js",
+      "source_location": "L43",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_expired_lock_is_clearable_js",
+      "target": "fs",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_expired_lock_is_clearable_js",
+      "target": "tests_test_expired_lock_is_clearable_fs",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_expired_lock_is_clearable_js",
+      "target": "path",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_expired_lock_is_clearable_js",
+      "target": "tests_test_expired_lock_is_clearable_path",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_expired_lock_is_clearable_js",
+      "target": "child_process",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_expired_lock_is_clearable_js",
+      "target": "tests_test_expired_lock_is_clearable_execsync",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_expired_lock_is_clearable_js",
+      "target": "tests_assert_js",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_expired_lock_is_clearable_js",
+      "target": "tests_assert_assert",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_expired_lock_is_clearable_js",
+      "target": "tests_assert_assertfileexists",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_expired_lock_is_clearable_js",
+      "target": "tests_test_expired_lock_is_clearable_assert_assertfileexists",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_expired_lock_is_clearable_js",
+      "target": "tests_test_expired_lock_is_clearable_lock_script",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_expired_lock_is_clearable_js",
+      "target": "tests_test_expired_lock_is_clearable_lock_dir",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_expired_lock_is_clearable_js",
+      "target": "tests_test_expired_lock_is_clearable_test_lock_file",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_expired_lock_is_clearable_js",
+      "target": "tests_test_expired_lock_is_clearable_oldtimestamp",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L31",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_expired_lock_is_clearable_js",
+      "target": "tests_test_expired_lock_is_clearable_oldlock",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L32",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_expired_lock_is_clearable_js",
+      "target": "tests_test_expired_lock_is_clearable_newlock",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L62",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_expired_lock_is_clearable_js",
+      "target": "tests_test_expired_lock_is_clearable_firstlock",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L102",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_expired_lock_is_clearable_js",
+      "target": "tests_test_expired_lock_is_clearable_stillfirstlock",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-expired-lock-is-clearable.js",
+      "source_location": "L118",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_index_html_graceful_degrade_js",
+      "target": "fs",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-index-html-graceful-degrade.js",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_index_html_graceful_degrade_js",
+      "target": "tests_test_index_html_graceful_degrade_fs",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-index-html-graceful-degrade.js",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_index_html_graceful_degrade_js",
+      "target": "path",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-index-html-graceful-degrade.js",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_index_html_graceful_degrade_js",
+      "target": "tests_test_index_html_graceful_degrade_path",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-index-html-graceful-degrade.js",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_index_html_graceful_degrade_js",
+      "target": "tests_assert_js",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-index-html-graceful-degrade.js",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_index_html_graceful_degrade_js",
+      "target": "tests_assert_assert",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-index-html-graceful-degrade.js",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_index_html_graceful_degrade_js",
+      "target": "tests_test_index_html_graceful_degrade_assert",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-index-html-graceful-degrade.js",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_index_html_graceful_degrade_js",
+      "target": "tests_test_index_html_graceful_degrade_index_html_path",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-index-html-graceful-degrade.js",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_index_html_graceful_degrade_js",
+      "target": "tests_test_index_html_graceful_degrade_htmlcontent",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-index-html-graceful-degrade.js",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_index_html_graceful_degrade_js",
+      "target": "tests_test_index_html_graceful_degrade_htmlcontent",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-index-html-graceful-degrade.js",
+      "source_location": "L29",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_index_html_graceful_degrade_js",
+      "target": "tests_test_index_html_graceful_degrade_hasunsafedotaccess",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-index-html-graceful-degrade.js",
+      "source_location": "L33",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_index_html_graceful_degrade_js",
+      "target": "tests_test_index_html_graceful_degrade_htmlcontent",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-index-html-graceful-degrade.js",
+      "source_location": "L42",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_index_html_graceful_degrade_js",
+      "target": "tests_test_index_html_graceful_degrade_hasunsafeonelineraccess",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-index-html-graceful-degrade.js",
+      "source_location": "L45",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_index_html_graceful_degrade_js",
+      "target": "tests_test_index_html_graceful_degrade_htmlcontent",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-index-html-graceful-degrade.js",
+      "source_location": "L54",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_index_html_graceful_degrade_js",
+      "target": "tests_test_index_html_graceful_degrade_hasunsafechangesaccess",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-index-html-graceful-degrade.js",
+      "source_location": "L57",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_index_html_graceful_degrade_js",
+      "target": "tests_test_index_html_graceful_degrade_htmlcontent",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-index-html-graceful-degrade.js",
+      "source_location": "L66",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_index_html_graceful_degrade_js",
+      "target": "tests_test_index_html_graceful_degrade_hasunsafequestionsaccess",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-index-html-graceful-degrade.js",
+      "source_location": "L69",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_index_html_graceful_degrade_js",
+      "target": "tests_test_index_html_graceful_degrade_htmlcontent",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-index-html-graceful-degrade.js",
+      "source_location": "L78",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_index_html_graceful_degrade_js",
+      "target": "tests_test_index_html_graceful_degrade_hasunsafekeyfilesaccess",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-index-html-graceful-degrade.js",
+      "source_location": "L81",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_index_html_graceful_degrade_js",
+      "target": "tests_test_index_html_graceful_degrade_htmlcontent",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-index-html-graceful-degrade.js",
+      "source_location": "L90",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_index_html_graceful_degrade_js",
+      "target": "tests_test_index_html_graceful_degrade_htmlcontent",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test-index-html-graceful-degrade.js",
+      "source_location": "L102",
+      "weight": 1.0
+    },
+    {
+      "source": "worker_comments_js",
+      "target": "worker_comments_cors_headers",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "worker/comments.js",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "worker_comments_js",
+      "target": "worker_comments_jsonresponse",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "worker/comments.js",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "worker_comments_js",
+      "target": "worker_comments_kvkey",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "worker/comments.js",
+      "source_location": "L21",
+      "weight": 1.0
+    },
+    {
+      "source": "worker_comments_js",
+      "target": "worker_comments_handleget",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "worker/comments.js",
+      "source_location": "L25",
+      "weight": 1.0
+    },
+    {
+      "source": "worker_comments_js",
+      "target": "worker_comments_handlepost",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "worker/comments.js",
+      "source_location": "L35",
+      "weight": 1.0
+    },
+    {
+      "source": "worker_comments_js",
+      "target": "worker_comments_fetch",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "worker/comments.js",
+      "source_location": "L80",
+      "weight": 1.0
+    },
+    {
+      "source": "worker_comments_handleget",
+      "target": "worker_comments_jsonresponse",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "worker/comments.js",
+      "source_location": "L28",
+      "weight": 1.0
+    },
+    {
+      "source": "worker_comments_handleget",
+      "target": "worker_comments_kvkey",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "worker/comments.js",
+      "source_location": "L30",
+      "weight": 1.0
+    },
+    {
+      "source": "worker_comments_handlepost",
+      "target": "worker_comments_jsonresponse",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "worker/comments.js",
+      "source_location": "L40",
+      "weight": 1.0
+    },
+    {
+      "source": "worker_comments_handlepost",
+      "target": "worker_comments_kvkey",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "worker/comments.js",
+      "source_location": "L58",
+      "weight": 1.0
+    },
+    {
+      "source": "worker_comments_fetch",
+      "target": "worker_comments_jsonresponse",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "worker/comments.js",
+      "source_location": "L88",
+      "weight": 1.0
+    },
+    {
+      "source": "worker_comments_fetch",
+      "target": "worker_comments_handleget",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "worker/comments.js",
+      "source_location": "L92",
+      "weight": 1.0
+    },
+    {
+      "source": "worker_comments_fetch",
+      "target": "worker_comments_handlepost",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "worker/comments.js",
+      "source_location": "L95",
+      "weight": 1.0
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0
+}

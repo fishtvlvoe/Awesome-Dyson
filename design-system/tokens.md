@@ -1,6 +1,6 @@
 # 待神設計系統 / Design Tokens
 
-> 這份文件是「未來任何專案儀表板/UI 設計」的唯一風格參考來源。不要重新猜配色，改設計前先讀這份。
+> **2026-08-24 起**：神系列說明頁與產品 UI 的視覺鎖改讀工作區 `/Users/fishtv/Development/design/fish-admin/`（`surface: fish-admin`）。本檔保留作待神歷史參考與 vibeprompts 摘錄，新畫面不要再把本檔當成唯一 SSOT。
 >
 > 來源：vibeprompts.dev（Dashboards 分類，@domi_kissi 的實際 Tailwind 程式碼，非目測猜色）+ 自建的三個示範元件（`examples/`）。所有色碼、圓角、字級都是從真實原始碼摘出來的，不是憑印象寫的。
 
